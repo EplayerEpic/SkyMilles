@@ -10,14 +10,14 @@ import controle.AssentosControle;
  *
  * @author Home
  */
-public class AssentosGUI extends javax.swing.JFrame {
+public class GerenciarAssentos extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AssentosGUI.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GerenciarAssentos.class.getName());
 
     /**
      * Creates new form AssentosGUI
      */
-   public AssentosGUI() {
+   public GerenciarAssentos() {
     initComponents();
     
     // Evento de clique na tabela
@@ -584,7 +584,7 @@ private void alterarAssento() {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new AssentosGUI().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new GerenciarAssentos().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,5 +1,6 @@
 package visao;
 
+import controle.CidadeControle;
 import controle.PontoTuristicoControle;
 import modelo.PontoTuristico;
 import javax.swing.*;
@@ -40,11 +41,12 @@ public class GerenciarPontoTuristico extends JFrame {
 
         // Eventos
         btnAdd.addActionListener(e -> {
+            CidadeControle cc = new CidadeControle();
             PontoTuristico p = new PontoTuristico(
                 Integer.parseInt(txtCod.getText()), 
                 txtDesc.getText(), 
                 txtEnd.getText(), 
-                Integer.parseInt(txtCodCidade.getText())
+                cc.consultarCidadeCodigo(Integer.parseInt(txtCodCidade.getText()))
             );
             controle.inserirPonto(p);
             carregarTabela();

@@ -1,5 +1,7 @@
-package visao;
+ package visao;
 
+import controle.HotelControle;
+import controle.PacoteControle;
 import controle.QuartoControle;
 import modelo.Quarto;
 import javax.swing.*;
@@ -45,14 +47,16 @@ public class GerenciarQuarto extends JFrame {
         pBotoes.add(btnAdd); pBotoes.add(btnDel);
 
         btnAdd.addActionListener(e -> {
+            PacoteControle pc = new PacoteControle();
+            HotelControle hc = new HotelControle();
             Quarto q = new Quarto();
             q.setValorReserva(Double.parseDouble(txtValor.getText()));
             q.setLocalSaida(txtSaida.getText());
             q.setLocalChegada(txtChegada.getText());
             q.setDataInicio(txtData.getText());
             q.setQntdDiarias(Integer.parseInt(txtDiarias.getText()));
-            q.setCodPacote(Integer.parseInt(txtPacote.getText()));
-            q.setCodHotel(Integer.parseInt(txtHotel.getText()));
+            q.setCodPacote(pc.consultarPacoteCodigo(Integer.parseInt(txtPacote.getText())));
+            q.setCodHotel(hc.consultarHotelCodigo(Integer.parseInt(txtHotel.getText())));
             controle.inserirQuarto(q);
             carregarTabela();
         });

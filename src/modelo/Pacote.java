@@ -11,6 +11,24 @@ package modelo;
 public class Pacote {
     private int codPacote;
     private double valorPacote;
+    private PacoteQuarto PacoteQuarto;
+    private PacoteAssento PacoteAssento;
+
+    public PacoteQuarto getPacoteQuarto() {
+        return PacoteQuarto;
+    }
+
+    public void setPacoteQuarto(PacoteQuarto PacoteQuarto) {
+        this.PacoteQuarto = PacoteQuarto;
+    }
+
+    public PacoteAssento getPacoteAssento() {
+        return PacoteAssento;
+    }
+
+    public void setPacoteAssento(PacoteAssento PacoteAssento) {
+        this.PacoteAssento = PacoteAssento;
+    }
 
     public Pacote() {
     }

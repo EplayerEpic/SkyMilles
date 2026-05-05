@@ -3,8 +3,6 @@ package controle;
 import java.util.ArrayList;
 import conexao.ConexaoMySQLSky;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelo.Pacote;
 import modelo.PacoteAssento;
 import modelo.PacoteQuarto;
@@ -24,7 +22,7 @@ public class PacoteControle {
                 par.setCodAssento(999);
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "SELECT * FROM usuario";
+            String sql = "SELECT * FROM pacote";
             PreparedStatement stm = conn.prepareStatement(sql);
             ResultSet resultado = stm.executeQuery();
 
@@ -53,13 +51,19 @@ public class PacoteControle {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioControle.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
         return vPacote;
     }
 
     public Pacote consultarPacoteCodigo(int codPacote) {
-        Pacote p = null;
+        Pacote pack = null;
+        PacoteQuarto pqr = new PacoteQuarto();
+                pqr.setCodPacote(999);
+                pqr.setCodQuarto(999);
+        PacoteAssento par = new PacoteAssento();
+                par.setCodPacote(999);
+                par.setCodAssento(999);
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
             String sql = "SELECT * FROM pacote WHERE cod_pacote = ?";
@@ -68,33 +72,42 @@ public class PacoteControle {
             ResultSet resultado = stm.executeQuery();
 
             if (resultado.next()) {
-                p = new Pacote();
-                p.setCodPacote(resultado.getInt("cod_usuario"));
-                p.setValorPacote(resultado.getDouble("valor_pacote"));
+                pack = new Pacote();
+                pack.setCodPacote(resultado.getInt("cod_usuario"));
+                pack.setValorPacote(resultado.getDouble("valor_pacote"));
 
                 PacoteQuarto pq = new PacoteQuarto();
-                p.setCodPacoteAssento(resultado.getInt("cod_pacote"));
-                p.setUsuCodCliente(cli);
+                pq.setCodPacote(resultado.getInt("cod_pacote"));
                 
                 PacoteAssento pa = new PacoteAssento();
+                pa.setCodPacote(resultado.getInt("cod_pacote"));
+                
+                pack.setPacoteAssento(pa);
+                pack.setPacoteQuarto(pq);
+                if(pack.getPacoteQuarto() ==null){
+                    pack.setPacoteQuarto(pqr);
+                }
+                if(pack.getPacoteAssento() ==null){
+                    pack.setPacoteAssento(par);
+                }
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioControle.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
-        return usu;
+        return pack;
     }
 
-    public String inserirUsuario(Usuario usu) {
+    public String inserirPacote(Pacote pack) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "INSERT INTO usuario (login, senha, e_mail, cod_cliente) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO pacote (cod_pacote, valor_pacote, cod_pacote_quarto, cod_pacote_assento) VALUES (?,?,?,?)";
             PreparedStatement stm = conn.prepareStatement(sql);
 
-            stm.setString(1, usu.getUsuLogin());
-            stm.setString(2, usu.getUsuSenha());
-            stm.setString(3, usu.getUsuEmail());
-            stm.setInt(4, usu.getUsuCodCliente().getCliCodigo());
+            stm.setInt(1, pack.getCodPacote());
+            stm.setDouble(2, pack.getValorPacote());
+            stm.setInt(3, pack.getPacoteQuarto().getCodPacote());
+            stm.setInt(4, pack.getPacoteAssento().getCodPacote());
 
             stm.executeUpdate();
             return "Inserido";
@@ -105,17 +118,17 @@ public class PacoteControle {
         }
     }
 
-    public String alterarUsuario(Usuario usu) {
+    public String alterarPacote(Pacote pack) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "UPDATE usuario SET login=?, senha=?, e_mail=?, cod_cliente=? WHERE cod_usuario=?";
+            String sql = "UPDATE pacote SET cod_pacote=?, valor_pacote=?, cod_pacote_quarto=?, cod_pacote_assento=? WHERE cod_pacote=?";
             PreparedStatement stm = conn.prepareStatement(sql);
 
-            stm.setString(1, usu.getUsuLogin());
-            stm.setString(2, usu.getUsuSenha());
-            stm.setString(3, usu.getUsuEmail());
-            stm.setInt(4, usu.getUsuCodCliente().getCliCodigo());
-            stm.setInt(5, usu.getUsuCodigo());
+            stm.setInt(1, pack.getCodPacote());
+            stm.setDouble(2, pack.getValorPacote());
+            stm.setInt(3, pack.getPacoteQuarto().getCodPacote());
+            stm.setInt(4, pack.getPacoteAssento().getCodPacote());
+            stm.setInt(5, pack.getCodPacote());
 
             stm.executeUpdate();
             return "Alterado";
@@ -126,13 +139,13 @@ public class PacoteControle {
         }
     }
 
-    public String deletarUsuario(int usuCodigo) {
+    public String deletarPacote(int codPacote) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "DELETE FROM usuario WHERE cod_usuario=?";
+            String sql = "DELETE FROM pacote WHERE cod_pacote=?";
             PreparedStatement stm = conn.prepareStatement(sql);
 
-            stm.setInt(1, usuCodigo);
+            stm.setInt(1, codPacote);
             stm.executeUpdate();
             return "Deletado";
 
@@ -140,55 +153,5 @@ public class PacoteControle {
             System.out.println(ex);
             return ex.getSQLState();
         }
-    }
-
-    public static void main(String[] args) {
-
-        UsuarioControle uc = new UsuarioControle();
-
-        // ===== CREATE =====
-        Usuario novo = new Usuario();
-        novo.setUsuLogin("testeUser");
-        novo.setUsuSenha("123456");
-        novo.setUsuEmail("teste@email.com");
-
-        Clientes cli = new Clientes();
-        cli.setCliCodigo(1); // TEM que existir
-        novo.setUsuCodCliente(cli);
-
-        System.out.println("Inserir: " + uc.inserirUsuario(novo));
-
-        // ===== READ =====
-        ArrayList<Usuario> lista = uc.consultarUsuarios();
-        System.out.println("\n--- LISTA ---");
-        for (Usuario u : lista) {
-            System.out.println(u);
-        }
-
-        if (lista.isEmpty()) {
-            System.out.println("\nNada encontrado.");
-            return;
-        }
-
-        int id = lista.get(0).getUsuCodigo();
-
-        // ===== READ BY ID =====
-        Usuario u = uc.consultarUsuarioCodigo(id);
-        System.out.println("\n--- CONSULTADO ---");
-        System.out.println(u);
-
-        // ===== UPDATE =====
-        u.setUsuLogin("loginAlterado");
-        System.out.println("\nAlterar: " + uc.alterarUsuario(u));
-
-        // ===== DELETE =====
-        System.out.println("\nDeletar: " + uc.deletarUsuario(id));
-
-        // ===== FINAL =====
-        System.out.println("\n--- LISTA FINAL ---");
-        for (Usuario usu : uc.consultarUsuarios()) {
-            System.out.println(usu);
-        }
-    }
-    
+    }    
 }
