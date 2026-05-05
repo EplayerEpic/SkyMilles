@@ -31,6 +31,29 @@ public class CidadeControle {
         }
         return lista;
     }
+    public Cidade consultarCidadeCodigo(int codCidade) {
+        Cidade c = null; 
+        try {
+            
+            ConexaoMySQLSky conexao = new ConexaoMySQLSky();
+            Connection conn = conexao.conectar();
+            String consulta = "SELECT * FROM cidade WHERE cod_cidade = " + codCidade;
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(consulta);
+
+            while (rs.next()) {
+                c = new Cidade();
+                c.setCodCidade(rs.getInt("cod_cidade"));
+                c.setDdd(rs.getString("ddd"));
+                c.setEstado(rs.getString("estado"));
+                c.setNomeCidade(rs.getString("nome_cidade"));
+           
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientesControle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return c;
+    }
 
     public String inserirCidade(Cidade c) {
         try {

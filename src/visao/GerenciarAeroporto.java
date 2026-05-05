@@ -1,11 +1,11 @@
 package visao;
 
 import controle.AeroportoControle;
+import controle.CidadeControle;
 import modelo.Aeroporto;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class GerenciarAeroporto extends JFrame {
     private AeroportoControle controle = new AeroportoControle();
@@ -52,7 +52,8 @@ public class GerenciarAeroporto extends JFrame {
 
         // Ações
         btnAdd.addActionListener(e -> {
-            Aeroporto a = new Aeroporto(Integer.parseInt(txtCod.getText()), txtNome.getText(), Integer.parseInt(txtCodCidade.getText()));
+            CidadeControle cc = new CidadeControle();
+            Aeroporto a = new Aeroporto(Integer.parseInt(txtCod.getText()), txtNome.getText(), cc.consultarCidadeCodigo(Integer.parseInt(txtCodCidade.getText())));
             controle.inserirAeroporto(a);
             carregarTabela();
         });
@@ -70,7 +71,7 @@ public class GerenciarAeroporto extends JFrame {
     private void carregarTabela() {
         modeloTabela.setRowCount(0);
         for (Aeroporto a : controle.consultarAeroportos()) {
-            modeloTabela.addRow(new Object[]{a.getCodAeroporto(), a.getNomeAero(), a.getCodCidade()});
+            modeloTabela.addRow(new Object[]{a.getCodAeroporto(), a.getNomeAero(), a.getCidade().getCodCidade()});
         }
     }
 
