@@ -7,13 +7,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Pacote;
 import modelo.PacoteAssento;
+import modelo.PacoteQuarto;
 
 public class PacoteControle {
+    
 
     public PacoteControle() {}
 
     public ArrayList<Pacote> consultarPacotes() {
         ArrayList<Pacote> vPacote = new ArrayList<>();
+        PacoteQuarto pqr = new PacoteQuarto();
+                pqr.setCodPacote(999);
+                pqr.setCodQuarto(999);
+        PacoteAssento par = new PacoteAssento();
+                par.setCodPacote(999);
+                par.setCodAssento(999);
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
             String sql = "SELECT * FROM usuario";
@@ -22,22 +30,32 @@ public class PacoteControle {
 
             while (resultado.next()) {
                 Pacote pack = new Pacote();
-                usu.setUsuCodigo(resultado.getInt("cod_usuario"));
-                usu.setUsuLogin(resultado.getString("login"));
-                usu.setUsuSenha(resultado.getString("senha"));
-                usu.setUsuEmail(resultado.getString("e_mail"));
-
-                Clientes cli = new Clientes();
-                cli.setCliCodigo(resultado.getInt("cod_cliente"));
-                usu.setUsuCodCliente(cli);
-
-                vUsuarios.add(usu);
+                pack.setCodPacote(resultado.getInt("cod_pacote"));
+                pack.setValorPacote(resultado.getDouble("valor_pacote"));
+                
+                PacoteQuarto pq = new PacoteQuarto();
+                pq.setCodPacote(resultado.getInt("cod_pacote"));
+                
+                PacoteAssento pa = new PacoteAssento();
+                pa.setCodPacote(resultado.getInt("cod_pacote"));
+                
+                pack.setPacoteQuarto(pq);
+                pack.setPacoteAssento(pa);
+                if(pack.getPacoteQuarto() ==null){
+                    pack.setPacoteQuarto(pqr);
+                }
+                if(pack.getPacoteAssento() ==null){
+                    pack.setPacoteAssento(par);
+                }
+                
+               
+                vPacote.add(pack);
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioControle.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return vUsuarios;
+        return vPacote;
     }
 
     public Pacote consultarPacoteCodigo(int codPacote) {
