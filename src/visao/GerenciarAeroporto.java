@@ -6,6 +6,7 @@ import modelo.Aeroporto;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import modelo.Cidade;
 
 public class GerenciarAeroporto extends JFrame {
     private AeroportoControle controle = new AeroportoControle();

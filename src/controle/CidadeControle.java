@@ -41,7 +41,7 @@ public class CidadeControle {
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery(consulta);
 
-            while (rs.next()) {
+            if (rs.next()) {
                 c = new Cidade();
                 c.setCodCidade(rs.getInt("cod_cidade"));
                 c.setDdd(rs.getString("ddd"));
