@@ -128,8 +128,8 @@
                   <Component id="Sexo" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="271" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="270" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="InsertButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="AlterButton" alignment="3" min="-2" max="-2" attributes="0"/>

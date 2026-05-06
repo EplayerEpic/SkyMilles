@@ -44,15 +44,19 @@ public class ClientesControle {
     }
 
     public Clientes consultarClienteCodigo(int cliCodigo) {
-        Clientes cli = new Clientes();
+        Clientes cli = null;
+
         try {
             ConexaoMySQLSky conexao = new ConexaoMySQLSky();
             Connection conn = conexao.conectar();
+
             String consulta = "SELECT * FROM cliente WHERE cod_cliente = " + cliCodigo;
             Statement stm = conn.createStatement();
             ResultSet resultado = stm.executeQuery(consulta);
 
-            while (resultado.next()) {
+            if (resultado.next()) {
+                cli = new Clientes(); // só cria se existir
+
                 cli.setCliCodigo(resultado.getInt("cod_cliente"));
                 cli.setCliNome(resultado.getString("nome_cliente"));
                 cli.setCliEndereco(resultado.getString("endereco"));
@@ -65,9 +69,11 @@ public class ClientesControle {
                     cli.setCliDataNasc(dataNasc.toLocalDate());
                 }
             }
+
         } catch (SQLException ex) {
             Logger.getLogger(ClientesControle.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return cli;
     }
 

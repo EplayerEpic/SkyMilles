@@ -277,6 +277,7 @@ public class GerenciarHotel extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void carregarTabela() {
+        modeloTabela.setRowCount(0);
         CidadeControle cc = new CidadeControle();
         ArrayList<Hotel> lista = hc.consultarHoteis();
         for (Hotel h : lista) {

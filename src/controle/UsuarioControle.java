@@ -29,7 +29,7 @@ public class UsuarioControle {
 
                 Clientes cli = new Clientes();
                 cli.setCliCodigo(resultado.getInt("cod_cliente"));
-                usu.setUsuCodCliente(cli);
+                usu.setUsuCliente(cli);
 
                 vUsuarios.add(usu);
             }
@@ -58,7 +58,7 @@ public class UsuarioControle {
 
                 Clientes cli = new Clientes();
                 cli.setCliCodigo(resultado.getInt("cod_cliente"));
-                usu.setUsuCodCliente(cli);
+                usu.setUsuCliente(cli);
             }
 
         } catch (SQLException ex) {
@@ -76,7 +76,7 @@ public class UsuarioControle {
             stm.setString(1, usu.getUsuLogin());
             stm.setString(2, usu.getUsuSenha());
             stm.setString(3, usu.getUsuEmail());
-            stm.setInt(4, usu.getUsuCodCliente().getCliCodigo());
+            stm.setInt(4, usu.getUsuCliente().getCliCodigo());
 
             stm.executeUpdate();
             return "Inserido";
@@ -96,7 +96,7 @@ public class UsuarioControle {
             stm.setString(1, usu.getUsuLogin());
             stm.setString(2, usu.getUsuSenha());
             stm.setString(3, usu.getUsuEmail());
-            stm.setInt(4, usu.getUsuCodCliente().getCliCodigo());
+            stm.setInt(4, usu.getUsuCliente().getCliCodigo());
             stm.setInt(5, usu.getUsuCodigo());
 
             stm.executeUpdate();
@@ -136,7 +136,7 @@ public class UsuarioControle {
 
         Clientes cli = new Clientes();
         cli.setCliCodigo(1); // TEM que existir
-        novo.setUsuCodCliente(cli);
+        novo.setUsuCliente(cli);
 
         System.out.println("Inserir: " + uc.inserirUsuario(novo));
 

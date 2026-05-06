@@ -270,7 +270,7 @@ public class GerenciarCliente extends javax.swing.JFrame {
             return;
         }
         for (Clientes c : lista) {
-
+            
             modeloTabela.addRow(new Object[]{
                 c.getCliCodigo(),
                 c.getCliEndereco(),

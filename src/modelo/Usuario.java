@@ -51,11 +51,11 @@ public class Usuario {
         this.usuEmail = usuEmail;
     }
 
-    public Clientes getUsuCodCliente() {
+    public Clientes getUsuCliente() {
         return usuCliente;
     }
 
-    public void setUsuCodCliente(Clientes usuCliente) {
+    public void setUsuCliente(Clientes usuCliente) {
         this.usuCliente = usuCliente;
     }
 
