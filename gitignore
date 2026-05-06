@@ -1,0 +1,17 @@
+# compilados
+*.class
+
+# pastas de build
+/build/
+/dist/
+/target/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/nbdist/
+/nbactions.xml
+
+# cache
+*.log
+*.tmp
