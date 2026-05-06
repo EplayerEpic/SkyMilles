@@ -74,11 +74,11 @@ public class Hotel {
         this.checkOut = checkOut;
     }
 
-    public Cidade getCodCidade() {
+    public Cidade getCidade() {
         return cidade;
     }
 
-    public void setCodCidade(Cidade cidade) {
+    public void setCidade(Cidade cidade) {
         this.cidade = cidade;
     }
 

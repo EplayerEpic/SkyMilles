@@ -39,7 +39,7 @@ public class HotelControle {
 
                 Cidade cidade = new Cidade();
                 cidade.setCodCidade(resultado.getInt("cod_cidade"));
-                hot.setCodCidade(cidade);
+                hot.setCidade(cidade);
 
                 vHoteis.add(hot);
             }
@@ -80,7 +80,7 @@ public class HotelControle {
 
                 Cidade cidade = new Cidade();
                 cidade.setCodCidade(resultado.getInt("cod_cidade"));
-                hot.setCodCidade(cidade);
+                hot.setCidade(cidade);
             }
 
         } catch (SQLException ex) {
@@ -102,7 +102,7 @@ public class HotelControle {
             stm.setString(3, hot.getEndereco());
             stm.setDate(4, hot.getCheckIn() != null ? Date.valueOf(hot.getCheckIn()) : null);
             stm.setDate(5, hot.getCheckOut() != null ? Date.valueOf(hot.getCheckOut()) : null);
-            stm.setInt(6, hot.getCodCidade().getCodCidade());
+            stm.setInt(6, hot.getCidade().getCodCidade());
 
             stm.executeUpdate();
             return "Inserido";
@@ -115,7 +115,7 @@ public class HotelControle {
 
     public String alterarHotel(Hotel hot) {
         try {
-            if (hot.getCodCidade() == null) {
+            if (hot.getCidade() == null) {
                 return "Erro: cidade nula";
             }
 
@@ -129,7 +129,7 @@ public class HotelControle {
             stm.setString(3, hot.getEndereco());
             stm.setDate(4, hot.getCheckIn() != null ? Date.valueOf(hot.getCheckIn()) : null);
             stm.setDate(5, hot.getCheckOut() != null ? Date.valueOf(hot.getCheckOut()) : null);
-            stm.setInt(6, hot.getCodCidade().getCodCidade());
+            stm.setInt(6, hot.getCidade().getCodCidade());
             stm.setInt(7, hot.getCodHotel());
 
             stm.executeUpdate();
@@ -193,7 +193,7 @@ public class HotelControle {
         // ===== CONSULTAR POR ID =====
         */
         Hotel h = hc.consultarHotelCodigo(1);
-        h.setCodCidade(new CidadeControle().consultarCidades().get(1));
+        h.setCidade(new CidadeControle().consultarCidades().get(1));
         hc.alterarHotel(h);
         
         /*if (h == null) {

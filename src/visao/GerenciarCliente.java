@@ -217,8 +217,8 @@ public class GerenciarCliente extends javax.swing.JFrame {
                         .addComponent(dt_nasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(InsertButton)
                     .addComponent(AlterButton)
@@ -230,17 +230,14 @@ public class GerenciarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void InsertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertButtonActionPerformed
-        //Código", "Endereço", "Sexo", "Nome", "CPF", "Nascimento", "Telefone
-        //int cliCodigo, String cliNome, String cliEndereco, String cliCPF,
-            //String cliTelefone, LocalDate cliDataNasc, char cliSexo)
-        Clientes c = new Clientes(Integer.parseInt(codCliente.getText()), Nome.getText(), Endereco.getText(),CPF.getText(), Tel.getText(), LocalDate.parse(dt_nasc.getText()), Sexo.getText().charAt(0));
-            cc.inserirCliente(c);
-            carregarTabela();
+        Clientes c = new Clientes(Integer.parseInt(codCliente.getText()), Nome.getText(), Endereco.getText(), CPF.getText(), Tel.getText(), LocalDate.parse(dt_nasc.getText()), Sexo.getText().charAt(0));
+        cc.inserirCliente(c);
+        carregarTabela();
     }//GEN-LAST:event_InsertButtonActionPerformed
 
     private void RemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveButtonActionPerformed
         cc.deletarCliente(Integer.parseInt(codCliente.getText()));
-            carregarTabela();
+        carregarTabela();
     }//GEN-LAST:event_RemoveButtonActionPerformed
 
     private void AlterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterButtonActionPerformed
@@ -285,16 +282,17 @@ public class GerenciarCliente extends javax.swing.JFrame {
             });
         }
     }
-public static void main(String args[]) {
 
-    try {
-        FlatDarkLaf.setup();
-    } catch (Exception ex) {
-        ex.printStackTrace();
+    public static void main(String args[]) {
+
+        try {
+            FlatDarkLaf.setup();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        java.awt.EventQueue.invokeLater(() -> new GerenciarCliente().setVisible(true));
     }
-
-    java.awt.EventQueue.invokeLater(() -> new GerenciarCliente().setVisible(true));
-}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AlterButton;
     private javax.swing.JTextField CPF;
