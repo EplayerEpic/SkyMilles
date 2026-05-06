@@ -4,25 +4,28 @@
  */
 package modelo;
 
+import java.time.LocalDateTime;
 
 public class Voo {
-    private int codVoo;  //cod_voo	num_voo	data_hora_chegada	data_hora_partida	aviao	companhia	cod_destino	cod_local_partida	
 
-    private String numVoo ;
-    private int codLocalPartida;
-    private int codDestino;
-    private String dataHoraPartida;
-    private String dataHoraChegada;
+    private int codVoo;  //cod_voo num_voo data_hora_chegada data_hora_partida aviao companhia cod_destino cod_local_partida	
+
+    private String numVoo;
+    private Aeroporto AeroPartida;
+    private Aeroporto AeroDestino;
+    private LocalDateTime dataHoraPartida;
+    private LocalDateTime dataHoraChegada;
     private String aviao;
     private String companhia;
 
-    public Voo() {}
+    public Voo() {
+    }
 
-    public Voo(int codVoo, String numVoo, int codLocalPartida,int codDestino, String dataHoraPartida, String dataHoraChegada, 
-                  String aviao, String companhia) {
+    public Voo(int codVoo, String numVoo, Aeroporto AeroPartida, Aeroporto AeroDestino, LocalDateTime dataHoraPartida, LocalDateTime dataHoraChegada,
+            String aviao, String companhia) {
         this.codVoo = codVoo;
-        this.codLocalPartida = codLocalPartida;
-        this.codDestino = codDestino;
+        this.AeroPartida = AeroPartida;
+        this.AeroDestino = AeroDestino;
         this.dataHoraPartida = dataHoraPartida;
         this.dataHoraChegada = dataHoraChegada;
         this.aviao = aviao;
@@ -30,7 +33,6 @@ public class Voo {
     }
 
     // Getters e Setters
-
     public int getCodVoo() {
         return codVoo;
     }
@@ -47,36 +49,36 @@ public class Voo {
         this.numVoo = numVoo;
     }
 
-    public int getCodLocalPartida() {
-        return codLocalPartida;
+    public Aeroporto getAeroPartida() {
+        return AeroPartida;
     }
 
-    public void setCodLocalPartida(int codLocalPartida) {
-        this.codLocalPartida = codLocalPartida;
+    public void setAeroPartida(Aeroporto AeroPartida) {
+        this.AeroPartida = AeroPartida;
     }
 
-    public int getCodDestino() {
-        return codDestino;
+    public Aeroporto getAeroDestino() {
+        return AeroDestino;
     }
 
-    public void setCodDestino(int codDestino) {
-        this.codDestino = codDestino;
+    public void setAeroDestino(Aeroporto AeroDestino) {
+        this.AeroDestino = AeroDestino;
     }
 
-    public String getDataHoraPartida() {
+    public LocalDateTime getDataHoraPartida() {
         return dataHoraPartida;
     }
 
-    public void setDataHoraPartida(String dataHoraPartida) {
+    public void setDataHoraPartida(LocalDateTime dataHoraPartida) {
         this.dataHoraPartida = dataHoraPartida;
     }
 
-    public String getDataHoraChegada() {
+    public LocalDateTime getDataHoraChegada() {
         return dataHoraChegada;
     }
 
-    public void setDataHoraChegada(String dataHoraChegada) {
-        this.dataHoraChegada = dataHoraChegada;
+    public void setDataHoraChegada(LocalDateTime data) {
+        this.dataHoraChegada = data;
     }
 
     public String getAviao() {
@@ -97,7 +99,7 @@ public class Voo {
 
     @Override
     public String toString() {
-        return "Voo{" + "codVoo=" + codVoo + ", numVoo=" + numVoo + ", codLocalPartida=" + codLocalPartida + ", codDestino=" + codDestino + ", dataHoraPartida=" + dataHoraPartida + ", dataHoraChegada=" + dataHoraChegada + ", aviao=" + aviao + ", companhia=" + companhia + '}';
+        return "Voo{" + "codVoo=" + codVoo + ", numVoo=" + numVoo + ", AeroPartida=" + AeroPartida + ", AeroDestino=" + AeroDestino + ", dataHoraPartida=" + dataHoraPartida + ", dataHoraChegada=" + dataHoraChegada + ", aviao=" + aviao + ", companhia=" + companhia + '}';
     }
-    
+
 }

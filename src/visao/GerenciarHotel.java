@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cidade;
 import modelo.Hotel;
+import utils.DataUtils;
 
 /**
  *
@@ -62,11 +63,11 @@ public class GerenciarHotel extends javax.swing.JFrame {
         codHotel = new javax.swing.JTextField();
         Local = new javax.swing.JTextField();
         Endereco = new javax.swing.JTextField();
-        Checkin = new javax.swing.JTextField();
-        Checkout = new javax.swing.JTextField();
         Cidade = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         CNPJ = new javax.swing.JTextField();
+        Checkin = new javax.swing.JFormattedTextField();
+        Checkout = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciar Hotel");
@@ -109,11 +110,13 @@ public class GerenciarHotel extends javax.swing.JFrame {
 
         codHotel.addActionListener(this::codHotelActionPerformed);
 
-        Checkin.addActionListener(this::CheckinActionPerformed);
-
         jLabel8.setText("CNPJ");
 
         CNPJ.addActionListener(this::CNPJActionPerformed);
+
+        Checkin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+
+        Checkout.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,17 +142,26 @@ public class GerenciarHotel extends javax.swing.JFrame {
                                     .addComponent(Endereco)
                                     .addComponent(Local, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(CNPJ, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))))
-                        .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Checkin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Checkout)
-                            .addComponent(Cidade))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(50, 50, 50)
+                                        .addComponent(jLabel7)
+                                        .addGap(26, 26, 26))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(Cidade)
+                                    .addComponent(Checkout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(jLabel5)
+                                .addGap(16, 16, 16)
+                                .addComponent(Checkin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(0, 234, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,11 +183,17 @@ public class GerenciarHotel extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(Checkin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel6)
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel7))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(Checkout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(Cidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(codHotel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,13 +209,7 @@ public class GerenciarHotel extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(Endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Checkin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Checkout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(Cidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(Endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -215,13 +227,11 @@ public class GerenciarHotel extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_codHotelActionPerformed
 
-    private void CheckinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckinActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CheckinActionPerformed
-
     private void InsertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertButtonActionPerformed
         CidadeControle cc = new CidadeControle();
-        Hotel h = new Hotel(Integer.parseInt(codHotel.getText()), CNPJ.getText(), Local.getText(), Endereco.getText(), LocalDate.parse(Checkin.getText()), LocalDate.parse(Checkout.getText()), cc.consultarCidadeCodigo(Integer.parseInt(Cidade.getText())));
+        LocalDate dataCheckIn = DataUtils.parseData(Checkin.getText());
+        LocalDate dataCheckOut = DataUtils.parseData(Checkout.getText());
+        Hotel h = new Hotel(Integer.parseInt(codHotel.getText()), CNPJ.getText(), Local.getText(), Endereco.getText(), dataCheckIn, dataCheckOut, cc.consultarCidadeCodigo(Integer.parseInt(Cidade.getText())));
         hc.inserirHotel(h);
         carregarTabela();
     }//GEN-LAST:event_InsertButtonActionPerformed
@@ -256,8 +266,8 @@ public class GerenciarHotel extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AlterButton;
     private javax.swing.JTextField CNPJ;
-    private javax.swing.JTextField Checkin;
-    private javax.swing.JTextField Checkout;
+    private javax.swing.JFormattedTextField Checkin;
+    private javax.swing.JFormattedTextField Checkout;
     private javax.swing.JTextField Cidade;
     private javax.swing.JTextField Endereco;
     private javax.swing.JButton InsertButton;
@@ -289,8 +299,8 @@ public class GerenciarHotel extends javax.swing.JFrame {
                 h.getCNPJ(),
                 h.getLocal(),
                 h.getEndereco(),
-                h.getCheckIn(),
-                h.getCheckOut(),
+                DataUtils.formatData(h.getCheckIn()),
+                DataUtils.formatData(h.getCheckOut()),
                 cidade != null ? cidade.getNomeCidade() : "N/A"
             });
         }
