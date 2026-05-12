@@ -16,7 +16,6 @@ public class GerenciarQuarto extends JFrame {
     private QuartoControle controle = new QuartoControle();
     private JTextField txtValor, txtSaida, txtChegada, txtData, txtDiarias, txtCod;
     private JComboBox<Hotel> hotelCombo;
-    private JComboBox<Pacote> pacoteCombo;
     private JTable tabela;
     private DefaultTableModel modeloTabela;
 
@@ -46,18 +45,15 @@ public class GerenciarQuarto extends JFrame {
         pDados.add(new JLabel("Diárias:"));
         txtDiarias = new JTextField();
         pDados.add(txtDiarias);
-        pDados.add(new JLabel("Pacote:"));
-        pacoteCombo = new JComboBox<Pacote>();
-        pDados.add(pacoteCombo);
         pDados.add(new JLabel("Hotel:"));
-        hotelCombo = new JComboBox<Hotel>();
+        hotelCombo = new JComboBox();
         pDados.add(hotelCombo);
         txtCod = new JTextField();
         pDados.add(txtCod);
         txtCod.setVisible(false);
 
         // Tabela
-        String[] colunas = {"Cód", "Valor", "Saída", "Chegada", "Início", "Diárias", "Pacote", "Hotel"};
+        String[] colunas = {"Cód", "Valor", "Saída", "Chegada", "Início", "Diárias", "Hotel"};
         modeloTabela = new DefaultTableModel(colunas, 0);
         tabela = new JTable(modeloTabela);
 
@@ -71,10 +67,8 @@ public class GerenciarQuarto extends JFrame {
         pBotoes.add(btnAlt);
 
         btnAdd.addActionListener(e -> {
-            PacoteControle pc = new PacoteControle();
             HotelControle hc = new HotelControle();
             Hotel h = (Hotel) hotelCombo.getSelectedItem();
-            Pacote p = (Pacote) pacoteCombo.getSelectedItem();
             if (hotelCombo.getSelectedIndex() == -1) {
                 JOptionPane.showMessageDialog(null,
                         "Selecione um hotel");
@@ -86,7 +80,6 @@ public class GerenciarQuarto extends JFrame {
             q.setLocalChegada(txtChegada.getText());
             q.setDataInicio(txtData.getText());
             q.setQntdDiarias(Integer.parseInt(txtDiarias.getText()));
-            q.setPacote(p);
             q.setHotel(h);
             controle.inserirQuarto(q);
             carregarTabela();
@@ -109,12 +102,10 @@ public class GerenciarQuarto extends JFrame {
                 JOptionPane.showMessageDialog(null, "Código do quarto não encontrado.");
                 return;
             }
-
-            Pacote p = (Pacote) pacoteCombo.getSelectedItem();
             Hotel h = (Hotel) hotelCombo.getSelectedItem();
 
-            if (h == null || p == null) {
-                JOptionPane.showMessageDialog(null, "Selecione um hotel e um pacote.");
+            if (h == null) {
+                JOptionPane.showMessageDialog(null, "Selecione um hotel.");
                 return;
             }
 
@@ -125,7 +116,6 @@ public class GerenciarQuarto extends JFrame {
             q.setLocalChegada(txtChegada.getText().trim());     // ← e isso
             q.setDataInicio(txtData.getText().trim());          // ← e isso
             q.setQntdDiarias(Integer.parseInt(txtDiarias.getText().trim()));
-            q.setPacote(p);
             q.setHotel(h);
 
             QuartoControle qc = new QuartoControle();
@@ -133,7 +123,6 @@ public class GerenciarQuarto extends JFrame {
 
             carregarTabela();
             carregarHotel();
-            carregarPacote();
             limparCampos();
         });
         tabela.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -150,9 +139,8 @@ public class GerenciarQuarto extends JFrame {
                     txtChegada.setText(tabela.getValueAt(linha, 3).toString());
                     txtData.setText(tabela.getValueAt(linha, 4).toString());
                     txtDiarias.setText(tabela.getValueAt(linha, 5).toString());
-                    Pacote p = (Pacote) tabela.getValueAt(linha, 6);
-                    System.out.println(tabela.getValueAt(linha, 7).getClass());
-                    Hotel h = (Hotel) tabela.getValueAt(linha, 7);
+                    System.out.println(tabela.getValueAt(linha, 6).getClass());
+                    Hotel h = (Hotel) tabela.getValueAt(linha, 6);
                     int codHotel = h.getCodHotel();
                     for (int i = 0; i < hotelCombo.getItemCount(); i++) {
 
@@ -160,16 +148,6 @@ public class GerenciarQuarto extends JFrame {
 
                         if (item.getCodHotel() == codHotel) {
                             hotelCombo.setSelectedIndex(i);
-                            break;
-                        }
-                    }
-                    int codPacote = p.getCodPacote();
-                    for (int i = 0; i < pacoteCombo.getItemCount(); i++) {
-
-                        Pacote item = pacoteCombo.getItemAt(i);
-
-                        if (item.getCodPacote() == codPacote) {
-                            pacoteCombo.setSelectedIndex(i);
                             break;
                         }
                     }
@@ -184,9 +162,7 @@ public class GerenciarQuarto extends JFrame {
 
         carregarTabela();
         carregarHotel();
-        carregarPacote();
         hotelCombo.setSelectedIndex(-1);
-        pacoteCombo.setSelectedIndex(-1);
     }
 
     private void carregarTabela() {
@@ -197,7 +173,7 @@ public class GerenciarQuarto extends JFrame {
             modeloTabela.addRow(new Object[]{
                 q.getCodQuarto(), q.getValorReserva(), q.getLocalSaida(),
                 q.getLocalChegada(), q.getDataInicio(), q.getQntdDiarias(),
-                q.getPacote(), q.getHotel()
+                q.getHotel()
             });
         }
     }
@@ -217,21 +193,6 @@ public class GerenciarQuarto extends JFrame {
         hotelCombo.setSelectedIndex(-1);
     }
 
-    public void carregarPacote() {
-
-        pacoteCombo.removeAllItems();
-
-        PacoteControle controle = new PacoteControle();
-
-        ArrayList<Pacote> lista = controle.consultarPacotes();
-
-        for (Pacote p : lista) {
-
-            pacoteCombo.addItem(p);
-        }
-
-        pacoteCombo.setSelectedIndex(-1);
-    }
 
     public void limparCampos() {
         
@@ -247,18 +208,13 @@ public class GerenciarQuarto extends JFrame {
 
         txtDiarias.setText("");
 
-        pacoteCombo.setSelectedIndex(-1);
-
         hotelCombo.setSelectedIndex(-1);
 
     }
 
-    private void formWindowActivated(
-            java.awt.event.WindowEvent evt
-    ) {
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {
 
         carregarHotel();
-        carregarPacote();
     }
 
     public static void main(String[] args) {

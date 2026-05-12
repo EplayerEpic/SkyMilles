@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/Budrys/Documents/NetBeans/SkyMilles/src/visao/GerenciarAeroporto.java</file>
-            <file>file:/home/Budrys/Documents/NetBeans/SkyMilles/src/modelo/Clientes.java</file>
-            <file>file:/home/Budrys/Documents/NetBeans/SkyMilles/src/visao/GerenciarCliente.java</file>
-            <file>file:/home/Budrys/Documents/NetBeans/SkyMilles/src/visao/GerenciarHotel.java</file>
-            <file>file:/home/Budrys/Documents/NetBeans/SkyMilles/src/modelo/Hotel.java</file>
-            <file>file:/home/Budrys/Documents/NetBeans/SkyMilles/src/controle/HotelControle.java</file>
+            <file>file:/C:/Users/aluno.UDICENTRO.000/Documents/NetBeansProjects/SkyMilles/src/controle/AssentosControle.java</file>
+            <file>file:/C:/Users/aluno.UDICENTRO.000/Documents/NetBeansProjects/SkyMilles/src/modelo/Assentos.java</file>
+            <file>file:/C:/Users/aluno.UDICENTRO.000/Documents/NetBeansProjects/SkyMilles/src/controle/PacoteControle.java</file>
+            <file>file:/C:/Users/aluno.UDICENTRO.000/Documents/NetBeansProjects/SkyMilles/src/modelo/Pacote.java</file>
         </group>
     </open-files>
 </project-private>

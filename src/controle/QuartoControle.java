@@ -28,10 +28,6 @@ public class QuartoControle {
                 q.setDataInicio(rs.getString("data_inicio"));
                 q.setQntdDiarias(rs.getInt("qntd_diarias"));
 
-                Pacote pac = new Pacote();
-                pac.setCodPacote(rs.getInt("cod_pacote"));
-                q.setPacote(pac);
-
                 Hotel hot = new Hotel();
                 hot.setCodHotel(rs.getInt("cod_hotel"));
                 q.setHotel(hot);
@@ -63,9 +59,6 @@ public class QuartoControle {
                 q.setDataInicio(rs.getString("data_inicio"));
                 q.setQntdDiarias(rs.getInt("qntd_diarias"));
 
-                Pacote pac = new Pacote();
-                pac.setCodPacote(rs.getInt("cod_pacote"));
-                q.setPacote(pac);
 
                 Hotel hot = new Hotel();
                 hot.setCodHotel(rs.getInt("cod_hotel"));
@@ -83,7 +76,7 @@ public class QuartoControle {
     public String inserirQuarto(Quarto q) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "INSERT INTO quarto (valor_reserva, local_saida, local_chegada, data_inicio, qntd_diarias, cod_pacote, cod_hotel) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO quarto (valor_reserva, local_saida, local_chegada, data_inicio, qntd_diarias, cod_hotel) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stm = conn.prepareStatement(sql);
 
             stm.setDouble(1, q.getValorReserva());
@@ -91,8 +84,7 @@ public class QuartoControle {
             stm.setString(3, q.getLocalChegada());
             stm.setString(4, q.getDataInicio());
             stm.setInt(5, q.getQntdDiarias());
-            stm.setInt(6, q.getPacote().getCodPacote());
-            stm.setInt(7, q.getHotel().getCodHotel());
+            stm.setInt(6, q.getHotel().getCodHotel());
 
             stm.executeUpdate();
             return "inserido";
@@ -105,7 +97,7 @@ public class QuartoControle {
     public String alterarQuarto(Quarto q) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "UPDATE quarto SET valor_reserva = ?, local_saida = ?, local_chegada =?, data_inicio = ?, qntd_diarias = ?, cod_pacote = ?, cod_hotel = ? WHERE cod_quarto=?";
+            String sql = "UPDATE quarto SET valor_reserva = ?, local_saida = ?, local_chegada =?, data_inicio = ?, qntd_diarias = ?, cod_hotel = ? WHERE cod_quarto=?";
             PreparedStatement stm = conn.prepareStatement(sql);
 
             stm.setDouble(1, q.getValorReserva());
@@ -113,9 +105,8 @@ public class QuartoControle {
             stm.setString(3, q.getLocalChegada());
             stm.setString(4, q.getDataInicio());
             stm.setInt(5, q.getQntdDiarias());
-            stm.setInt(6, q.getPacote().getCodPacote());
-            stm.setInt(7, q.getHotel().getCodHotel());
-            stm.setInt(8, q.getCodQuarto());
+            stm.setInt(6, q.getHotel().getCodHotel());
+            stm.setInt(7, q.getCodQuarto());
 
             stm.executeUpdate();
             return "Alterado";
@@ -143,60 +134,5 @@ public class QuartoControle {
 
     public static void main(String[] args) {
 
-        QuartoControle qCtrl = new QuartoControle();
-
-        // ===== LISTAR =====
-        System.out.println("=== TODOS OS QUARTOS ===");
-        for (Quarto q : qCtrl.consultarQuartos()) {
-            System.out.println(q);
-        }
-
-        // ===== INSERT =====
-        System.out.println("\n=== INSERINDO ===");
-        Quarto novo = new Quarto();
-        novo.setValorReserva(350.00);
-        novo.setLocalSaida("Uberlandia");
-        novo.setLocalChegada("Sao Paulo");
-        novo.setDataInicio("2026-05-10");
-        novo.setQntdDiarias(4);
-
-        Pacote pac = new Pacote();
-        pac.setCodPacote(1); // precisa existir
-        novo.setPacote(pac);
-
-        Hotel hot = new Hotel();
-        hot.setCodHotel(1); // precisa existir
-        novo.setHotel(hot);
-
-        System.out.println("Resultado: " + qCtrl.inserirQuarto(novo));
-
-        // ===== LISTAR DEPOIS =====
-        ArrayList<Quarto> lista = qCtrl.consultarQuartos();
-        System.out.println("\n=== APÓS INSERT ===");
-        for (Quarto q : lista) {
-            System.out.println(q);
-        }
-
-        if (lista.isEmpty()) {
-            return;
-        }
-
-        int id = lista.get(lista.size() - 1).getCodQuarto();
-
-        // ===== CONSULTAR POR ID =====
-        System.out.println("\n=== CONSULTAR POR ID ===");
-        for (Quarto q : qCtrl.consultarQuartoCodigo(id)) {
-            System.out.println(q);
-        }
-
-        // ===== DELETE =====
-        System.out.println("\n=== REMOVENDO ===");
-        System.out.println("Resultado: " + qCtrl.removerQuarto(id));
-
-        // ===== FINAL =====
-        System.out.println("\n=== LISTA FINAL ===");
-        for (Quarto q : qCtrl.consultarQuartos()) {
-            System.out.println(q);
-        }
     }
 }

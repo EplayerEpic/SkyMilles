@@ -63,11 +63,11 @@ public class GerenciarHotel extends javax.swing.JFrame {
         codHotel = new javax.swing.JTextField();
         Local = new javax.swing.JTextField();
         Endereco = new javax.swing.JTextField();
-        Cidade = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         CNPJ = new javax.swing.JTextField();
         Checkin = new javax.swing.JFormattedTextField();
         Checkout = new javax.swing.JFormattedTextField();
+        comboCidade = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciar Hotel");
@@ -86,13 +86,13 @@ public class GerenciarHotel extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         InsertButton.setText("Inserir");
-        InsertButton.addActionListener(this::InsertButtonActionPerformed);
+        InsertButton.addActionListener();
 
         AlterButton.setText("Alterar");
-        AlterButton.addActionListener(this::AlterButtonActionPerformed);
+        AlterButton.addActionListener();
 
         RemoveButton.setText("Remover");
-        RemoveButton.addActionListener(this::RemoveButtonActionPerformed);
+        RemoveButton.addActionListener();
 
         jLabel1.setText("Gerenciar Hotel");
 
@@ -108,11 +108,7 @@ public class GerenciarHotel extends javax.swing.JFrame {
 
         jLabel7.setText("Cidade");
 
-        codHotel.addActionListener(this::codHotelActionPerformed);
-
         jLabel8.setText("CNPJ");
-
-        CNPJ.addActionListener(this::CNPJActionPerformed);
 
         Checkin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
 
@@ -153,15 +149,15 @@ public class GerenciarHotel extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Cidade)
-                                    .addComponent(Checkout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Checkout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(comboCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(50, 50, 50)
                                 .addComponent(jLabel5)
                                 .addGap(16, 16, 16)
                                 .addComponent(Checkin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(0, 234, Short.MAX_VALUE))
+                .addGap(0, 236, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,7 +189,7 @@ public class GerenciarHotel extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(Cidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(comboCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(codHotel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -223,17 +219,8 @@ public class GerenciarHotel extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void codHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codHotelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_codHotelActionPerformed
-
     private void InsertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertButtonActionPerformed
-        CidadeControle cc = new CidadeControle();
-        LocalDate dataCheckIn = DataUtils.parseData(Checkin.getText());
-        LocalDate dataCheckOut = DataUtils.parseData(Checkout.getText());
-        Hotel h = new Hotel(Integer.parseInt(codHotel.getText()), CNPJ.getText(), Local.getText(), Endereco.getText(), dataCheckIn, dataCheckOut, cc.consultarCidadeCodigo(Integer.parseInt(Cidade.getText())));
-        hc.inserirHotel(h);
-        carregarTabela();
+        // TODO add your handling code here:
     }//GEN-LAST:event_InsertButtonActionPerformed
 
     private void AlterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterButtonActionPerformed
@@ -241,13 +228,8 @@ public class GerenciarHotel extends javax.swing.JFrame {
     }//GEN-LAST:event_AlterButtonActionPerformed
 
     private void RemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveButtonActionPerformed
-        hc.deletarHotel(Integer.parseInt(codHotel.getText()));
-        carregarTabela();
-    }//GEN-LAST:event_RemoveButtonActionPerformed
-
-    private void CNPJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPJActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CNPJActionPerformed
+    }//GEN-LAST:event_RemoveButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,12 +250,12 @@ public class GerenciarHotel extends javax.swing.JFrame {
     private javax.swing.JTextField CNPJ;
     private javax.swing.JFormattedTextField Checkin;
     private javax.swing.JFormattedTextField Checkout;
-    private javax.swing.JTextField Cidade;
     private javax.swing.JTextField Endereco;
     private javax.swing.JButton InsertButton;
     private javax.swing.JTextField Local;
     private javax.swing.JButton RemoveButton;
     private javax.swing.JTextField codHotel;
+    private javax.swing.JComboBox<Cidade> comboCidade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -304,5 +286,20 @@ public class GerenciarHotel extends javax.swing.JFrame {
                 cidade != null ? cidade.getNomeCidade() : "N/A"
             });
         }
+    }
+    public void carregarClientes() {
+
+        comboCidade.removeAllItems();
+
+        CidadeControle controle = new CidadeControle();
+
+        ArrayList<Cidade> lista = controle.consultarCidades();
+
+        for (Cidade c : lista) {
+
+            comboCidade.addItem(c);
+        }
+
+        comboCidade.setSelectedIndex(-1);
     }
 }

@@ -63,9 +63,9 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="Cidade" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="Checkout" min="-2" max="-2" attributes="0"/>
+                                  <Component id="comboCidade" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -77,7 +77,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="0" pref="234" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="236" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
@@ -116,7 +116,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Cidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="comboCidade" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -281,15 +281,10 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="codHotel">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="codHotelActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="Local">
     </Component>
     <Component class="javax.swing.JTextField" name="Endereco">
-    </Component>
-    <Component class="javax.swing.JTextField" name="Cidade">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
@@ -297,9 +292,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="CNPJ">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CNPJActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="Checkin">
       <Properties>
@@ -314,6 +306,16 @@
           <Format subtype="1" type="1"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="comboCidade">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Cidade&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

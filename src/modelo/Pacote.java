@@ -11,31 +11,34 @@ package modelo;
 public class Pacote {
     private int codPacote;
     private double valorPacote;
-    private PacoteQuarto PacoteQuarto;
-    private PacoteAssento PacoteAssento;
-
-    public PacoteQuarto getPacoteQuarto() {
-        return PacoteQuarto;
-    }
-
-    public void setPacoteQuarto(PacoteQuarto PacoteQuarto) {
-        this.PacoteQuarto = PacoteQuarto;
-    }
-
-    public PacoteAssento getPacoteAssento() {
-        return PacoteAssento;
-    }
-
-    public void setPacoteAssento(PacoteAssento PacoteAssento) {
-        this.PacoteAssento = PacoteAssento;
-    }
+    private Quarto quarto;
+    private Assentos assento;
 
     public Pacote() {
     }
 
-    public Pacote(int codPacote, double valorPacote) {
+    public Quarto getQuarto() {
+        return quarto;
+    }
+
+    public void setQuarto(Quarto quarto) {
+        this.quarto = quarto;
+    }
+
+    public Assentos getAssento() {
+        return assento;
+    }
+
+    public void setAssento(Assentos assento) {
+        this.assento = assento;
+    }
+    
+
+    public Pacote(int codPacote, double valorPacote,Quarto quarto, Assentos assento) {
         this.codPacote = codPacote;
         this.valorPacote = valorPacote;
+        this.quarto = quarto;
+        this.assento = assento;
     }
 
     public int getCodPacote() {

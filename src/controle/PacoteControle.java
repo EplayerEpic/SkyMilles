@@ -5,8 +5,6 @@ import conexao.ConexaoMySQLSky;
 import java.sql.*;
 import modelo.Assentos;
 import modelo.Pacote;
-import modelo.PacoteAssento;
-import modelo.PacoteQuarto;
 import modelo.Quarto;
 
 public class PacoteControle {
@@ -28,29 +26,13 @@ public class PacoteControle {
                 pack.setCodPacote(resultado.getInt("cod_pacote"));
                 pack.setValorPacote(resultado.getDouble("valor_pacote"));
                 
-                PacoteQuarto pq = new PacoteQuarto();
                 Quarto q = new Quarto();
                 q.setCodQuarto(resultado.getInt("cod_pacote"));
-                Pacote p1 = new Pacote();
-                p1.setCodPacote(resultado.getInt("cod_pacote"));
-                pq.setPacote(p1);
-                pq.setQuarto(q);
                 
-                PacoteAssento pa = new PacoteAssento();
-                Pacote p2 = new Pacote();
-                p2.setCodPacote(resultado.getInt("cod_pacote"));
                 Assentos a = new Assentos();
                 a.setCodAssento(resultado.getInt("cod_assento"));
-                pa.setPacote(p2);
-                pa.setAssento(a);
-                pack.setPacoteQuarto(pq);
-                pack.setPacoteAssento(pa);
-                if(pack.getPacoteQuarto() ==null){
-                    pack.setPacoteQuarto(pq);
-                }
-                if(pack.getPacoteAssento() ==null){
-                    pack.setPacoteAssento(pa);
-                }
+                pack.setAssento(a);
+                pack.setQuarto(q);
                 
                
                 vPacote.add(pack);
@@ -76,29 +58,14 @@ public class PacoteControle {
                 pack.setCodPacote(resultado.getInt("cod_usuario"));
                 pack.setValorPacote(resultado.getDouble("valor_pacote"));
 
-                PacoteQuarto pq = new PacoteQuarto();
-                Pacote p1 = new Pacote();
-                p1.setCodPacote(resultado.getInt("cod_pacote"));
+           
                 Quarto q = new Quarto();
                 q.setCodQuarto(resultado.getInt("cod_quarto"));
-                pq.setPacote(p1);
-                pq.setQuarto(q);
-                
-                PacoteAssento pa = new PacoteAssento();
-                Pacote p2 = new Pacote();
-                p2.setCodPacote(resultado.getInt("cod_pacote"));
-                pa.setPacote(p2);
+                pack.setQuarto(q);
                 Assentos a = new Assentos();
                 a.setCodAssento(resultado.getInt("cod_assento"));
                 
-                pack.setPacoteAssento(pa);
-                pack.setPacoteQuarto(pq);
-                if(pack.getPacoteQuarto() ==null){
-                    pack.setPacoteQuarto(pq);
-                }
-                if(pack.getPacoteAssento() ==null){
-                    pack.setPacoteAssento(pa);
-                }
+                pack.setAssento(a);
             }
 
         } catch (SQLException ex) {
@@ -110,13 +77,13 @@ public class PacoteControle {
     public String inserirPacote(Pacote pack) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "INSERT INTO pacote (cod_pacote, valor_pacote, cod_pacote_quarto, cod_pacote_assento) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO pacote (cod_pacote, valor_pacote, cod_assento, cod_quarto) VALUES (?,?,?,?)";
             PreparedStatement stm = conn.prepareStatement(sql);
 
             stm.setInt(1, pack.getCodPacote());
             stm.setDouble(2, pack.getValorPacote());
-            stm.setInt(3, pack.getPacoteQuarto().getPacote().getCodPacote());
-            stm.setInt(4, pack.getPacoteAssento().getPacote().getCodPacote());
+            stm.setInt(3, pack.getQuarto().getCodQuarto());
+            stm.setInt(4, pack.getAssento().getCodAssento());
 
             stm.executeUpdate();
             return "Inserido";
@@ -130,13 +97,13 @@ public class PacoteControle {
     public String alterarPacote(Pacote pack) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "UPDATE pacote SET cod_pacote=?, valor_pacote=?, cod_pacote_quarto=?, cod_pacote_assento=? WHERE cod_pacote=?";
+            String sql = "UPDATE pacote SET cod_pacote=?, valor_pacote=?, cod_quarto=?, cod_assento=? WHERE cod_pacote=?";
             PreparedStatement stm = conn.prepareStatement(sql);
 
             stm.setInt(1, pack.getCodPacote());
             stm.setDouble(2, pack.getValorPacote());
-            stm.setInt(3, pack.getPacoteQuarto().getPacote().getCodPacote());
-            stm.setInt(4, pack.getPacoteAssento().getPacote().getCodPacote());
+            stm.setInt(3, pack.getQuarto().getCodQuarto());
+            stm.setInt(4, pack.getAssento().getCodAssento());
             stm.setInt(5, pack.getCodPacote());
 
             stm.executeUpdate();
@@ -164,20 +131,14 @@ public class PacoteControle {
         }
     }
     public static void main(String[] args){
-        PacoteQuarto pqr = new PacoteQuarto();
-        Pacote p1 = new Pacote();
-                p1.setCodPacote(9999);
-                pqr.setPacote(p1);
+        Pacote p = new Pacote();
+                p.setCodPacote(9999);;
         Quarto q = new Quarto();
                 q.setCodQuarto(9999);
-                pqr.setQuarto(q);
-        PacoteAssento par = new PacoteAssento();
-        Pacote p2 = new Pacote();
-                p2.setCodPacote(999);
+                p.setQuarto(q);
         Assentos a = new Assentos();
                 a.setCodAssento(999);
-                par.setPacote(p2);
-                par.setAssento(a);
+                p.setAssento(a);
         
     }
 }
