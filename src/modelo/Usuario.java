@@ -10,6 +10,14 @@ public class Usuario {
 
     public Usuario() {
     }
+    
+    public Usuario(String login, String senha,String email,Clientes cliente) {
+
+    this.usuLogin = login;
+    this.usuSenha = senha;
+    this.usuEmail = email;
+    this.usuCliente = cliente;
+}
 
     public Usuario(int usuCodigo, String usuLogin, String usuSenha, String usuEmail, Clientes usuCliente) {
         this.usuCodigo = usuCodigo;

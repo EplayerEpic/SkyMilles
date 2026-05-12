@@ -10,13 +10,17 @@ import java.util.logging.Logger;
 
 public class UsuarioControle {
 
-    public UsuarioControle() {}
+    public UsuarioControle() {
+    }
 
     public ArrayList<Usuario> consultarUsuarios() {
         ArrayList<Usuario> vUsuarios = new ArrayList<>();
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "SELECT * FROM usuario";
+            String sql = "SELECT u.*, c.nome_cliente "
+                    + "FROM usuario u "
+                    + "INNER JOIN cliente c "
+                    + "ON u.cod_cliente = c.cod_cliente";
             PreparedStatement stm = conn.prepareStatement(sql);
             ResultSet resultado = stm.executeQuery();
 
@@ -29,6 +33,7 @@ public class UsuarioControle {
 
                 Clientes cli = new Clientes();
                 cli.setCliCodigo(resultado.getInt("cod_cliente"));
+                cli.setCliNome(resultado.getString("nome_cliente"));
                 usu.setUsuCliente(cli);
 
                 vUsuarios.add(usu);
@@ -172,5 +177,5 @@ public class UsuarioControle {
             System.out.println(usu);
         }
     }
-    
+
 }

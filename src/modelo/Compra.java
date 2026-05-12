@@ -79,8 +79,32 @@ public class Compra {
     }
 
     @Override
-    public String toString() {
-        return "Compra{" + "codCompra=" + codCompra + ", formaPagamento=" + formaPagamento + ", valor=" + valor + ", dataCompra=" + dataCompra + ", codCliente=" + cliente + ", codPacote=" + pacote + '}';
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + this.codCompra;
+        return hash;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Compra other = (Compra) obj;
+        return this.codCompra == other.codCompra;
+    }
+
+    @Override
+    public String toString() {
+        return "Compra{" + "codCompra=" + codCompra + ", dataCompra=" + dataCompra + '}';
+    }
+
+    
 
 }

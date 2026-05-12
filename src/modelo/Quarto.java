@@ -23,6 +23,16 @@ public class Quarto {
         this.pacote = pacote;
         this.hotel = hotel;
     }
+    public Quarto(double valorReserva, String localSaida, String localChegada, 
+                  String dataInicio, int qntdDiarias, Pacote pacote, Hotel hotel) {
+        this.valorReserva = valorReserva;
+        this.localSaida = localSaida;
+        this.localChegada = localChegada;
+        this.dataInicio = dataInicio;
+        this.qntdDiarias = qntdDiarias;
+        this.pacote = pacote;
+        this.hotel = hotel;
+    }
 
     // Getters e Setters
     public int getCodQuarto() { return codQuarto; }
@@ -37,16 +47,37 @@ public class Quarto {
     public void setDataInicio(String dataInicio) { this.dataInicio = dataInicio; }
     public int getQntdDiarias() { return qntdDiarias; }
     public void setQntdDiarias(int qntdDiarias) { this.qntdDiarias = qntdDiarias; }
-    public Pacote getCodPacote() { return pacote; }
-    public void setCodPacote(Pacote pacote) { this.pacote = pacote; }
-    public Hotel getCodHotel() { return hotel; }
-    public void setCodHotel(Hotel hotel) { this.hotel = hotel; }
-    
+    public Pacote getPacote() { return pacote; }
+    public void setPacote(Pacote pacote) { this.pacote = pacote; }
+    public Hotel getHotel() { return hotel; }
+    public void setHotel(Hotel hotel) { this.hotel = hotel; }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + this.codQuarto;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Quarto other = (Quarto) obj;
+        return this.codQuarto == other.codQuarto;
+    }
+
     @Override
     public String toString() {
-        return "Quarto{" + "cod_quarto = " + codQuarto + ", valor_reserva = " + valorReserva + 
-               ", local_saida = " + localSaida + ", local_chegada = " + localChegada + 
-                ", data_inicio = "+dataInicio +", qntd_diarias = "+ qntdDiarias+ ", cod_pacote = "
-                +pacote+", cod_hotel = "+hotel+'}';
+        return ""+codQuarto;
     }
+    
+    
 }

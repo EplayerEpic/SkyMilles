@@ -52,12 +52,32 @@ public class Assentos {
     public void setCodVoo(int codVoo) { this.codVoo = codVoo; }
 
     @Override
-    public String toString() {
-        return "Assentos{codAssento=" + codAssento + ", numBilhete=" + numBilhete +
-               ", dataEmissao=" + dataEmissao + ", classe=" + classe +
-               ", valorAss=" + valorAss + ", status=" + status +
-               ", pacoteAssento=" + pacoteAssento +
-               ", codDestino=" + codDestino + ", codLocalPartida=" + codLocalPartida +
-               ", codVoo=" + codVoo + '}';
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + this.codAssento;
+        return hash;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Assentos other = (Assentos) obj;
+        return this.codAssento == other.codAssento;
+    }
+
+    @Override
+    public String toString() {
+        return "Assentos{" + "codAssento=" + codAssento + '}';
+    }
+
+    
+    
 }

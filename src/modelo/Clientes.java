@@ -1,6 +1,7 @@
 package modelo;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Clientes {
 
@@ -25,6 +26,7 @@ public class Clientes {
         this.cliDataNasc = cliDataNasc;
         this.cliSexo = cliSexo;
     }
+    
 
     public int getCliCodigo() {
         return cliCodigo;
@@ -84,14 +86,28 @@ public class Clientes {
 
     @Override
     public String toString() {
-        return "Clientes{"
-                + "cliCodigo=" + cliCodigo
-                + ", cliNome=" + cliNome
-                + ", cliEndereco=" + cliEndereco
-                + ", cliCPF=" + cliCPF
-                + ", cliTelefone=" + cliTelefone
-                + ", cliDataNasc=" + cliDataNasc
-                + ", cliSexo=" + cliSexo
-                + '}';
+        return cliNome;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.cliNome);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Clientes other = (Clientes) obj;
+        return Objects.equals(this.cliNome, other.cliNome);
     }
 }

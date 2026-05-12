@@ -14,7 +14,10 @@ public class PontoTuristicoControle {
         ArrayList<PontoTuristico> lista = new ArrayList<>();
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "SELECT * FROM ponto_turistico";
+            String sql = "SELECT pt.*, c.nome_cidade "
+                    + "FROM ponto_turistico pt "
+                    + "INNER JOIN cidade c "
+                    + "ON pt.cod_cidade = c.cod_cidade";
             PreparedStatement stm = conn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -26,7 +29,8 @@ public class PontoTuristicoControle {
 
                 Cidade cidade = new Cidade();
                 cidade.setCodCidade(rs.getInt("cod_cidade"));
-                p.setCodCidade(cidade);
+                cidade.setNomeCidade(rs.getString("nome_cidade"));
+                p.setCidade(cidade);
 
                 lista.add(p);
             }
@@ -42,6 +46,7 @@ public class PontoTuristicoControle {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
             String sql = "SELECT * FROM ponto_turistico WHERE cod_ponto = ?";
+            
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, codPonto);
             ResultSet rs = stm.executeQuery();
@@ -54,7 +59,7 @@ public class PontoTuristicoControle {
 
                 Cidade cidade = new Cidade();
                 cidade.setCodCidade(rs.getInt("cod_cidade"));
-                p.setCodCidade(cidade);
+                p.setCidade(cidade);
             }
 
         } catch (SQLException ex) {
@@ -72,7 +77,7 @@ public class PontoTuristicoControle {
             stm.setInt(1, p.getCodPonto());
             stm.setString(2, p.getDescricao());
             stm.setString(3, p.getEndereco());
-            stm.setInt(4, p.getCodCidade().getCodCidade());
+            stm.setInt(4, p.getCidade().getCodCidade());
 
             stm.executeUpdate();
             return "inserido";
@@ -91,7 +96,7 @@ public class PontoTuristicoControle {
 
             stm.setString(1, p.getDescricao());
             stm.setString(2, p.getEndereco());
-            stm.setInt(3, p.getCodCidade().getCodCidade());
+            stm.setInt(3, p.getCidade().getCodCidade());
             stm.setInt(4, p.getCodPonto());
 
             stm.executeUpdate();
@@ -131,7 +136,7 @@ public class PontoTuristicoControle {
 
         Cidade c = new Cidade();
         c.setCodCidade(1); // precisa existir
-        novo.setCodCidade(c);
+        novo.setCidade(c);
 
         System.out.println("Inserir: " + pt.inserirPonto(novo));
 

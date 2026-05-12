@@ -1,24 +1,56 @@
 package modelo;
 
+import java.util.Objects;
+
 public class PacoteQuarto {
-    private int codPacote;
-    private int codQuarto;
+    private Pacote pacote;
+    private Quarto quarto;
 
     public PacoteQuarto() {}
 
-    public PacoteQuarto(int codPacote, int codQuarto) {
-        this.codPacote = codPacote;
-        this.codQuarto = codQuarto;
+    public PacoteQuarto(Pacote pacote, Quarto quarto) {
+        this.pacote = pacote;
+        this.quarto = quarto;
     }
 
-    public int getCodPacote() { return codPacote; }
-    public int getCodQuarto() { return codQuarto; }
+    public Pacote getPacote() { return pacote; }
+    public Quarto getQuarto() { return quarto; }
 
-    public void setCodPacote(int codPacote) { this.codPacote = codPacote; }
-    public void setCodQuarto(int codQuarto) { this.codQuarto = codQuarto; }
+    public void setPacote(Pacote pacote) { this.pacote = pacote; }
+    public void setQuarto(Quarto quarto) { this.quarto = quarto; }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 83 * hash + Objects.hashCode(this.pacote);
+        hash = 83 * hash + Objects.hashCode(this.quarto);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PacoteQuarto other = (PacoteQuarto) obj;
+        if (!Objects.equals(this.pacote, other.pacote)) {
+            return false;
+        }
+        return Objects.equals(this.quarto, other.quarto);
+    }
 
     @Override
     public String toString() {
-        return "PacoteQuarto{codPacote=" + codPacote + ", codQuarto=" + codQuarto + '}';
+        return "Pacote: " + pacote + ", Quarto:" + quarto;
     }
+
+    
+
+
 }

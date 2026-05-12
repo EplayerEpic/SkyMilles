@@ -8,6 +8,8 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import controle.ClientesControle;
 import controle.UsuarioControle;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Clientes;
 import modelo.Usuario;
@@ -27,6 +29,7 @@ public class GerenciarUsuario extends javax.swing.JFrame {
      */
     public GerenciarUsuario() {
         initComponents();
+        codUsuario.setVisible(false);
         modeloTabela = new DefaultTableModel(
                 new Object[][]{},
                 new String[]{"Código", "Login", "Senha", "E-mail", "Cliente"}
@@ -34,6 +37,8 @@ public class GerenciarUsuario extends javax.swing.JFrame {
 
         jTable1.setModel(modeloTabela);
         carregarTabela();
+        carregarClientes();
+        Cliente.setSelectedIndex(-1);
     }
 
     /**
@@ -45,7 +50,6 @@ public class GerenciarUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -55,17 +59,15 @@ public class GerenciarUsuario extends javax.swing.JFrame {
         Login = new javax.swing.JTextField();
         Senha = new javax.swing.JTextField();
         email = new javax.swing.JTextField();
-        codCliente = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         InsertButton = new javax.swing.JButton();
         AlterButton = new javax.swing.JButton();
         RemoveButton = new javax.swing.JButton();
+        Cliente = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciar Usuário");
-
-        jLabel1.setText("Código");
 
         jLabel2.setText("Login");
 
@@ -73,7 +75,7 @@ public class GerenciarUsuario extends javax.swing.JFrame {
 
         jLabel4.setText("E-mail");
 
-        jLabel5.setText("Cod. Cliente");
+        jLabel5.setText("Cliente");
 
         jLabel6.setText("Gerenciar Usuário");
 
@@ -92,6 +94,11 @@ public class GerenciarUsuario extends javax.swing.JFrame {
                 "Código", "Login", "Senha", "E-mail", "Cliente"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         InsertButton.setText("Inserir");
@@ -110,31 +117,33 @@ public class GerenciarUsuario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Senha, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                                .addComponent(Senha))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Login, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(codUsuario))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
+                                .addGap(15, 15, 15)
+                                .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(137, 137, 137)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(codCliente))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(email)))))
+                                .addComponent(email))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(codUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(64, 64, 64))
             .addComponent(jScrollPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -150,24 +159,28 @@ public class GerenciarUsuario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4)
-                    .addComponent(codUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5)
-                    .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(codCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(Senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(Senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(26, 26, 26)
+                .addComponent(codUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -189,45 +202,86 @@ public class GerenciarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_emailActionPerformed
 
     private void AlterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterButtonActionPerformed
-        // TODO add your handling code here:
+        int linha = jTable1.getSelectedRow();
+
+        if (linha == -1) {
+            JOptionPane.showMessageDialog(null, "Selecione um usuário na tabela.");
+            return;
+        }
+        Clientes cli = (Clientes) Cliente.getSelectedItem();
+
+        Usuario usu = new Usuario(Integer.parseInt(codUsuario.getText()), Login.getText(), Senha.getText(), email.getText(), cli);
+
+        UsuarioControle uc = new UsuarioControle();
+        uc.alterarUsuario(usu);
+
+        carregarTabela();
+
+        limparCampos();
+
+        Cliente.setSelectedIndex(-1);
+
+        codUsuario.setEditable(true);
+
+        Cliente.setEnabled(true);
     }//GEN-LAST:event_AlterButtonActionPerformed
 
     private void InsertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertButtonActionPerformed
-        ClientesControle cc = new ClientesControle();
+        UsuarioControle uc = new UsuarioControle();
         //int usuCodigo, String usuLogin, String usuSenha, String usuEmail, Clientes usuCliente
-        Usuario u = new Usuario(Integer.parseInt(codUsuario.getText()), Login.getText(),Senha.getText(), email.getText(), cc.consultarClienteCodigo(Integer.parseInt(codCliente.getText())) );
+        Clientes cli = (Clientes) Cliente.getSelectedItem();
+        if (Cliente.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(null,
+                    "Selecione um cliente");
+            return;
+        }
+        Usuario u = new Usuario(Login.getText(), Senha.getText(), email.getText(), cli);
         uc.inserirUsuario(u);
         carregarTabela();
     }//GEN-LAST:event_InsertButtonActionPerformed
 
     private void RemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveButtonActionPerformed
-        uc.deletarUsuario(Integer.parseInt(codUsuario.getText()));
-        carregarTabela();
+        UsuarioControle uc = new UsuarioControle();
+     
+            uc.deletarUsuario(Integer.parseInt(codUsuario.getText()));
+            carregarTabela();
     }//GEN-LAST:event_RemoveButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        try {
-            FlatDarkLaf.setup();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        codUsuario.setEditable(false);
+        Cliente.setEditable(false);
+        int linha = jTable1.getSelectedRow();
+        codUsuario.setText(jTable1.getValueAt(linha, 0).toString());
+        Login.setText(jTable1.getValueAt(linha, 1).toString());
+        Senha.setText(jTable1.getValueAt(linha, 2).toString());
+        email.setText(jTable1.getValueAt(linha, 3).toString());
 
-        java.awt.EventQueue.invokeLater(() -> new GerenciarUsuario().setVisible(true));
-    }
+        Clientes cli = (Clientes) jTable1.getValueAt(linha, 4);
+        Cliente.setSelectedItem(cli);
+    }//GEN-LAST:event_jTable1MouseClicked
+
+        /**
+         * @param args the command line arguments
+         */
+        public static void main(String args[]) {
+            try {
+                FlatDarkLaf.setup();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+            java.awt.EventQueue.invokeLater(() -> new GerenciarUsuario().setVisible(true));
+        }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AlterButton;
+    private javax.swing.JComboBox<Clientes> Cliente;
     private javax.swing.JButton InsertButton;
     private javax.swing.JTextField Login;
     private javax.swing.JButton RemoveButton;
     private javax.swing.JTextField Senha;
-    private javax.swing.JTextField codCliente;
     private javax.swing.JTextField codUsuario;
     private javax.swing.JTextField email;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -244,15 +298,55 @@ public class GerenciarUsuario extends javax.swing.JFrame {
         for (Usuario u : lista) {
 
             Clientes cliente = cc.consultarClienteCodigo(u.getUsuCliente().getCliCodigo());
-            
+
             modeloTabela.addRow(new Object[]{
                 u.getUsuCodigo(),
                 u.getUsuLogin(),
                 u.getUsuSenha(),
                 u.getUsuEmail(),
-                cliente != null ? cliente.getCliNome() : "N/A"
+                u.getUsuCliente()
             });
         }
 
+    }
+
+    public void carregarClientes() {
+
+        Cliente.removeAllItems();
+
+        ClientesControle controle = new ClientesControle();
+
+        ArrayList<Clientes> lista = controle.consultarClientes();
+
+        for (Clientes cli : lista) {
+
+            Cliente.addItem(cli);
+        }
+
+        Cliente.setSelectedIndex(-1);
+    }
+
+    public void limparCampos() {
+
+        codUsuario.setText("");
+
+        Login.setText("");
+
+        Senha.setText("");
+
+        email.setText("");
+
+        Cliente.setSelectedIndex(-1);
+
+        codUsuario.setEditable(true);
+
+        Cliente.setEnabled(true);
+    }
+
+    private void formWindowActivated(
+            java.awt.event.WindowEvent evt
+    ) {
+
+        carregarClientes();
     }
 }

@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.Objects;
+
 public class Aeroporto {
     private int codAeroporto;
     private String nomeAero;
@@ -23,11 +25,30 @@ public class Aeroporto {
     public void setCidade(Cidade cidade) { this.cidade = cidade; }
 
     @Override
-    public String toString() {
-        return "Aeroporto{" +
-                "cod_aeroporto=" + codAeroporto +
-                ", nome_aero=" + nomeAero +
-                ", cod_cidade=" + (cidade != null ? cidade.getCodCidade() : null) +
-                '}';
+    public int hashCode() {
+        int hash = 5;
+        hash = 47 * hash + Objects.hashCode(this.nomeAero);
+        return hash;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Aeroporto other = (Aeroporto) obj;
+        return Objects.equals(this.nomeAero, other.nomeAero);
+    }
+
+    @Override
+    public String toString() {
+        return "Aeroporto{" + "nomeAero=" + nomeAero + '}';
+    }
+
 }

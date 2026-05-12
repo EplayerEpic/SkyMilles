@@ -55,8 +55,32 @@ public class Pacote {
     }
 
     @Override
-    public String toString() {
-        return "Pacote{" + "codPacote=" + codPacote + ", valorPacote=" + valorPacote + '}';
+    public int hashCode() {
+        int hash = 7;
+        hash = 71 * hash + this.codPacote;
+        return hash;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pacote other = (Pacote) obj;
+        return this.codPacote == other.codPacote;
+    }
+
+    @Override
+    public String toString() {
+        return "codPacote:" + codPacote;
+    }
+
+    
     
 }

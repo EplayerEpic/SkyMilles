@@ -83,13 +83,31 @@ public class Hotel {
     }
 
     @Override
-    public String toString() {
-        return "Hotel = {" + " cod_hotel=" + codHotel +
-                ", CNPJ='" + CNPJ  +
-                ", _local='" + local  +
-                ", endereco='" + endereco +
-                ", check_in=" + checkIn +
-                ", check_out=" + checkOut +
-                ", cod_cidade=" + cidade + " } ";
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + this.codHotel;
+        return hash;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Hotel other = (Hotel) obj;
+        return this.codHotel == other.codHotel;
+    }
+
+    @Override
+    public String toString() {
+        return "codHotel=" + codHotel;
+    }
+
+    
 }

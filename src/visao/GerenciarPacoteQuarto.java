@@ -1,120 +1,183 @@
 package visao;
 
+import controle.PacoteControle;
 import controle.PacoteQuartoControle;
+import controle.QuartoControle;
 import modelo.PacoteQuarto;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.ArrayList;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import modelo.Pacote;
+import modelo.Quarto;
 
-public class GerenciarPacoteQuarto extends javax.swing.JFrame {
+public class GerenciarPacoteQuarto extends JFrame {
 
     private PacoteQuartoControle controle = new PacoteQuartoControle();
-
-    private JTextField txtCodPacote, txtCodQuarto;
-    private JButton btnInserir, btnRemover, btnConsultar, btnLimpar;
+    private JTextField txtCod;
+    private JComboBox<Pacote> comboPacote;
+    private JComboBox<Quarto> comboQuarto;
     private JTable tabela;
     private DefaultTableModel modeloTabela;
 
     public GerenciarPacoteQuarto() {
-        initComponents();
+        setTitle("SkyMilles - Pacote Quarto");
+        setSize(700, 500);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setLayout(new BorderLayout(10, 10));
+
+        // Formulário
+        JPanel pCampos = new JPanel(new GridLayout(4, 2, 5, 5));
+        pCampos.setBorder(BorderFactory.createTitledBorder("Cadastro"));
+        pCampos.add(new JLabel("Pacote"));
+        comboPacote = new JComboBox();
+        pCampos.add(comboPacote);
+        pCampos.add(new JLabel("Quarto"));
+        comboQuarto = new JComboBox();
+        pCampos.add(comboQuarto);
+        
+
+        // Botões
+        JPanel pBotoes = new JPanel();
+        JButton btnAdd = new JButton("Inserir");
+        JButton btnAlt = new JButton("Alterar");
+        JButton btnDel = new JButton("Remover");
+        pBotoes.add(btnAdd);
+        pBotoes.add(btnAlt);
+        pBotoes.add(btnDel);
+
+        // Tabela
+        modeloTabela = new DefaultTableModel(new Object[]{"Código", "Pacote"}, 0);
+        tabela = new JTable(modeloTabela);
+
+        // Eventos
+        btnAdd.addActionListener(e -> {
+
+            PacoteQuartoControle pqc = new PacoteQuartoControle();
+            //pega cidade do comboBox
+            Pacote pkt = (Pacote) comboPacote.getSelectedItem();
+            Quarto q = (Quarto) comboQuarto.getSelectedItem();
+            if (comboPacote.getSelectedIndex() == -1) {
+                JOptionPane.showMessageDialog(null,
+                        "Selecione um pacote");
+                return;
+            }
+            if (comboQuarto.getSelectedIndex() == -1) {
+                JOptionPane.showMessageDialog(null,
+                        "Selecione um quarto");
+                return;
+            }
+            //preenche o construtor
+            PacoteQuarto p = new PacoteQuarto(pkt, q);
+            pqc.inserirPacoteQuarto(p);
+            carregarTabela();
+        });
+        btnAlt.addActionListener(e -> {
+            int linha = tabela.getSelectedRow();
+
+            if (linha == -1) {
+                JOptionPane.showMessageDialog(null, "Selecione um pacote e um quarto na tabela.");
+                return;
+            }
+            Pacote p = (Pacote) comboPacote.getSelectedItem();
+            Quarto q = (Quarto) comboQuarto.getSelectedItem();
+
+            PacoteQuarto pq = new PacoteQuarto(p, q);
+            PacoteQuartoControle pqc = new PacoteQuartoControle();
+            pqc.alterarPacoteQuarto(pq);
+
+            
+            carregarTabela();
+            limparCampos();
+
+            comboPacote.setSelectedIndex(-1);
+            comboQuarto.setSelectedIndex(-1);
+        });
+
+        btnDel.addActionListener(e -> {
+            PacoteQuartoControle pqc = new PacoteQuartoControle();
+            Pacote p = (Pacote) comboPacote.getSelectedItem();
+            Quarto q = (Quarto) comboQuarto.getSelectedItem();
+            pqc.removerPacoteQuarto(p.getCodPacote(), q.getCodQuarto());
+            carregarTabela();
+        });
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+
+                int linha = tabela.getSelectedRow();
+                Pacote p = (Pacote) tabela.getValueAt(linha, 0);
+                Quarto q = (Quarto) tabela.getValueAt(linha, 1);
+                
+                comboPacote.setSelectedItem(p);
+                comboQuarto.setSelectedItem(q);
+            }
+        });
+
+        add(pCampos, BorderLayout.NORTH);
+        add(new JScrollPane(tabela), BorderLayout.CENTER);
+        add(pBotoes, BorderLayout.SOUTH);
+        carregarPacote();
+        carregarQuarto();
         carregarTabela();
     }
 
-    private void initComponents() {
-        setTitle("Gerenciar Pacote x Quarto - SkyMilles");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(500, 400);
-        setLocationRelativeTo(null);
-        setLayout(new BorderLayout(10, 10));
-
-        JPanel painelCampos = new JPanel(new GridBagLayout());
-        painelCampos.setBorder(BorderFactory.createTitledBorder("Associar Pacote e Quarto"));
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 8, 5, 8);
-        gbc.anchor = GridBagConstraints.WEST;
-
-        txtCodPacote = new JTextField(10);
-        txtCodQuarto = new JTextField(10);
-
-        gbc.gridx = 0; gbc.gridy = 0; painelCampos.add(new JLabel("Cód. Pacote:"), gbc);
-        gbc.gridx = 1; painelCampos.add(txtCodPacote, gbc);
-        gbc.gridx = 0; gbc.gridy = 1; painelCampos.add(new JLabel("Cód. Quarto:"), gbc);
-        gbc.gridx = 1; painelCampos.add(txtCodQuarto, gbc);
-
-        JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
-        btnInserir   = new JButton("Inserir");
-        btnRemover   = new JButton("Remover");
-        btnConsultar = new JButton("Consultar");
-        btnLimpar    = new JButton("Limpar");
-
-        btnInserir.setBackground(new Color(34, 139, 34));   btnInserir.setForeground(Color.WHITE);
-        btnRemover.setBackground(new Color(220, 20, 60));   btnRemover.setForeground(Color.WHITE);
-        btnConsultar.setBackground(new Color(255, 165, 0)); btnConsultar.setForeground(Color.WHITE);
-
-        painelBotoes.add(btnInserir); painelBotoes.add(btnRemover);
-        painelBotoes.add(btnConsultar); painelBotoes.add(btnLimpar);
-
-        modeloTabela = new DefaultTableModel(new String[]{"Cód. Pacote", "Cód. Quarto"}, 0) {
-            @Override public boolean isCellEditable(int r, int c) { return false; }
-        };
-        tabela = new JTable(modeloTabela);
-        tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-        tabela.getSelectionModel().addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting() && tabela.getSelectedRow() >= 0) {
-                int l = tabela.getSelectedRow();
-                txtCodPacote.setText(modeloTabela.getValueAt(l, 0).toString());
-                txtCodQuarto.setText(modeloTabela.getValueAt(l, 1).toString());
-            }
-        });
-
-        btnInserir.addActionListener(e -> {
-            try {
-                PacoteQuarto pq = new PacoteQuarto(
-                    Integer.parseInt(txtCodPacote.getText().trim()),
-                    Integer.parseInt(txtCodQuarto.getText().trim()));
-                String res = controle.inserirPacoteQuarto(pq);
-                JOptionPane.showMessageDialog(this, "Registro " + res + " com sucesso!");
-                carregarTabela(); limpar();
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Preencha os campos corretamente.", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
-        });
-
-        btnRemover.addActionListener(e -> {
-            try {
-                String res = controle.removerPacoteQuarto(
-                    Integer.parseInt(txtCodPacote.getText().trim()),
-                    Integer.parseInt(txtCodQuarto.getText().trim()));
-                JOptionPane.showMessageDialog(this, "Registro " + res + " com sucesso!");
-                carregarTabela(); limpar();
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Preencha os campos corretamente.", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
-        });
-
-        btnConsultar.addActionListener(e -> carregarTabela());
-        btnLimpar.addActionListener(e -> limpar());
-
-        JPanel topo = new JPanel(new BorderLayout());
-        topo.add(painelCampos, BorderLayout.CENTER);
-        topo.add(painelBotoes, BorderLayout.SOUTH);
-        add(topo, BorderLayout.NORTH);
-        add(new JScrollPane(tabela), BorderLayout.CENTER);
-    }
-
+    //metodos
     private void carregarTabela() {
         modeloTabela.setRowCount(0);
         for (PacoteQuarto pq : controle.consultarPacoteQuartos()) {
-            modeloTabela.addRow(new Object[]{pq.getCodPacote(), pq.getCodQuarto()});
+            modeloTabela.addRow(new Object[]{pq.getPacote(), pq.getQuarto()});
         }
     }
 
-    private void limpar() {
-        txtCodPacote.setText(""); txtCodQuarto.setText(""); tabela.clearSelection();
+    public void carregarPacote() {
+
+        comboPacote.removeAllItems();
+
+        PacoteControle controle = new PacoteControle();
+
+        ArrayList<Pacote> lista = controle.consultarPacotes();
+
+        for (Pacote p : lista) {
+
+            comboPacote.addItem(p);
+        }
+
+        comboPacote.setSelectedIndex(-1);
+    }
+    public void carregarQuarto() {
+
+        comboQuarto.removeAllItems();
+
+        QuartoControle controle = new QuartoControle();
+
+        ArrayList<Quarto> lista = controle.consultarQuartos();
+
+        for (Quarto q : lista) {
+
+            comboQuarto.addItem(q);
+        }
+
+        comboQuarto.setSelectedIndex(-1);
+    }
+
+    public void limparCampos() {
+
+        comboPacote.setSelectedIndex(-1);
+        comboQuarto.setSelectedIndex(-1);
+    }
+
+    private void formWindowActivated(
+            java.awt.event.WindowEvent evt
+    ) {
+        carregarPacote();
+        carregarQuarto();
     }
 
     public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(() -> new GerenciarPacoteQuarto().setVisible(true));
+        new GerenciarPacoteQuarto().setVisible(true);
     }
 }

@@ -6,6 +6,8 @@ import conexao.ConexaoMySQLSky;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
+import modelo.Pacote;
+import modelo.Quarto;
 
 public class PacoteQuartoControle {
 
@@ -14,13 +16,18 @@ public class PacoteQuartoControle {
     // ── CONSULTAR TODOS ──────────────────────────────────────────────────────
     public ArrayList<PacoteQuarto> consultarPacoteQuartos() {
         ArrayList<PacoteQuarto> lista = new ArrayList<>();
+        PacoteQuartoControle pqc = new PacoteQuartoControle();
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            ResultSet resultado = conn.createStatement().executeQuery("SELECT * FROM pacotequarto");
+            ResultSet resultado = conn.createStatement().executeQuery("SELECT * FROM pacoteQuarto");
             while (resultado.next()) {
                 PacoteQuarto pq = new PacoteQuarto();
-                pq.setCodPacote(resultado.getInt("cod_pacote"));
-                pq.setCodQuarto(resultado.getInt("cod_quarto"));
+                Pacote p = new Pacote();
+                p.setCodPacote((resultado.getInt("cod_pacote")));
+                Quarto q = new Quarto();
+                q.setCodQuarto(resultado.getInt("cod_quarto"));
+                pq.setPacote(p);
+                pq.setQuarto(q);
                 lista.add(pq);
             }
         } catch (SQLException ex) {
@@ -34,14 +41,18 @@ public class PacoteQuartoControle {
         ArrayList<PacoteQuarto> lista = new ArrayList<>();
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "SELECT * FROM pacotequarto WHERE cod_pacote = ?";
+            String sql = "SELECT * FROM pacoteQuarto WHERE cod_pacote = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, codPacote);
             ResultSet resultado = stm.executeQuery();
             while (resultado.next()) {
                 PacoteQuarto pq = new PacoteQuarto();
-                pq.setCodPacote(resultado.getInt("cod_pacote"));
-                pq.setCodQuarto(resultado.getInt("cod_quarto"));
+                Pacote p = new Pacote();
+                p.setCodPacote(resultado.getInt("cod_pacote"));
+                Quarto q = new Quarto();
+                q.setCodQuarto(resultado.getInt("cod_quarto"));
+                pq.setPacote(p);
+                pq.setQuarto(q);
                 lista.add(pq);
             }
         } catch (SQLException ex) {
@@ -55,10 +66,10 @@ public class PacoteQuartoControle {
         String resultado = "";
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "INSERT INTO pacotequarto (cod_pacote, cod_quarto) VALUES (?, ?)";
+            String sql = "INSERT INTO pacoteQuarto (cod_pacote, cod_quarto) VALUES (?, ?)";
             PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setInt(1, pq.getCodPacote());
-            stm.setInt(2, pq.getCodQuarto());
+            stm.setInt(1, pq.getPacote().getCodPacote());
+            stm.setInt(2, pq.getQuarto().getCodQuarto());
             stm.executeUpdate();
             resultado = "inserido";
         } catch (SQLException ex) {
@@ -67,13 +78,32 @@ public class PacoteQuartoControle {
         }
         return resultado;
     }
+    public String alterarPacoteQuarto(PacoteQuarto pq) {
+        try {
+            Connection conn = new ConexaoMySQLSky().conectar();
+            String sql = "UPDATE pacoteQuarto SET cod_pacote =?, cod_quarto=? WHERE cod_pacote = ? AND cod_quarto =?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+
+            stm.setInt(1, pq.getPacote().getCodPacote());
+            stm.setInt(2, pq.getQuarto().getCodQuarto());
+            stm.setInt(3, pq.getPacote().getCodPacote());
+            stm.setInt(4, pq.getQuarto().getCodQuarto());
+
+            stm.executeUpdate();
+            return "alterado";
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return ex.getSQLState();
+        }
+    }
 
     // ── REMOVER ──────────────────────────────────────────────────────────────
     public String removerPacoteQuarto(int codPacote, int codQuarto) {
         String resultado = "";
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "DELETE FROM pacotequarto WHERE cod_pacote = ? AND cod_quarto = ?";
+            String sql = "DELETE FROM pacoteQuarto WHERE cod_pacote = ? AND cod_quarto = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, codPacote);
             stm.setInt(2, codQuarto);
@@ -96,7 +126,11 @@ public class PacoteQuartoControle {
         }
 
         System.out.println("\n=== Inserindo ===");
-        PacoteQuarto novo = new PacoteQuarto(1, 1);
+        Pacote p = new Pacote();
+        p.setCodPacote(1);
+        Quarto q = new Quarto();
+        q.setCodQuarto(1);
+        PacoteQuarto novo = new PacoteQuarto(p, q);
         System.out.println("Resultado: " + ctrl.inserirPacoteQuarto(novo));
 
         System.out.println("\n=== Consultando por pacote (cod_pacote = 1) ===");

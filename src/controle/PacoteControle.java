@@ -3,9 +3,11 @@ package controle;
 import java.util.ArrayList;
 import conexao.ConexaoMySQLSky;
 import java.sql.*;
+import modelo.Assentos;
 import modelo.Pacote;
 import modelo.PacoteAssento;
 import modelo.PacoteQuarto;
+import modelo.Quarto;
 
 public class PacoteControle {
     
@@ -14,12 +16,7 @@ public class PacoteControle {
 
     public ArrayList<Pacote> consultarPacotes() {
         ArrayList<Pacote> vPacote = new ArrayList<>();
-        PacoteQuarto pqr = new PacoteQuarto();
-                pqr.setCodPacote(999);
-                pqr.setCodQuarto(999);
-        PacoteAssento par = new PacoteAssento();
-                par.setCodPacote(999);
-                par.setCodAssento(999);
+        
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
             String sql = "SELECT * FROM pacote";
@@ -32,18 +29,27 @@ public class PacoteControle {
                 pack.setValorPacote(resultado.getDouble("valor_pacote"));
                 
                 PacoteQuarto pq = new PacoteQuarto();
-                pq.setCodPacote(resultado.getInt("cod_pacote"));
+                Quarto q = new Quarto();
+                q.setCodQuarto(resultado.getInt("cod_pacote"));
+                Pacote p1 = new Pacote();
+                p1.setCodPacote(resultado.getInt("cod_pacote"));
+                pq.setPacote(p1);
+                pq.setQuarto(q);
                 
                 PacoteAssento pa = new PacoteAssento();
-                pa.setCodPacote(resultado.getInt("cod_pacote"));
-                
+                Pacote p2 = new Pacote();
+                p2.setCodPacote(resultado.getInt("cod_pacote"));
+                Assentos a = new Assentos();
+                a.setCodAssento(resultado.getInt("cod_assento"));
+                pa.setPacote(p2);
+                pa.setAssento(a);
                 pack.setPacoteQuarto(pq);
                 pack.setPacoteAssento(pa);
                 if(pack.getPacoteQuarto() ==null){
-                    pack.setPacoteQuarto(pqr);
+                    pack.setPacoteQuarto(pq);
                 }
                 if(pack.getPacoteAssento() ==null){
-                    pack.setPacoteAssento(par);
+                    pack.setPacoteAssento(pa);
                 }
                 
                
@@ -58,12 +64,6 @@ public class PacoteControle {
 
     public Pacote consultarPacoteCodigo(int codPacote) {
         Pacote pack = null;
-        PacoteQuarto pqr = new PacoteQuarto();
-                pqr.setCodPacote(999);
-                pqr.setCodQuarto(999);
-        PacoteAssento par = new PacoteAssento();
-                par.setCodPacote(999);
-                par.setCodAssento(999);
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
             String sql = "SELECT * FROM pacote WHERE cod_pacote = ?";
@@ -77,18 +77,27 @@ public class PacoteControle {
                 pack.setValorPacote(resultado.getDouble("valor_pacote"));
 
                 PacoteQuarto pq = new PacoteQuarto();
-                pq.setCodPacote(resultado.getInt("cod_pacote"));
+                Pacote p1 = new Pacote();
+                p1.setCodPacote(resultado.getInt("cod_pacote"));
+                Quarto q = new Quarto();
+                q.setCodQuarto(resultado.getInt("cod_quarto"));
+                pq.setPacote(p1);
+                pq.setQuarto(q);
                 
                 PacoteAssento pa = new PacoteAssento();
-                pa.setCodPacote(resultado.getInt("cod_pacote"));
+                Pacote p2 = new Pacote();
+                p2.setCodPacote(resultado.getInt("cod_pacote"));
+                pa.setPacote(p2);
+                Assentos a = new Assentos();
+                a.setCodAssento(resultado.getInt("cod_assento"));
                 
                 pack.setPacoteAssento(pa);
                 pack.setPacoteQuarto(pq);
                 if(pack.getPacoteQuarto() ==null){
-                    pack.setPacoteQuarto(pqr);
+                    pack.setPacoteQuarto(pq);
                 }
                 if(pack.getPacoteAssento() ==null){
-                    pack.setPacoteAssento(par);
+                    pack.setPacoteAssento(pa);
                 }
             }
 
@@ -106,8 +115,8 @@ public class PacoteControle {
 
             stm.setInt(1, pack.getCodPacote());
             stm.setDouble(2, pack.getValorPacote());
-            stm.setInt(3, pack.getPacoteQuarto().getCodPacote());
-            stm.setInt(4, pack.getPacoteAssento().getCodPacote());
+            stm.setInt(3, pack.getPacoteQuarto().getPacote().getCodPacote());
+            stm.setInt(4, pack.getPacoteAssento().getPacote().getCodPacote());
 
             stm.executeUpdate();
             return "Inserido";
@@ -126,8 +135,8 @@ public class PacoteControle {
 
             stm.setInt(1, pack.getCodPacote());
             stm.setDouble(2, pack.getValorPacote());
-            stm.setInt(3, pack.getPacoteQuarto().getCodPacote());
-            stm.setInt(4, pack.getPacoteAssento().getCodPacote());
+            stm.setInt(3, pack.getPacoteQuarto().getPacote().getCodPacote());
+            stm.setInt(4, pack.getPacoteAssento().getPacote().getCodPacote());
             stm.setInt(5, pack.getCodPacote());
 
             stm.executeUpdate();
@@ -153,5 +162,22 @@ public class PacoteControle {
             System.out.println(ex);
             return ex.getSQLState();
         }
-    }    
+    }
+    public static void main(String[] args){
+        PacoteQuarto pqr = new PacoteQuarto();
+        Pacote p1 = new Pacote();
+                p1.setCodPacote(9999);
+                pqr.setPacote(p1);
+        Quarto q = new Quarto();
+                q.setCodQuarto(9999);
+                pqr.setQuarto(q);
+        PacoteAssento par = new PacoteAssento();
+        Pacote p2 = new Pacote();
+                p2.setCodPacote(999);
+        Assentos a = new Assentos();
+                a.setCodAssento(999);
+                par.setPacote(p2);
+                par.setAssento(a);
+        
+    }
 }

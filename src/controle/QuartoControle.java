@@ -30,11 +30,11 @@ public class QuartoControle {
 
                 Pacote pac = new Pacote();
                 pac.setCodPacote(rs.getInt("cod_pacote"));
-                q.setCodPacote(pac);
+                q.setPacote(pac);
 
                 Hotel hot = new Hotel();
                 hot.setCodHotel(rs.getInt("cod_hotel"));
-                q.setCodHotel(hot);
+                q.setHotel(hot);
 
                 lista.add(q);
             }
@@ -65,11 +65,11 @@ public class QuartoControle {
 
                 Pacote pac = new Pacote();
                 pac.setCodPacote(rs.getInt("cod_pacote"));
-                q.setCodPacote(pac);
+                q.setPacote(pac);
 
                 Hotel hot = new Hotel();
                 hot.setCodHotel(rs.getInt("cod_hotel"));
-                q.setCodHotel(hot);
+                q.setHotel(hot);
 
                 lista.add(q);
             }
@@ -91,13 +91,37 @@ public class QuartoControle {
             stm.setString(3, q.getLocalChegada());
             stm.setString(4, q.getDataInicio());
             stm.setInt(5, q.getQntdDiarias());
-            stm.setInt(6, q.getCodPacote().getCodPacote());
-            stm.setInt(7, q.getCodHotel().getCodHotel());
+            stm.setInt(6, q.getPacote().getCodPacote());
+            stm.setInt(7, q.getHotel().getCodHotel());
 
             stm.executeUpdate();
             return "inserido";
 
         } catch (SQLException ex) {
+            return ex.getSQLState();
+        }
+    }
+
+    public String alterarQuarto(Quarto q) {
+        try {
+            Connection conn = new ConexaoMySQLSky().conectar();
+            String sql = "UPDATE quarto SET valor_reserva = ?, local_saida = ?, local_chegada =?, data_inicio = ?, qntd_diarias = ?, cod_pacote = ?, cod_hotel = ? WHERE cod_quarto=?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+
+            stm.setDouble(1, q.getValorReserva());
+            stm.setString(2, q.getLocalSaida());
+            stm.setString(3, q.getLocalChegada());
+            stm.setString(4, q.getDataInicio());
+            stm.setInt(5, q.getQntdDiarias());
+            stm.setInt(6, q.getPacote().getCodPacote());
+            stm.setInt(7, q.getHotel().getCodHotel());
+            stm.setInt(8, q.getCodQuarto());
+
+            stm.executeUpdate();
+            return "Alterado";
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
             return ex.getSQLState();
         }
     }
@@ -138,11 +162,11 @@ public class QuartoControle {
 
         Pacote pac = new Pacote();
         pac.setCodPacote(1); // precisa existir
-        novo.setCodPacote(pac);
+        novo.setPacote(pac);
 
         Hotel hot = new Hotel();
         hot.setCodHotel(1); // precisa existir
-        novo.setCodHotel(hot);
+        novo.setHotel(hot);
 
         System.out.println("Resultado: " + qCtrl.inserirQuarto(novo));
 
@@ -153,7 +177,9 @@ public class QuartoControle {
             System.out.println(q);
         }
 
-        if (lista.isEmpty()) return;
+        if (lista.isEmpty()) {
+            return;
+        }
 
         int id = lista.get(lista.size() - 1).getCodQuarto();
 

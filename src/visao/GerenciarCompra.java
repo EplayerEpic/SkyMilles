@@ -118,12 +118,12 @@ public class GerenciarCompra extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TableCompras);
 
-        RegistrarCompraB.setText("RegistrarCompra");
+        RegistrarCompraB.setText("Inserir");
         RegistrarCompraB.addActionListener(this::RegistrarCompraBActionPerformed);
 
-        RemoverCompraB.setText("RemoverCompra");
+        RemoverCompraB.setText("Remover");
 
-        AlterarCompraB.setText("AlterarCompra");
+        AlterarCompraB.setText("Alterar");
         AlterarCompraB.addActionListener(this::AlterarCompraBActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
