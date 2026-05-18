@@ -1,5 +1,6 @@
 package visao;
 
+import com.formdev.flatlaf.FlatDarkLaf;
 import controle.CidadeControle;
 import modelo.Cidade;
 import javax.swing.*;
@@ -66,7 +67,14 @@ public class GerenciarCidade extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        new GerenciarCidade().setVisible(true);
+    public static void main(String args[]) {
+
+        try {
+            FlatDarkLaf.setup();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        java.awt.EventQueue.invokeLater(() -> new GerenciarCidade().setVisible(true));
     }
 }

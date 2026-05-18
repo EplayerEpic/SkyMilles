@@ -50,7 +50,7 @@ public class Cidade {
             return false;
         }
         final Cidade other = (Cidade) obj;
-        return Objects.equals(this.nomeCidade, other.nomeCidade);
+        return Objects.equals(this.codCidade, other.codCidade);
     }
 
     @Override

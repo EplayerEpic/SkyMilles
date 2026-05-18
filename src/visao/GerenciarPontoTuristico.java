@@ -1,5 +1,6 @@
 package visao;
 
+import com.formdev.flatlaf.FlatDarkLaf;
 import controle.CidadeControle;
 import controle.PontoTuristicoControle;
 import modelo.PontoTuristico;
@@ -156,7 +157,14 @@ public class GerenciarPontoTuristico extends JFrame {
         carregarCidade();
     }
 
-    public static void main(String[] args) {
-        new GerenciarPontoTuristico().setVisible(true);
+    public static void main(String args[]) {
+
+        try {
+            FlatDarkLaf.setup();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        java.awt.EventQueue.invokeLater(() -> new GerenciarPontoTuristico().setVisible(true));
     }
 }

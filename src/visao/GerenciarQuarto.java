@@ -1,5 +1,6 @@
 package visao;
 
+import com.formdev.flatlaf.FlatDarkLaf;
 import controle.HotelControle;
 import controle.PacoteControle;
 import controle.QuartoControle;
@@ -217,7 +218,14 @@ public class GerenciarQuarto extends JFrame {
         carregarHotel();
     }
 
-    public static void main(String[] args) {
-        new GerenciarQuarto().setVisible(true);
+    public static void main(String args[]) {
+
+        try {
+            FlatDarkLaf.setup();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        java.awt.EventQueue.invokeLater(() -> new GerenciarQuarto().setVisible(true));
     }
 }
