@@ -24,6 +24,7 @@ public class Voo {
     public Voo(int codVoo, String numVoo, Aeroporto AeroPartida, Aeroporto AeroDestino, LocalDateTime dataHoraPartida, LocalDateTime dataHoraChegada,
             String aviao, String companhia) {
         this.codVoo = codVoo;
+        this.numVoo = numVoo;
         this.AeroPartida = AeroPartida;
         this.AeroDestino = AeroDestino;
         this.dataHoraPartida = dataHoraPartida;

@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelo.Aeroporto;
 import utils.DataUtils;
 
 public class VooControle {
@@ -16,7 +17,11 @@ public class VooControle {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
             AeroportoControle ac = new AeroportoControle();
-            String sql = "SELECT * FROM voo";
+
+            String sql = "SELECT v.*, a1.nome_aeroporto AS nome_destino, a2.nome_aeroporto AS nome_partida "
+                    + "FROM voo v "
+                    + "INNER JOIN aeroporto a1 ON a1.cod_aeroporto = v.cod_destino "
+                    + "INNER JOIN aeroporto a2 ON a2.cod_aeroporto = v.cod_local_partida";
             ResultSet rs = conn.createStatement().executeQuery(sql);
             while (rs.next()) {
                 Voo v = new Voo();
@@ -26,8 +31,14 @@ public class VooControle {
                 v.setDataHoraPartida(rs.getTimestamp("data_hora_partida").toLocalDateTime());
                 v.setAviao(rs.getString("aviao"));
                 v.setCompanhia(rs.getString("companhia"));
-                v.setAeroDestino(ac.consultarAeroportoCodigo(rs.getInt("cod_destino")));
-                v.setAeroPartida(ac.consultarAeroportoCodigo(rs.getInt("cod_local_partida")));
+                Aeroporto aDestino = new Aeroporto();
+                aDestino.setCodAeroporto(rs.getInt("cod_destino"));
+                aDestino.setNomeAero(rs.getString("nome_destino"));
+                v.setAeroDestino(aDestino);
+                Aeroporto aOrigem = new Aeroporto();
+                aOrigem.setCodAeroporto(rs.getInt("cod_local_partida"));
+                aOrigem.setNomeAero(rs.getString("nome_partida"));
+                v.setAeroPartida(aOrigem);
                 lista.add(v);
             }
         } catch (SQLException ex) {
@@ -79,6 +90,29 @@ public class VooControle {
             stm.executeUpdate();
             return "inserido";
         } catch (SQLException ex) {
+            return ex.getSQLState();
+        }
+    }
+
+    public String alterarVoo(Voo v) {
+        try {
+            Connection conn = new ConexaoMySQLSky().conectar();
+            String sql = "UPDATE voo SET num_voo=?, data_hora_chegada=?, data_hora_partida=?, aviao=?, companhia =?, cod_destino =?, cod_local_partida =? WHERE cod_voo=?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, v.getNumVoo());
+            stm.setObject(2, v.getDataHoraChegada());
+            stm.setObject(3, v.getDataHoraPartida());
+            stm.setString(4, v.getAviao());
+            stm.setString(5, v.getCompanhia());
+            stm.setInt(6, v.getAeroDestino().getCodAeroporto());
+            stm.setInt(7, v.getAeroPartida().getCodAeroporto());
+            stm.setInt(8, v.getCodVoo());
+
+            stm.executeUpdate();
+            return "Alterado";
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
             return ex.getSQLState();
         }
     }

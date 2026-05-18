@@ -28,7 +28,7 @@
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -37,24 +37,22 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="origem" max="32767" attributes="0"/>
+                              <Component id="comboOrigem" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="codVoo" min="-2" pref="105" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" pref="150" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="destino" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
@@ -71,18 +69,19 @@
                                   <Component id="horaPartida" min="-2" pref="61" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Component id="comboDestino" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="202" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="aviao" pref="74" max="32767" attributes="0"/>
+                          <Component id="aviao" pref="123" max="32767" attributes="0"/>
                           <Component id="companhia" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="100" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -92,7 +91,7 @@
           </Group>
           <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="324" max="32767" attributes="0"/>
               <Component id="InsertButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="AlterButton" min="-2" max="-2" attributes="0"/>
@@ -114,7 +113,7 @@
                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="codVoo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="aviao" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="destino" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboDestino" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -130,9 +129,9 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="origem" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="dataChegada" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="horaChegada" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboOrigem" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="330" max="-2" attributes="0"/>
@@ -199,10 +198,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="numVoo">
-    </Component>
-    <Component class="javax.swing.JTextField" name="origem">
-    </Component>
-    <Component class="javax.swing.JTextField" name="destino">
     </Component>
     <Component class="javax.swing.JTextField" name="aviao">
     </Component>
@@ -289,6 +284,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -322,9 +320,6 @@
           <Format subtype="1" type="1"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dataChegadaActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="dataPartida">
       <Properties>
@@ -346,6 +341,26 @@
           <Format subtype="1" type="2"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="comboOrigem">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Aeroporto&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="comboDestino">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Aeroporto&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

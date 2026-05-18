@@ -48,7 +48,7 @@ public class Aeroporto {
 
     @Override
     public String toString() {
-        return "Aeroporto{" + "nomeAero=" + nomeAero + '}';
+        return nomeAero;
     }
 
 }
