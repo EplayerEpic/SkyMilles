@@ -113,9 +113,9 @@ public class GerenciarQuarto extends JFrame {
             Quarto q = new Quarto();
             q.setCodQuarto(Integer.parseInt(txtCod.getText().trim()));
             q.setValorReserva(Double.parseDouble(txtValor.getText().trim()));
-            q.setLocalSaida(txtSaida.getText().trim());         // ← você esqueceu isso
-            q.setLocalChegada(txtChegada.getText().trim());     // ← e isso
-            q.setDataInicio(txtData.getText().trim());          // ← e isso
+            q.setLocalSaida(txtSaida.getText().trim());         
+            q.setLocalChegada(txtChegada.getText().trim());     
+            q.setDataInicio(txtData.getText().trim());          
             q.setQntdDiarias(Integer.parseInt(txtDiarias.getText().trim()));
             q.setHotel(h);
 

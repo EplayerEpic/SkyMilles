@@ -66,8 +66,8 @@ public class GerenciarUsuario extends javax.swing.JFrame {
         RemoveButton = new javax.swing.JButton();
         Cliente = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Gerenciar Usuário");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Gerenciar Usuários - SkyMilles");
 
         jLabel2.setText("Login");
 

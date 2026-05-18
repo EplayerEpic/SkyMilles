@@ -84,8 +84,8 @@ import utils.DataUtils;
         comboOrigem = new javax.swing.JComboBox<>();
         comboDestino = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Gerenciar Voos");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Gerenciar Voos - SkyMilles");
 
         jLabel1.setText("Gerenciar Voos");
 

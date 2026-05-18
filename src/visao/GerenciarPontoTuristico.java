@@ -19,7 +19,7 @@ public class GerenciarPontoTuristico extends JFrame {
     private DefaultTableModel modeloTabela;
 
     public GerenciarPontoTuristico() {
-        setTitle("SkyMilles - Pontos Turísticos");
+        setTitle("Pontos Turísticos - SkyMilles");
         setSize(700, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);

@@ -69,8 +69,8 @@ public class GerenciarHotel extends javax.swing.JFrame {
         Checkout = new javax.swing.JFormattedTextField();
         comboCidade = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Gerenciar Hotel");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Gerenciar Hoteis - SkyMilles");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -86,13 +86,13 @@ public class GerenciarHotel extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         InsertButton.setText("Inserir");
-        InsertButton.addActionListener();
+        InsertButton.addActionListener(this::InsertButtonActionPerformed);
 
         AlterButton.setText("Alterar");
-        AlterButton.addActionListener();
+        AlterButton.addActionListener(this::AlterButtonActionPerformed);
 
         RemoveButton.setText("Remover");
-        RemoveButton.addActionListener();
+        RemoveButton.addActionListener(this::RemoveButtonActionPerformed);
 
         jLabel1.setText("Gerenciar Hotel");
 

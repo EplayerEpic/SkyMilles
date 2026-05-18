@@ -102,7 +102,8 @@ public class GerenciarCliente extends javax.swing.JFrame {
         Sexo = new javax.swing.JComboBox<>();
         dt_nasc = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Gerenciar Clientes - SkyMilles");
 
         jLabel1.setText("Gerenciar Cliente");
 
