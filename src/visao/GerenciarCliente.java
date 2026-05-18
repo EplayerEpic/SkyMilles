@@ -33,6 +33,26 @@ public class GerenciarCliente extends javax.swing.JFrame {
     public GerenciarCliente() {
         initComponents();
 
+         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            int linha = jTable1.getSelectedRow();
+            if (linha >= 0) {
+                codCliente.setText(jTable1.getValueAt(linha, 0).toString());
+                Endereco.setText(jTable1.getValueAt(linha, 1).toString());
+                Sexo.setSelectedItem(jTable1.getValueAt(linha, 2).toString());
+                Nome.setText(jTable1.getValueAt(linha, 3).toString());
+                CPF.setText(jTable1.getValueAt(linha, 4).toString());
+                dt_nasc.setText(jTable1.getValueAt(linha, 5).toString());
+                Tel.setText(jTable1.getValueAt(linha, 6).toString());
+            }
+        }
+    });
+        
+        
+        
+        
+        
+        
         modeloTabela = new DefaultTableModel(
                 new Object[][]{},
                 new String[]{"Código", "Endereço", "Sexo", "Nome", "CPF", "Nascimento", "Telefone"}
@@ -72,15 +92,15 @@ public class GerenciarCliente extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         codCliente = new javax.swing.JTextField();
-        Sexo = new javax.swing.JTextField();
         Nome = new javax.swing.JTextField();
         InsertButton = new javax.swing.JButton();
         AlterButton = new javax.swing.JButton();
         RemoveButton = new javax.swing.JButton();
         Endereco = new javax.swing.JTextField();
-        dt_nasc = new javax.swing.JFormattedTextField();
         CPF = new javax.swing.JFormattedTextField();
         Tel = new javax.swing.JFormattedTextField();
+        Sexo = new javax.swing.JComboBox<>();
+        dt_nasc = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -148,14 +168,6 @@ public class GerenciarCliente extends javax.swing.JFrame {
         });
 
         try {
-            dt_nasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-                new javax.swing.text.MaskFormatter("##/##/####")
-            ));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        try {
             CPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
                 new javax.swing.text.MaskFormatter("###.###.###-##")
             ));
@@ -169,6 +181,10 @@ public class GerenciarCliente extends javax.swing.JFrame {
                 TelActionPerformed(evt);
             }
         });
+
+        Sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
+
+        dt_nasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -191,8 +207,9 @@ public class GerenciarCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addGap(33, 33, 33)
-                        .addComponent(Sexo, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(Sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -210,16 +227,17 @@ public class GerenciarCliente extends javax.swing.JFrame {
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(CPF)
-                            .addComponent(Nome)))
+                            .addComponent(Nome))
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Tel, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dt_nasc)))
-                .addGap(27, 27, 27)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Tel, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dt_nasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
@@ -240,7 +258,7 @@ public class GerenciarCliente extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(Endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(Sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
@@ -254,9 +272,9 @@ public class GerenciarCliente extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(dt_nasc, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(dt_nasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(InsertButton)
@@ -270,7 +288,7 @@ public class GerenciarCliente extends javax.swing.JFrame {
 
     private void InsertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertButtonActionPerformed
         LocalDate dataNasc = DataUtils.parseData(dt_nasc.getText());
-        Clientes c = new Clientes(Integer.parseInt(codCliente.getText()), Nome.getText(), Endereco.getText(), CPF.getText(), Tel.getText(), dataNasc, Sexo.getText().charAt(0));
+        Clientes c = new Clientes(Integer.parseInt(codCliente.getText()), Nome.getText(), Endereco.getText(), CPF.getText(), Tel.getText(), dataNasc, Sexo.getSelectedItem().toString().charAt(0));
         cc.inserirCliente(c);
         carregarTabela();
     }//GEN-LAST:event_InsertButtonActionPerformed
@@ -282,6 +300,16 @@ public class GerenciarCliente extends javax.swing.JFrame {
 
     private void AlterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterButtonActionPerformed
         // TODO add your handling code here:
+        if(jTable1.getSelectedRow() < 0){
+        javax.swing.JOptionPane.showMessageDialog(this, "Selecione um assento na tabela!", "Atenção", javax.swing.JOptionPane.WARNING_MESSAGE);
+        return;
+        }
+        int linha = jTable1.getSelectedRow();
+        LocalDate dataNasc = DataUtils.parseData(dt_nasc.getText());
+        Clientes cli = new Clientes(Integer.parseInt(codCliente.getText()),Nome.getText(),Endereco.getText(),CPF.getText(),Tel.getText(),dataNasc,Sexo.getSelectedItem().toString().charAt(0));
+        cc.alterarCliente(cli);
+        carregarTabela();
+        
     }//GEN-LAST:event_AlterButtonActionPerformed
 
     private void EnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnderecoActionPerformed
@@ -340,7 +368,7 @@ public class GerenciarCliente extends javax.swing.JFrame {
     private javax.swing.JButton InsertButton;
     private javax.swing.JTextField Nome;
     private javax.swing.JButton RemoveButton;
-    private javax.swing.JTextField Sexo;
+    private javax.swing.JComboBox<String> Sexo;
     private javax.swing.JFormattedTextField Tel;
     private javax.swing.JTextField codCliente;
     private javax.swing.JFormattedTextField dt_nasc;
