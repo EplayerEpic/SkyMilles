@@ -47,9 +47,7 @@ public class GerenciarAeroporto extends JFrame {
         JPanel pCampos = new JPanel(new GridLayout(3, 2, 5, 5));
         pCampos.setBorder(BorderFactory.createTitledBorder("Dados do Aeroporto"));
 
-        pCampos.add(new JLabel("Cód. Aeroporto:"));
-        txtCod = new JTextField();
-        pCampos.add(txtCod);
+       
 
         pCampos.add(new JLabel("Nome Aeroporto:"));
         txtNome = new JTextField();
@@ -58,7 +56,9 @@ public class GerenciarAeroporto extends JFrame {
         pCampos.add(new JLabel("Cidade:"));
         comboCidade = new JComboBox();
         pCampos.add(comboCidade);
-
+        txtCod = new JTextField();
+        pCampos.add(txtCod);
+        txtCod.setVisible(false);
         // Painel de Botões
         JPanel pBotoes = new JPanel(new FlowLayout());
         JButton btnAdd = new JButton("Inserir");

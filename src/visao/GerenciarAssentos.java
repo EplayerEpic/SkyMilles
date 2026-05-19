@@ -351,7 +351,7 @@ public class GerenciarAssentos extends javax.swing.JFrame {
         return;
     }
 
-    String sql = "SELECT cod_assento, num_bilhete, data_emissao, _classe, valor_ass, _status, cod_pacote, cod_destino, cod_local_partida, cod_voo FROM Assento WHERE cod_assento = ?";
+    String sql = "SELECT cod_assento, num_bilhete, data_emissao, _classe, valor_ass, _status, cod_destino, cod_local_partida, cod_voo FROM Assento WHERE cod_assento = ?";
 
     javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) TableAss.getModel();
     modelo.setRowCount(0);
@@ -372,7 +372,6 @@ public class GerenciarAssentos extends javax.swing.JFrame {
                     rs.getString("_classe"),
                     rs.getDouble("valor_ass"),
                     rs.getBoolean("_status") ? "1" : "0",
-                    rs.getInt("cod_pacote"),
                     rs.getInt("cod_destino"),
                     rs.getInt("cod_local_partida"),
                     rs.getInt("cod_voo")
@@ -423,7 +422,7 @@ private void limparCampos() {
 }
 
 private void consultarAssentos() {
-    String sql = "SELECT cod_assento, num_bilhete, data_emissao, _classe, valor_ass, _status, cod_pacote, cod_destino, cod_local_partida, cod_voo FROM Assento";
+    String sql = "SELECT cod_assento, num_bilhete, data_emissao, _classe, valor_ass, _status, cod_destino, cod_local_partida, cod_voo FROM Assento";
 
     javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) TableAss.getModel();
     modelo.setRowCount(0);
@@ -440,7 +439,6 @@ private void consultarAssentos() {
                 rs.getString("_classe"),
                 rs.getDouble("valor_ass"),
                 rs.getBoolean("_status") ? "1" : "0",
-                rs.getInt("cod_pacote"),
                 rs.getInt("cod_destino"),
                 rs.getInt("cod_local_partida"),
                 rs.getInt("cod_voo")
@@ -483,7 +481,7 @@ private void adicionarAssento() {
     // ↑ ATÉ AQUI
 
     // Se passou da verificação, aí insere normalmente
-    String sql = "INSERT INTO Assento (num_bilhete, data_emissao, _classe, valor_ass, _status, cod_pacote, cod_destino, cod_local_partida, cod_voo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    String sql = "INSERT INTO Assento (num_bilhete, data_emissao, _classe, valor_ass, _status, cod_destino, cod_local_partida, cod_voo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     try (java.sql.Connection conn = conexao.conectar();
          java.sql.PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -493,10 +491,9 @@ private void adicionarAssento() {
         ps.setString(3, CampoClasseAss.getSelectedItem().toString());
         ps.setDouble(4, Double.parseDouble(CampoValorAss.getText()));
         ps.setBoolean(5, CampoStatusAss.getSelectedItem().toString().equals("1"));
-        ps.setInt(6, Integer.parseInt(CampoPacoteAss.getText()));
-        ps.setInt(7, Integer.parseInt(CampoCodDestinoAss.getText()));
-        ps.setInt(8, Integer.parseInt(CampoCodLocalPartidaAss.getText()));
-        ps.setInt(9, Integer.parseInt(CampoCodVooAss.getText()));
+        ps.setInt(6, Integer.parseInt(CampoCodDestinoAss.getText()));
+        ps.setInt(7, Integer.parseInt(CampoCodLocalPartidaAss.getText()));
+        ps.setInt(8, Integer.parseInt(CampoCodVooAss.getText()));
 
         ps.executeUpdate();
         javax.swing.JOptionPane.showMessageDialog(this, "Assento adicionado!");
@@ -539,7 +536,7 @@ private void alterarAssento() {
         return;
     }
 
-    String sql = "UPDATE Assento SET num_bilhete=?, data_emissao=?, _classe=?, valor_ass=?, _status=?, cod_pacote=?, cod_destino=?, cod_local_partida=?, cod_voo=? WHERE cod_assento=?";
+    String sql = "UPDATE Assento SET num_bilhete=?, data_emissao=?, _classe=?, valor_ass=?, _status=?, cod_destino=?, cod_local_partida=?, cod_voo=? WHERE cod_assento=?";
 
     try (java.sql.Connection conn = conexao.conectar();
          java.sql.PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -549,11 +546,10 @@ private void alterarAssento() {
         ps.setString(3, CampoClasseAss.getSelectedItem().toString());
         ps.setDouble(4, Double.parseDouble(CampoValorAss.getText()));
         ps.setBoolean(5, CampoStatusAss.getSelectedItem().toString().equals("1"));
-        ps.setInt(6, Integer.parseInt(CampoPacoteAss.getText()));
-        ps.setInt(7, Integer.parseInt(CampoCodDestinoAss.getText()));
-        ps.setInt(8, Integer.parseInt(CampoCodLocalPartidaAss.getText()));
-        ps.setInt(9, Integer.parseInt(CampoCodVooAss.getText()));
-        ps.setInt(10, Integer.parseInt(CampoCodAss.getText()));
+        ps.setInt(6, Integer.parseInt(CampoCodDestinoAss.getText()));
+        ps.setInt(7, Integer.parseInt(CampoCodLocalPartidaAss.getText()));
+        ps.setInt(8, Integer.parseInt(CampoCodVooAss.getText()));
+        ps.setInt(9, Integer.parseInt(CampoCodAss.getText()));
 
         ps.executeUpdate();
         javax.swing.JOptionPane.showMessageDialog(this, "Assento alterado!");

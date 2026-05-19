@@ -14,7 +14,10 @@ public class AeroportoControle {
         ArrayList<Aeroporto> lista = new ArrayList<>();
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "SELECT * FROM aeroporto";
+             String sql = "SELECT a.*, c.nome_cidade "
+                    + "FROM aeroporto a "
+                    + "INNER JOIN cidade c "
+                    + "ON a.cod_cidade = c.cod_cidade";
             PreparedStatement stm = conn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -25,6 +28,7 @@ public class AeroportoControle {
 
                 Cidade c = new Cidade();
                 c.setCodCidade(rs.getInt("cod_cidade"));
+                c.setNomeCidade(rs.getString("nome_cidade"));
                 a.setCidade(c);
 
                 lista.add(a);
