@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Cidade;
 import modelo.Hotel;
 import utils.DataUtils;
+import static utils.DataUtils.parseData;
 
 /**
  *
@@ -30,12 +31,14 @@ public class GerenciarHotel extends javax.swing.JFrame {
      */
     public GerenciarHotel() {
         initComponents();
+        codHotel.setVisible(false);
         modeloTabela = new DefaultTableModel(
                 new Object[][]{},
                 new String[]{"Código", "CNPJ", "Local", "Endereço", "Check-in", "Check-out", "Cidade"}
         );
 
         jTable1.setModel(modeloTabela);
+        carregarCidade();
         carregarTabela();
     }
 
@@ -54,7 +57,6 @@ public class GerenciarHotel extends javax.swing.JFrame {
         AlterButton = new javax.swing.JButton();
         RemoveButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -83,6 +85,11 @@ public class GerenciarHotel extends javax.swing.JFrame {
                 "Código", "CNPJ", "Local", "Endereço", "Check-in", "Check-out", "Cidade"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         InsertButton.setText("Inserir");
@@ -95,8 +102,6 @@ public class GerenciarHotel extends javax.swing.JFrame {
         RemoveButton.addActionListener(this::RemoveButtonActionPerformed);
 
         jLabel1.setText("Gerenciar Hotel");
-
-        jLabel2.setText("Cod Hotel");
 
         jLabel3.setText("Local");
 
@@ -121,47 +126,35 @@ public class GerenciarHotel extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 498, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(codHotel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel8))
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(Endereco)
-                                    .addComponent(Local, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CNPJ, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel8))
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(Endereco)
+                            .addComponent(Local, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(50, 50, 50)
-                                        .addComponent(jLabel7)
-                                        .addGap(26, 26, 26))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Checkout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(comboCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(jLabel5)
-                                .addGap(16, 16, 16)
-                                .addComponent(Checkin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(0, 236, Short.MAX_VALUE))
+                            .addComponent(jLabel7)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel5)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Checkout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Checkin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(172, 172, 172)
                         .addComponent(InsertButton)
@@ -170,6 +163,10 @@ public class GerenciarHotel extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(RemoveButton)
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(codHotel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,10 +176,7 @@ public class GerenciarHotel extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(Checkin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(Checkout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -192,12 +186,10 @@ public class GerenciarHotel extends javax.swing.JFrame {
                             .addComponent(comboCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(codHotel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(5, 5, 5)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(CNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(CNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(Checkin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -206,7 +198,9 @@ public class GerenciarHotel extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(Endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(codHotel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -220,16 +214,138 @@ public class GerenciarHotel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void InsertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertButtonActionPerformed
-        // TODO add your handling code here:
+        try {
+            // Validações básicas
+            if (CNPJ.getText().trim().isEmpty() || Local.getText().trim().isEmpty()
+                    || Endereco.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Preencha CNPJ, Local e Endereço.", "Atenção", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            if (comboCidade.getSelectedItem() == null) {
+                JOptionPane.showMessageDialog(this, "Selecione uma cidade.", "Atenção", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            Hotel hotel = new Hotel();
+            hotel.setCNPJ(CNPJ.getText().trim());
+            hotel.setLocal(Local.getText().trim());
+            hotel.setEndereco(Endereco.getText().trim());
+            hotel.setCheckIn(parseData(Checkin.getText().trim()));
+            hotel.setCheckOut(parseData(Checkout.getText().trim()));
+            hotel.setCidade((Cidade) comboCidade.getSelectedItem());
+
+            String resultado = hc.inserirHotel(hotel);
+
+            if ("Inserido".equals(resultado)) {
+                JOptionPane.showMessageDialog(this, "Hotel inserido com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                carregarTabela();
+                limparCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao inserir: " + resultado, "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro inesperado: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            logger.severe(ex.getMessage());
+        }
     }//GEN-LAST:event_InsertButtonActionPerformed
 
     private void AlterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterButtonActionPerformed
-        // TODO add your handling code here:
+        try {
+            if (codHotel.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Selecione um hotel na tabela para alterar.", "Atenção", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            if (CNPJ.getText().trim().isEmpty() || Local.getText().trim().isEmpty()
+                    || Endereco.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Preencha CNPJ, Local e Endereço.", "Atenção", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            if (comboCidade.getSelectedItem() == null) {
+                JOptionPane.showMessageDialog(this, "Selecione uma cidade.", "Atenção", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            Hotel hotel = new Hotel();
+            hotel.setCodHotel(Integer.parseInt(codHotel.getText().trim()));
+            hotel.setCNPJ(CNPJ.getText().trim());
+            hotel.setLocal(Local.getText().trim());
+            hotel.setEndereco(Endereco.getText().trim());
+            hotel.setCheckIn(parseData(Checkin.getText().trim()));
+            hotel.setCheckOut(parseData(Checkout.getText().trim()));
+            hotel.setCidade((Cidade) comboCidade.getSelectedItem());
+
+            String resultado = hc.alterarHotel(hotel);
+
+            if ("Alterado".equals(resultado)) {
+                JOptionPane.showMessageDialog(this, "Hotel alterado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                carregarTabela();
+                limparCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao alterar: " + resultado, "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro inesperado: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            logger.severe(ex.getMessage());
+        }
     }//GEN-LAST:event_AlterButtonActionPerformed
 
     private void RemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveButtonActionPerformed
-        // TODO add your handling code here:
+        try {
+            if (codHotel.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Selecione um hotel na tabela para remover.", "Atenção", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int confirmacao = JOptionPane.showConfirmDialog(this,
+                    "Tem certeza que deseja remover o hotel selecionado?",
+                    "Confirmar Remoção",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+
+            if (confirmacao != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            int codigo = Integer.parseInt(codHotel.getText().trim());
+            String resultado = hc.deletarHotel(codigo);
+
+            if ("Deletado".equals(resultado)) {
+                JOptionPane.showMessageDialog(this, "Hotel removido com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                carregarTabela();
+                limparCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao remover: " + resultado, "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro inesperado: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            logger.severe(ex.getMessage());
+        }
     }//GEN-LAST:event_RemoveButtonActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int linha = jTable1.getSelectedRow();
+
+        if (linha != -1) {
+            //"Código", "CNPJ", "Local", "Endereço", "Check-in", "Check-out", "Cidade"
+            codHotel.setText(jTable1.getValueAt(linha, 0).toString());
+            CNPJ.setText(jTable1.getValueAt(linha, 1).toString());
+            Local.setText(jTable1.getValueAt(linha, 2).toString());
+            Endereco.setText(jTable1.getValueAt(linha, 3).toString());
+            Checkin.setText(jTable1.getValueAt(linha,4).toString());
+            Checkout.setText(jTable1.getValueAt(linha,5).toString());
+            Cidade c = (Cidade) jTable1.getValueAt(linha, 6);
+                comboCidade.setSelectedItem(c);
+
+        }
+
+
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -257,7 +373,6 @@ public class GerenciarHotel extends javax.swing.JFrame {
     private javax.swing.JTextField codHotel;
     private javax.swing.JComboBox<Cidade> comboCidade;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -270,11 +385,9 @@ public class GerenciarHotel extends javax.swing.JFrame {
 
     private void carregarTabela() {
         modeloTabela.setRowCount(0);
-        CidadeControle cc = new CidadeControle();
         ArrayList<Hotel> lista = hc.consultarHoteis();
         for (Hotel h : lista) {
 
-            Cidade cidade = cc.consultarCidadeCodigo(h.getCidade().getCodCidade());
 
             modeloTabela.addRow(new Object[]{
                 h.getCodHotel(),
@@ -283,11 +396,12 @@ public class GerenciarHotel extends javax.swing.JFrame {
                 h.getEndereco(),
                 DataUtils.formatData(h.getCheckIn()),
                 DataUtils.formatData(h.getCheckOut()),
-                cidade != null ? cidade.getNomeCidade() : "N/A"
+                h.getCidade()
             });
         }
     }
-    public void carregarClientes() {
+
+    public void carregarCidade() {
 
         comboCidade.removeAllItems();
 
@@ -301,5 +415,16 @@ public class GerenciarHotel extends javax.swing.JFrame {
         }
 
         comboCidade.setSelectedIndex(-1);
+    }
+
+    private void limparCampos() {
+        codHotel.setText("");
+        CNPJ.setText("");
+        Local.setText("");
+        Endereco.setText("");
+        Checkin.setText("");
+        Checkout.setText("");
+        comboCidade.setSelectedIndex(-1);
+        jTable1.clearSelection();
     }
 }

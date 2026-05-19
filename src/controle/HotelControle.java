@@ -16,8 +16,12 @@ public class HotelControle {
 
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String consulta = "SELECT * FROM hotel";
-            PreparedStatement stm = conn.prepareStatement(consulta);
+            String sql = "SELECT h.*, c.nome_cidade "
+                    + "FROM hotel h "
+                    + "INNER JOIN cidade c "
+                    + "ON h.cod_cidade = c.cod_cidade";
+            
+            PreparedStatement stm = conn.prepareStatement(sql);
             ResultSet resultado = stm.executeQuery();
 
             while (resultado.next()) {
@@ -39,6 +43,7 @@ public class HotelControle {
 
                 Cidade cidade = new Cidade();
                 cidade.setCodCidade(resultado.getInt("cod_cidade"));
+                cidade.setNomeCidade(resultado.getString("nome_cidade"));
                 hot.setCidade(cidade);
 
                 vHoteis.add(hot);
