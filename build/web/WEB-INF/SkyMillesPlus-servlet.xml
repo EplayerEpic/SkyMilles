@@ -5,17 +5,19 @@
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
        http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd 
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd 
-       ">
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd" >
 
-    <!--
-    Most controllers will use the ControllerClassNameHandlerMapping above, but
-    for the index controller we are using ParameterizableViewController, so we must
-    define an explicit mapping for it.
-    -->
+    <context:component-scan base-package="br.com.webplanet.conexao"/>
+    <context:component-scan base-package="br.com.webplanet.controle"/>
+    <context:component-scan base-package="br.com.webplanet.daos"/>
+    <context:component-scan base-package="br.com.webplanet.modelo"/>
+    <context:component-scan base-package="br.com.webplanet.utils"/>
+    
     <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="mappings">
             <props>
