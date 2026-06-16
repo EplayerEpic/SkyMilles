@@ -2,19 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/aluno.UDICENTRO.000/Documents/NetBeansProjects/SkyMillesPlus/web/WEB-INF/SkyMillesPlus-servlet.xml</file>
-            <file>file:/C:/Users/aluno.UDICENTRO.000/Documents/NetBeansProjects/SkyMillesPlus/web/WEB-INF/dispatcher-servlet.xml</file>
-            <file>file:/C:/Users/aluno.UDICENTRO.000/Documents/NetBeansProjects/SkyMillesPlus/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/aluno.UDICENTRO.000/Documents/NetBeansProjects/SkyMillesPlus/web/META-INF/context.xml</file>
-            <file>file:/C:/Users/aluno.UDICENTRO.000/Documents/NetBeansProjects/SkyMillesPlus/web/WEB-INF/jsp/visuCliente.jsp</file>
-            <file>file:/C:/Users/aluno.UDICENTRO.000/Documents/NetBeansProjects/SkyMillesPlus/web/WEB-INF/jsp/index.jsp</file>
-            <file>file:/C:/Users/aluno.UDICENTRO.000/Documents/NetBeansProjects/SkyMillesPlus/web/WEB-INF/jsp/adm.jsp</file>
-            <file>file:/C:/Users/aluno.UDICENTRO.000/Documents/NetBeansProjects/SkyMillesPlus/web/WEB-INF/applicationContext.xml</file>
-            <file>file:/C:/Users/aluno.UDICENTRO.000/Documents/NetBeansProjects/SkyMillesPlus/web/redirect.jsp</file>
-            <file>file:/C:/Users/aluno.UDICENTRO.000/Documents/NetBeansProjects/SkyMillesPlus/web/WEB-INF/jsp/visuVoos.jsp</file>
-            <file>file:/C:/Users/aluno.UDICENTRO.000/Documents/NetBeansProjects/SkyMillesPlus/web/WEB-INF/jsp/visuHoteis.jsp</file>
-            <file>file:/C:/Users/aluno.UDICENTRO.000/Documents/NetBeansProjects/SkyMillesPlus/web/resources/js/js.js</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
