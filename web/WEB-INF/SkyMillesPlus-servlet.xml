@@ -38,6 +38,6 @@
           class="org.springframework.web.servlet.mvc.ParameterizableViewController"
           p:viewName="index" />
     
-    <mvc:annotation-drivers/>
+    <mvc:annotation-driven/>
     <mvc:resources mapping="/resources/**" location="/resources/*"/>
 </beans>

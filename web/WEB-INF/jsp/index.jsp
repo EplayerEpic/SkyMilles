@@ -10,6 +10,7 @@
 
 <body>
     <!-- Cabeçalho -->
+    <a href="consultarCliente">Demiurgo</a>
     <header id="header">
         <a href="http://localhost/dashboard/SkyMilles/"><img id="Logo"
                 src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles"></a>
@@ -324,6 +325,7 @@
                 <div class="footer-column">
                     <h3>Ajuda</h3>
                     <ul>
+                        <li><a href="./adm.jsp">Demiurgo</a></li>
                         <li><a href="./perguntas.jsp">Perguntas Frequentes</a></li>
                         <li><a href="./suporte.jsp">Central de Suporte</a></li>
                         <li><a href="./status-voo.jsp">Status de Voo</a></li>
