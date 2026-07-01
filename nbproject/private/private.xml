@@ -2,20 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/aluno.UDICENTRO/Documents/NetBeansProjects/SkyMilles/web/WEB-INF/jsp/index.jsp</file>
-            <file>file:/C:/Users/aluno.UDICENTRO/Documents/NetBeansProjects/SkyMilles/web/WEB-INF/jsp/cadastro.jsp</file>
-            <file>file:/C:/Users/aluno.UDICENTRO/Documents/NetBeansProjects/SkyMilles/src/java/br/com/webplanet/controle/AeroportoControle.java</file>
-            <file>file:/C:/Users/aluno.UDICENTRO/Documents/NetBeansProjects/SkyMilles/web/WEB-INF/jsp/listarVoo.jsp</file>
-            <file>file:/C:/Users/aluno.UDICENTRO/Documents/NetBeansProjects/SkyMilles/src/java/br/com/webplanet/controle/TesteControle.java</file>
-            <file>file:/C:/Users/aluno.UDICENTRO/Documents/NetBeansProjects/SkyMilles/web/WEB-INF/jsp/adm.jsp</file>
-            <file>file:/C:/Users/aluno.UDICENTRO/Documents/NetBeansProjects/SkyMilles/web/WEB-INF/jsp/cadHotel.jsp</file>
-            <file>file:/C:/Users/aluno.UDICENTRO/Documents/NetBeansProjects/SkyMilles/web/WEB-INF/jsp/addVoo.jsp</file>
-            <file>file:/C:/Users/aluno.UDICENTRO/Documents/NetBeansProjects/SkyMilles/web/WEB-INF/jsp/visuCliente.jsp</file>
-            <file>file:/C:/Users/aluno.UDICENTRO/Documents/NetBeansProjects/SkyMilles/web/WEB-INF/SkyMillesPlus-servlet.xml</file>
-            <file>file:/C:/Users/aluno.UDICENTRO/Documents/NetBeansProjects/SkyMilles/web/WEB-INF/jsp/login.jsp</file>
-            <file>file:/C:/Users/aluno.UDICENTRO/Documents/NetBeansProjects/SkyMilles/src/java/br/com/webplanet/controle/ClientesControle.java</file>
-            <file>file:/C:/Users/aluno.UDICENTRO/Documents/NetBeansProjects/SkyMilles/web/WEB-INF/jsp/hoteis.jsp</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

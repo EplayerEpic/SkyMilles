@@ -1,24 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Formul�rio</title>
+        <title>Formulário</title>
         <link rel="stylesheet" href="<c:url value="${pageContext.request.contextPath}/resources/css/estilo.css"></c:url>">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/estilo.css" />
         
     </head>
     <body>
         <div class="form-centro">
-            
+<div>
+Literal: Informação do cliente
+</div>
+
+<div>
+String Java: <%= "Informação do cliente" %>
+</div>
             <form:form method="POST" onsubmit="${pageContext.request.contextPath}/consultarCliente" commandName="cliente" name="formulario" id="formulario" modelAttribute = "cliente">
                 <form:errors path = "*" cssClass = "blocoerro" element = "div" />
                 <center><img width="80%" src="${pageContext.request.contextPath}/resources/imagens/figura.png"></center>
                 <legend>
-                    Informa��o do cliente
+                    Informação do cliente
                 </legend>
                 <div class="input-group">
                     <form:label path= "cliCodigo">Nome</form:label>
@@ -34,7 +39,7 @@
             
             <br> 
             <legend>
-                Dados Enviados pelo usu�rio
+                Dados Enviados pelo usuário
             </legend>
             <div class="input-group">
                 Nome: ${cliNome}

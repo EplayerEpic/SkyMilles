@@ -129,7 +129,7 @@ body {
     transform: scale(1.1);
 }
 
-/* Quando a lupa estÃ¡ ativa, ela desaparece */
+/* Quando a lupa está ativa, ela desaparece */
 .lupa.active {
     opacity: 0;
     transform: scale(0);
@@ -874,7 +874,7 @@ body {
         width: 250px;
     }
 }
-/* Seletor de Companhias AÃ©reas */
+/* Seletor de Companhias Aéreas */
 .EscolhaComp {
     text-align: center;
     font-size: 28px;
@@ -1008,7 +1008,7 @@ body {
 }
 
 
-/* SeÃ§Ã£o de Planos */
+/* Seção de Planos */
 .planos-section {
     background: linear-gradient(to bottom, #4d9fb8 0%, #c1cdda 100%);
     padding: 60px 20px;
@@ -1328,7 +1328,7 @@ footer {
 
 /* ==================== RESPONSIVIDADE ==================== */
 
-/* Tablets e telas mÃ©dias (768px a 1199px) */
+/* Tablets e telas médias (768px a 1199px) */
 @media screen and (min-width: 768px) and (max-width: 1199px) {
     #header {
         padding: 10px 30px;
@@ -1368,7 +1368,7 @@ footer {
     }
 }
 
-/* MOBILE (atÃ© 767px) */
+/* MOBILE (até 767px) */
 @media screen and (max-width: 767px) {
     body {
         padding-top: 80px;
@@ -1528,7 +1528,7 @@ footer {
         font-size: 28px;
     }
 
-    /* Companhias AÃ©reas Mobile */
+    /* Companhias Aéreas Mobile */
     .EscolhaComp {
         font-size: 22px;
         margin-top: 30px;

@@ -1,18 +1,4 @@
-Ativar as notificações na área de trabalho para o E-mail de IFTM.
-   OK  Agora não(a)
-
-2 de 1.298
-(sem assunto)
-Caixa de entrada
-
-JOÃO LUCAS SILVA SIVIERI
-Anexos
-23:50 (há 5 minutos)
-para mim
-
-
- 2 anexos
-  •  Verificados pelo Gmail
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 

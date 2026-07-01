@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Formul·rio</title>
+        <title>Formul√°rio</title>
         <link rel="stylesheet" href="<c:url value="${pageContext.request.contextPath}/resources/css/estilo.css"></c:url>">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/estilo.css" />
         
@@ -17,7 +17,7 @@
             <form:form method="POST" onsubmit="${pageContext.request.contextPath}/listarVoo" commandName="voo" name="formulario" id="formulario">
                 <form:errors path = "*" cssClass = "blocoerro" element = "div" />
                 <legend>
-                    InformaÁ„o do Voo
+                    Informa√ß√£o do Voo
                 </legend>
                 <div class="input-group">
                     <form:label path= "cliCodigo">Nome</form:label>
@@ -33,7 +33,7 @@
             
             <br> 
             <legend>
-                Dados Enviados pelo usu·rio
+                Dados Enviados pelo usu√°rio
             </legend>
             <div class="input-group">
                 Nome: ${cliNome}
@@ -48,7 +48,7 @@
                 Sexo: ${(cliSexo=="0"? "Masculino" : "Feminino")}
             </div>
             <div class="input-group">
-                CÛgido ${cliCodigo}
+                C√≥gido ${cliCodigo}
             </div>
            
             </form:form>

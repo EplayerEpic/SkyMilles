@@ -129,7 +129,7 @@
      transform: scale(1.1);
  }
 
- /* Quando a lupa estÃ¡ ativa, ela desaparece */
+ /* Quando a lupa está ativa, ela desaparece */
  .lupa.active {
      opacity: 0;
      transform: scale(0);
