@@ -14,7 +14,7 @@
     <body>
         <div class="form-centro">
             
-            <form:form method="POST" onsubmit="${pageContext.request.contextPath}/consultarCliente" commandName="cliente" name="formulario" id="formulario">
+            <form:form method="POST" onsubmit="${pageContext.request.contextPath}/consultarCliente" commandName="cliente" name="formulario" id="formulario" modelAttribute = "cliente">
                 <form:errors path = "*" cssClass = "blocoerro" element = "div" />
                 <center><img width="80%" src="${pageContext.request.contextPath}/resources/imagens/figura.png"></center>
                 <legend>
@@ -49,7 +49,7 @@
                 Sexo: ${(cliSexo=="0"? "Masculino" : "Feminino")}
             </div>
             <div class="input-group">
-                Fone ${cliTelefone}
+                Fone: ${cliTelefone}
             </div>
             <div class="input-group">
                 Data de Nasc. ${cliDataNasc}

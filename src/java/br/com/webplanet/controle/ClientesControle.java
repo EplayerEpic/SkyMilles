@@ -15,7 +15,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.portlet.ModelAndView;
+//import org.springframework.web.portlet.ModelAndView;
+  import org.springframework.web.servlet.ModelAndView;
 /**
  *
  * @author aluno
@@ -24,12 +25,12 @@ import org.springframework.web.portlet.ModelAndView;
 public class ClientesControle {
     @RequestMapping(value = "/adicionarCliente", method = RequestMethod.GET)
     public ModelAndView adicionarCliente() {
-        return new ModelAndView("adicionarCliente", "command", new Clientes());
+        return new ModelAndView("adicionarCliente", "cliente", new Clientes());
     }
     
     @RequestMapping(value = "/consultarCliente", method = RequestMethod.GET)
     public ModelAndView consultarCliente() {
-        return new ModelAndView("consultarCliente", "command", new Clientes());
+        return new ModelAndView("consultarCliente", "cliente", new Clientes());
     }
     
     @ModelAttribute("cliente")

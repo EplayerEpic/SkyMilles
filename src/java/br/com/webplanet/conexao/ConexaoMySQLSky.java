@@ -20,7 +20,8 @@ public class ConexaoMySQLSky {
              Class.forName("com.mysql.cj.jdbc.Driver");
             String ip = "127.0.0.1";
             String us = "root";
-            String bd = "skymilles";
+            String bd = "Skymilles";
+            //String bd = "skymilles";
             String pw = "";
             conn = DriverManager.getConnection("jdbc:mysql://" + ip + "/" + bd , us , pw);
             System.out.println("Conectado.");

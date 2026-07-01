@@ -9,7 +9,7 @@
     <body>
     <form:form method ="post" action = "${pageContext.request.contestPath}/addVoo" commandName = "Voo" name="formulario" id="formulario">
         <form:errors path="*" cssClass ="blocoerro" element ="div" />
-        <legend> Cadastron de Voo</legend>
+        <legend> Cadastro de Voo</legend>
         <div class="input-group">
             <form:label path="numVoo"></form:label>
             
