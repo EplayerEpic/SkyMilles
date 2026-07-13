@@ -51,7 +51,7 @@ String Java: <%= "Informação do cliente" %>
                 CPF: ${cliCPF}
             </div>
             <div class="input-group">
-                Sexo: ${(cliSexo=="0"? "Masculino" : "Feminino")}
+               Sexo: ${cliSexo}
             </div>
             <div class="input-group">
                 Fone: ${cliTelefone}

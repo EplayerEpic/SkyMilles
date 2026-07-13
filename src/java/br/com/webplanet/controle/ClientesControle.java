@@ -16,51 +16,53 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 //import org.springframework.web.portlet.ModelAndView;
-  import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.ModelAndView;
+
 /**
  *
  * @author aluno
  */
 @Controller
 public class ClientesControle {
+
     @RequestMapping(value = "/adicionarCliente", method = RequestMethod.GET)
     public ModelAndView adicionarCliente() {
         return new ModelAndView("adicionarCliente", "cliente", new Clientes());
     }
-    
+
     @RequestMapping(value = "/consultarCliente", method = RequestMethod.GET)
     public ModelAndView consultarCliente() {
         return new ModelAndView("consultarCliente", "cliente", new Clientes());
     }
-    
+
     @ModelAttribute("cliente")
     public Clientes criarClienteModelo() {
         return new Clientes();
     }
+
     @ModelAttribute("webConsultaClientes")
-    public Map<Integer, String> consultarClientes(){
+    public Map<Integer, String> consultarClientes() {
         Map<Integer, String> fds = new HashMap<>();
-        ClientesModelo con = new ClientesModelo(); 
+        ClientesModelo con = new ClientesModelo();
         ArrayList<Clientes> lista = con.consultarClientes();
-        
-        for(int i = 0; i < lista.size(); i++){
+
+        for (int i = 0; i < lista.size(); i++) {
             fds.put(lista.get(i).getCliCodigo(), lista.get(i).getCliNome());
         }
         return fds;
     }
+
     @RequestMapping(value = "/adicionarCliente", method = RequestMethod.POST)
     public String adicionarCliente(@ModelAttribute("cliente") Clientes est, BindingResult bindingResult, Model modelo) {
         if (bindingResult.hasErrors()) {
             return "adicionarCliente";
         }
-       
+
         // pegar os dados da interface gráfica e mandar para o modelo.
         // inserir no banco chamando o modelo.
-        
-        
         return "resultadoCliente";
     }
-    
+
     @RequestMapping(value = "/consultarCliente", method = RequestMethod.POST)
     public String consultarCliente(@ModelAttribute("cliente") Clientes est, BindingResult bindingResult, Model modelo) {
         if (bindingResult.hasErrors()) {
@@ -68,13 +70,17 @@ public class ClientesControle {
         }
         ClientesModelo con = new ClientesModelo();
         Clientes cli = con.consultarClienteCodigo(est.getCliCodigo());
+System.out.println("SEXO ASCII: " + (int) cli.getCliSexo());
         modelo.addAttribute("cliNome", cli.getCliNome());
         modelo.addAttribute("cliEndereco", cli.getCliEndereco());
         modelo.addAttribute("cliCPF", cli.getCliCPF());
         modelo.addAttribute("cliTelefone", cli.getCliTelefone());
         modelo.addAttribute("cliDataNasc", cli.getCliDataNasc());
-        modelo.addAttribute("cliSexo", cli.getCliSexo());
-            
+        modelo.addAttribute("cliSexo",
+                cli.getCliSexo() == 'M' ? "Masculino"
+                : cli.getCliSexo() == 'F' ? "Feminino"
+                : "Não informado");
+
         return "consultarCliente";
     }
 }
