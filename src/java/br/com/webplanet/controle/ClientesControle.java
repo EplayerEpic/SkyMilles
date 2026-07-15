@@ -39,7 +39,7 @@ public class ClientesControle {
         ClientesModelo cm = new ClientesModelo();
         ArrayList<Clientes> lista = cm.consultarClientes();  
         ModelAndView mv = new ModelAndView("listarTodos");
-        mv.addObject("clientes", lista);
+        mv.addObject("clientes", lista); 
         
         return mv;
     }
@@ -66,7 +66,11 @@ public class ClientesControle {
         if (bindingResult.hasErrors()) {
             return "adicionarCliente";
         }
-
+        ClientesModelo cm = new ClientesModelo();
+        cm.inserirCliente(est);
+        
+        modelo.addAttribute("mensagem", "cliente cadastrado com sucesso");
+        
         // pegar os dados da interface gráfica e mandar para o modelo.
         // inserir no banco chamando o modelo.
         return "resultadoCliente";

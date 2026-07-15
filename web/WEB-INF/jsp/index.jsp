@@ -12,6 +12,7 @@
 <body>
     <!-- Cabeçalho -->
     <a href="consultarCliente">Demiurgo</a>
+    <a href="listarTodos">Demiurgo</a>
     <header id="header">
         <a href="http://localhost/dashboard/SkyMilles/"><img id="Logo"
                 src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles"></a>
