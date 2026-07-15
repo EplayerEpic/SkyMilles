@@ -34,6 +34,15 @@ public class ClientesControle {
     public ModelAndView consultarCliente() {
         return new ModelAndView("consultarCliente", "cliente", new Clientes());
     }
+    @RequestMapping(value = "/listarTodos", method = RequestMethod.GET)
+    public ModelAndView listarTodos(){
+        ClientesModelo cm = new ClientesModelo();
+        ArrayList<Clientes> lista = cm.consultarClientes();  
+        ModelAndView mv = new ModelAndView("listarTodos");
+        mv.addObject("clientes", lista);
+        
+        return mv;
+    }
 
     @ModelAttribute("cliente")
     public Clientes criarClienteModelo() {
@@ -70,7 +79,6 @@ public class ClientesControle {
         }
         ClientesModelo con = new ClientesModelo();
         Clientes cli = con.consultarClienteCodigo(est.getCliCodigo());
-System.out.println("SEXO ASCII: " + (int) cli.getCliSexo());
         modelo.addAttribute("cliNome", cli.getCliNome());
         modelo.addAttribute("cliEndereco", cli.getCliEndereco());
         modelo.addAttribute("cliCPF", cli.getCliCPF());
