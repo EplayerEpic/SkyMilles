@@ -13,6 +13,11 @@
     <!-- Cabeçalho -->
     <a href="consultarCliente">Demiurgo</a>
     <a href="listarTodos">Demiurgo</a>
+    <a href="ConsultarCidade">consultarCidade </a>
+    <a href ="listarTodasC">consultarTodasCidade</a>
+    <a href ="adicionarCidade">ADD Cidade </a>
+    <a href ="DeletarCidade"> removerCidade(Vai ficar de ultimo)</a>
+    <a href ="AlterarCidade"> AlterarCidade </a>
     <header id="header">
         <a href="http://localhost/dashboard/SkyMilles/"><img id="Logo"
                 src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles"></a>

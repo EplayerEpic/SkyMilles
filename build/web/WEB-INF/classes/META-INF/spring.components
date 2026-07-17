@@ -1,1 +1,2 @@
+br.com.webplanet.controle.CidadeControle=org.springframework.stereotype.Component
 br.com.webplanet.controle.ClientesControle=org.springframework.stereotype.Component

@@ -1,1 +1,13 @@
-/dist/
+# Compiled class files
+*.class
+
+# Diretórios de build do Ant
+build/
+dist/
+
+# Arquivos privados do NetBeans (config local, não deve ser compartilhado)
+nbproject/private/
+
+# Logs e temporários
+*.log
+*.tmp
