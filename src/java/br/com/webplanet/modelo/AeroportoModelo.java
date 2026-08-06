@@ -14,7 +14,32 @@ public class AeroportoModelo {
         ArrayList<Aeroporto> lista = new ArrayList<>();
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "SELECT * FROM aeroporto";
+            String sql = "SELECT * FROM aeroporto where status = 1";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                Aeroporto a = new Aeroporto();
+                a.setCodAeroporto(rs.getInt("cod_aeroporto"));
+                a.setNomeAero(rs.getString("nome_aeroporto"));
+
+                Cidade c = new Cidade();
+                c.setCodCidade(rs.getInt("cod_cidade"));
+                a.setCidade(c);
+
+                lista.add(a);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AeroportoModelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+    public ArrayList<Aeroporto> consultarAeroportosInativos() {
+        ArrayList<Aeroporto> lista = new ArrayList<>();
+        try {
+            Connection conn = new ConexaoMySQLSky().conectar();
+            String sql = "SELECT * FROM aeroporto where status = 0";
             PreparedStatement stm = conn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 

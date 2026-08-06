@@ -17,7 +17,7 @@ public class AssentosModelo {
         ArrayList<Assentos> vAssentos = new ArrayList<>();
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String consulta = "SELECT * FROM assento";
+            String consulta = "SELECT * FROM assento where status = 1";
             ResultSet resultado = conn.createStatement().executeQuery(consulta);
             while (resultado.next()) {
                 Assentos assen = new Assentos();
@@ -26,7 +26,7 @@ public class AssentosModelo {
                 assen.setDataEmissao(resultado.getString("data_emissao"));
                 assen.setClasse(resultado.getString("_classe"));
                 assen.setValorAss(resultado.getDouble("valor_ass"));
-                assen.setStatus(resultado.getBoolean("_status"));
+                assen.setStatus(resultado.getInt("_status"));
                 assen.setCodDestino(resultado.getInt("cod_destino"));
                 assen.setCodLocalPartida(resultado.getInt("cod_local_partida"));
                 Voo v = new Voo();
@@ -39,7 +39,35 @@ public class AssentosModelo {
         }
         return vAssentos;
     }
-
+    // -- consultar todos os inativos
+    
+        public ArrayList<Assentos> consultarAssentosInativo() {
+        ArrayList<Assentos> vAssentos = new ArrayList<>();
+        try {
+            Connection conn = new ConexaoMySQLSky().conectar();
+            String consulta = "SELECT * FROM assento where status = 0";
+            ResultSet resultado = conn.createStatement().executeQuery(consulta);
+            while (resultado.next()) {
+                Assentos assen = new Assentos();
+                assen.setCodAssento(resultado.getInt("cod_assento"));
+                assen.setNumBilhete(resultado.getInt("num_bilhete"));
+                assen.setDataEmissao(resultado.getString("data_emissao"));
+                assen.setClasse(resultado.getString("_classe"));
+                assen.setValorAss(resultado.getDouble("valor_ass"));
+                assen.setStatus(resultado.getInt("_status"));
+                assen.setCodDestino(resultado.getInt("cod_destino"));
+                assen.setCodLocalPartida(resultado.getInt("cod_local_partida"));
+                Voo v = new Voo();
+                v.setCodVoo(resultado.getInt("cod_voo"));
+                assen.setVoo(v);
+                vAssentos.add(assen);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AssentosModelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vAssentos;
+    }
+    
     // ── CONSULTAR POR CÓDIGO ─────────────────────────────────────────────────
     public Assentos consultarCodAssento(int codAssento) {
         Assentos assen = new Assentos();
@@ -55,7 +83,7 @@ public class AssentosModelo {
                 assen.setDataEmissao(resultado.getString("data_emissao"));
                 assen.setClasse(resultado.getString("_classe"));
                 assen.setValorAss(resultado.getDouble("valor_ass"));
-                assen.setStatus(resultado.getBoolean("_status"));
+                assen.setStatus(resultado.getInt("_status"));
                 assen.setCodDestino(resultado.getInt("cod_destino"));
                 assen.setCodLocalPartida(resultado.getInt("cod_local_partida"));
                 Voo v = new Voo();
@@ -83,7 +111,7 @@ public class AssentosModelo {
             stm.setString(3, a.getDataEmissao());
             stm.setString(4, a.getClasse());
             stm.setDouble(5, a.getValorAss());
-            stm.setBoolean(6, a.isStatus());
+            stm.setInt(6, a.getStatus());
             stm.setInt(7, a.getCodDestino());
             stm.setInt(8, a.getCodLocalPartida());
             stm.setInt(9, a.getVoo().getCodVoo());
@@ -111,7 +139,7 @@ public class AssentosModelo {
             stm.setString(2, a.getDataEmissao());
             stm.setString(3, a.getClasse());
             stm.setDouble(4, a.getValorAss());
-            stm.setBoolean(5, a.isStatus());
+            stm.setInt(5, a.getStatus());
             stm.setInt(6, a.getCodDestino());
             stm.setInt(7, a.getCodLocalPartida());
             stm.setInt(8, a.getVoo().getCodVoo());

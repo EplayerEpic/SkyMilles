@@ -6,7 +6,7 @@ public class Assentos {
     private String dataEmissao;
     private String classe;
     private double valorAss;
-    private boolean status;
+    private int status;
     private int codDestino;
     private int codLocalPartida;
     private Voo voo;
@@ -14,7 +14,7 @@ public class Assentos {
     public Assentos() {}
 
     public Assentos(int codAssento, int numBilhete, String dataEmissao, String classe,
-            double valorAss, boolean status,
+            double valorAss, int status,
             int codDestino, int codLocalPartida, Voo voo) {
         this.codAssento = codAssento;
         this.numBilhete = numBilhete;
@@ -32,7 +32,7 @@ public class Assentos {
     public String getDataEmissao() { return dataEmissao; }
     public String getClasse() { return classe; }
     public double getValorAss() { return valorAss; }
-    public boolean isStatus() { return status; }
+    public int getStatus() { return status; }
     public int getCodDestino() { return codDestino; }
     public int getCodLocalPartida() { return codLocalPartida; }
     public Voo getVoo() { return voo; }
@@ -42,7 +42,7 @@ public class Assentos {
     public void setDataEmissao(String dataEmissao) { this.dataEmissao = dataEmissao; }
     public void setClasse(String classe) { this.classe = classe; }
     public void setValorAss(double valorAss) { this.valorAss = valorAss; }
-    public void setStatus(boolean status) { this.status = status; }
+    public void setStatus(int status) { this.status = status; }
     public void setCodDestino(int codDestino) { this.codDestino = codDestino; }
     public void setCodLocalPartida(int codLocalPartida) { this.codLocalPartida = codLocalPartida; }
     public void setVoo(Voo voo) { this.voo = voo; }

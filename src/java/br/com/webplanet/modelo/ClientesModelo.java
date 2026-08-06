@@ -29,6 +29,7 @@ public class ClientesModelo {
                 cli.setCliCPF(resultado.getString("cpf"));
                 cli.setCliTelefone(resultado.getString("telefone"));
                 cli.setCliSexo(resultado.getString("sexo").charAt(0));
+                cli.setStatus(resultado.getInt("status"));
 
                 Date dataNasc = resultado.getDate("data_nasc");
                 if (dataNasc != null) {
@@ -63,6 +64,7 @@ public class ClientesModelo {
                 cli.setCliCPF(resultado.getString("cpf"));
                 cli.setCliTelefone(resultado.getString("telefone"));
                 cli.setCliSexo(resultado.getString("sexo").charAt(0));
+                cli.setStatus(resultado.getInt("status"));
 
                 Date dataNasc = resultado.getDate("data_nasc");
                 if (dataNasc != null) {
@@ -84,8 +86,8 @@ public class ClientesModelo {
             Connection conn = conexao.conectar();
 
             String consulta = "INSERT INTO cliente "
-                    + "(nome_cliente, cpf, sexo, endereco, telefone, data_nasc) "
-                    + "VALUES (?,?,?,?,?,?)";
+                    + "(nome_cliente, cpf, sexo, endereco, telefone, data_nasc, status) "
+                    + "VALUES (?,?,?,?,?,?,?)";
 
             PreparedStatement stm = conn.prepareStatement(consulta);
             stm.setString(1, cli.getCliNome());
@@ -94,6 +96,7 @@ public class ClientesModelo {
             stm.setString(4, cli.getCliEndereco());
             stm.setString(5, cli.getCliTelefone());
             stm.setDate(6, cli.getCliDataNasc() != null ? Date.valueOf(cli.getCliDataNasc()) : null);
+            stm.setInt(7,cli.getStatus());
 
             stm.executeUpdate();
             resultado = "Inserido";
@@ -112,7 +115,7 @@ public class ClientesModelo {
 
             String consulta = "UPDATE cliente SET "
                     + "nome_cliente = ?, cpf = ?, sexo = ?, endereco = ?, "
-                    + "telefone = ?, data_nasc = ? WHERE cod_cliente = ?";
+                    + "telefone = ?, data_nasc = ?, status = ? WHERE cod_cliente = ?";
 
             PreparedStatement stm = conn.prepareStatement(consulta);
             stm.setString(1, cli.getCliNome());
@@ -122,6 +125,7 @@ public class ClientesModelo {
             stm.setString(5, cli.getCliTelefone());
             stm.setDate(6, cli.getCliDataNasc() != null ? Date.valueOf(cli.getCliDataNasc()) : null);
             stm.setInt(7, cli.getCliCodigo());
+            stm.setInt(8, cli.getStatus()); 
 
             stm.executeUpdate();
             resultado = "Alterado";
