@@ -18,6 +18,21 @@
     <a href ="adicionarCidade">ADD Cidade </a>
     <a href ="DeletarCidade"> removerCidade(Vai ficar de ultimo)</a>
     <a href ="AlterarCidade"> AlterarCidade </a>
+    <a href="${pageContext.request.contextPath}/listarPontos"> listar pontos</a>
+    <a href="${pageContext.request.contextPath}/adicionarPonto"> adicionar ponto</a>
+    <a href="${pageContext.request.contextPath}/removerPonto"> remover ponto</a>
+    <a href="${pageContext.request.contextPath}/alterarPonto"> alterar ponto</a>
+    <a href="${pageContext.request.contextPath}/consultarPonto"> consultar ponto</a>
+    <a href="${pageContext.request.contextPath}/listarQuartos"> listar Quartos</a>
+    <a href="${pageContext.request.contextPath}/adicionarQuarto"> adicionar Quarto</a>
+    <a href="${pageContext.request.contextPath}/removerQuarto"> remover Quarto</a>
+    <a href="${pageContext.request.contextPath}/alterarQuarto"> alterar Quarto</a>
+    <a href="${pageContext.request.contextPath}/consultarQuarto"> consultar Quarto</a>
+    <a href="${pageContext.request.contextPath}/listarVoos"> listar Voos</a>
+    <a href="${pageContext.request.contextPath}/adicionarVoo"> adicionar Voo</a>
+    <a href="${pageContext.request.contextPath}/removerVoo"> remover Voo</a>
+    <a href="${pageContext.request.contextPath}/alterarVoo"> alterar Voo</a>
+    <a href="${pageContext.request.contextPath}/consultarVoo"> consultar Voo</a>
     <header id="header">
         <a href="http://localhost/dashboard/SkyMilles/"><img id="Logo"
                 src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles"></a>
