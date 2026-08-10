@@ -16,7 +16,7 @@ public class HotelModelo {
 
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String consulta = "SELECT * FROM hotel";
+            String consulta = "SELECT * FROM hotel where status=1";
             PreparedStatement stm = conn.prepareStatement(consulta);
             ResultSet resultado = stm.executeQuery();
 
@@ -26,6 +26,47 @@ public class HotelModelo {
                 hot.setCNPJ(resultado.getString("cnpj"));
                 hot.setLocal(resultado.getString("_local"));
                 hot.setEndereco(resultado.getString("endereco"));
+                hot.setStatus(resultado.getInt("status"));
+
+                Date checkIn = resultado.getDate("check_in");
+                if (checkIn != null) {
+                    hot.setCheckIn(checkIn.toLocalDate());
+                }
+
+                Date checkOut = resultado.getDate("check_out");
+                if (checkOut != null) {
+                    hot.setCheckOut(checkOut.toLocalDate());
+                }
+
+                Cidade cidade = new Cidade();
+                cidade.setCodCidade(resultado.getInt("cod_cidade"));
+                hot.setCidade(cidade);
+
+                vHoteis.add(hot);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(HotelModelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return vHoteis;
+    }
+    public ArrayList<Hotel> consultarHoteisInativos() {
+        ArrayList<Hotel> vHoteis = new ArrayList<>();
+
+        try {
+            Connection conn = new ConexaoMySQLSky().conectar();
+            String consulta = "SELECT * FROM hotel where status=0";
+            PreparedStatement stm = conn.prepareStatement(consulta);
+            ResultSet resultado = stm.executeQuery();
+
+            while (resultado.next()) {
+                Hotel hot = new Hotel();
+                hot.setCodHotel(resultado.getInt("cod_hotel"));
+                hot.setCNPJ(resultado.getString("cnpj"));
+                hot.setLocal(resultado.getString("_local"));
+                hot.setEndereco(resultado.getString("endereco"));
+                hot.setStatus(resultado.getInt("status"));
 
                 Date checkIn = resultado.getDate("check_in");
                 if (checkIn != null) {
@@ -67,6 +108,7 @@ public class HotelModelo {
                 hot.setCNPJ(resultado.getString("cnpj"));
                 hot.setLocal(resultado.getString("_local"));
                 hot.setEndereco(resultado.getString("endereco"));
+                hot.setStatus(resultado.getInt("status"));
 
                 Date checkIn = resultado.getDate("check_in");
                 if (checkIn != null) {
@@ -94,7 +136,7 @@ public class HotelModelo {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
 
-            String sql = "INSERT INTO hotel (cnpj, _local, endereco, check_in, check_out, cod_cidade) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO hotel (cnpj, _local, endereco, check_in, check_out, cod_cidade, status) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement stm = conn.prepareStatement(sql);
 
             stm.setString(1, hot.getCNPJ());
@@ -103,6 +145,7 @@ public class HotelModelo {
             stm.setDate(4, hot.getCheckIn() != null ? Date.valueOf(hot.getCheckIn()) : null);
             stm.setDate(5, hot.getCheckOut() != null ? Date.valueOf(hot.getCheckOut()) : null);
             stm.setInt(6, hot.getCidade().getCodCidade());
+            stm.setInt(7, hot.getStatus());
 
             stm.executeUpdate();
             return "Inserido";
@@ -121,7 +164,7 @@ public class HotelModelo {
 
             Connection conn = new ConexaoMySQLSky().conectar();
 
-            String sql = "UPDATE hotel SET cnpj=?, _local=?, endereco=?, check_in=?, check_out=?, cod_cidade=? WHERE cod_hotel=?";
+            String sql = "UPDATE hotel SET cnpj=?, _local=?, endereco=?, check_in=?, check_out=?, cod_cidade=?, status=? WHERE cod_hotel=?";
             PreparedStatement stm = conn.prepareStatement(sql);
 
             stm.setString(1, hot.getCNPJ());
@@ -131,6 +174,7 @@ public class HotelModelo {
             stm.setDate(5, hot.getCheckOut() != null ? Date.valueOf(hot.getCheckOut()) : null);
             stm.setInt(6, hot.getCidade().getCodCidade());
             stm.setInt(7, hot.getCodHotel());
+            stm.setInt(8, hot.getStatus());
 
             stm.executeUpdate();
             return "Alterado";

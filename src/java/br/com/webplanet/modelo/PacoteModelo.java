@@ -17,7 +17,7 @@ public class PacoteModelo {
         
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "SELECT * FROM pacote";
+            String sql = "SELECT * FROM pacote where status=1";
             PreparedStatement stm = conn.prepareStatement(sql);
             ResultSet resultado = stm.executeQuery();
 
@@ -25,6 +25,39 @@ public class PacoteModelo {
                 Pacote pack = new Pacote();
                 pack.setCodPacote(resultado.getInt("cod_pacote"));
                 pack.setValorPacote(resultado.getDouble("valor_pacote"));
+                pack.setStatus(resultado.getInt("status"));
+                
+                Quarto q = new Quarto();
+                q.setCodQuarto(resultado.getInt("cod_pacote"));
+                
+                Assentos a = new Assentos();
+                a.setCodAssento(resultado.getInt("cod_assento"));
+                pack.setAssento(a);
+                pack.setQuarto(q);
+                
+               
+                vPacote.add(pack);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return vPacote;
+    }
+    public ArrayList<Pacote> consultarPacotesInativos() {
+        ArrayList<Pacote> vPacote = new ArrayList<>();
+        
+        try {
+            Connection conn = new ConexaoMySQLSky().conectar();
+            String sql = "SELECT * FROM pacote where status=0";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            ResultSet resultado = stm.executeQuery();
+
+            while (resultado.next()) {
+                Pacote pack = new Pacote();
+                pack.setCodPacote(resultado.getInt("cod_pacote"));
+                pack.setValorPacote(resultado.getDouble("valor_pacote"));
+                pack.setStatus(resultado.getInt("status"));
                 
                 Quarto q = new Quarto();
                 q.setCodQuarto(resultado.getInt("cod_pacote"));
@@ -57,6 +90,7 @@ public class PacoteModelo {
                 pack = new Pacote();
                 pack.setCodPacote(resultado.getInt("cod_usuario"));
                 pack.setValorPacote(resultado.getDouble("valor_pacote"));
+                pack.setStatus(resultado.getInt("status"));
 
            
                 Quarto q = new Quarto();
@@ -77,13 +111,14 @@ public class PacoteModelo {
     public String inserirPacote(Pacote pack) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "INSERT INTO pacote (cod_pacote, valor_pacote, cod_assento, cod_quarto) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO pacote (cod_pacote, valor_pacote, cod_assento, cod_quarto, status) VALUES (?,?,?,?,?,?)";
             PreparedStatement stm = conn.prepareStatement(sql);
 
             stm.setInt(1, pack.getCodPacote());
             stm.setDouble(2, pack.getValorPacote());
             stm.setInt(3, pack.getQuarto().getCodQuarto());
             stm.setInt(4, pack.getAssento().getCodAssento());
+            stm.setInt(5,pack.getStatus());
 
             stm.executeUpdate();
             return "Inserido";
@@ -97,7 +132,7 @@ public class PacoteModelo {
     public String alterarPacote(Pacote pack) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "UPDATE pacote SET cod_pacote=?, valor_pacote=?, cod_quarto=?, cod_assento=? WHERE cod_pacote=?";
+            String sql = "UPDATE pacote SET cod_pacote=?, valor_pacote=?, cod_quarto=?, cod_assento=?, status=? WHERE cod_pacote=?";
             PreparedStatement stm = conn.prepareStatement(sql);
 
             stm.setInt(1, pack.getCodPacote());
@@ -105,6 +140,7 @@ public class PacoteModelo {
             stm.setInt(3, pack.getQuarto().getCodQuarto());
             stm.setInt(4, pack.getAssento().getCodAssento());
             stm.setInt(5, pack.getCodPacote());
+            stm.setInt(6,pack.getStatus());
 
             stm.executeUpdate();
             return "Alterado";

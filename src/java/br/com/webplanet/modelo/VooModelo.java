@@ -16,7 +16,7 @@ public class VooModelo {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
             AeroportoModelo ac = new AeroportoModelo();
-            String sql = "SELECT * FROM voo";
+            String sql = "SELECT * FROM voo where status=1";
             ResultSet rs = conn.createStatement().executeQuery(sql);
             while (rs.next()) {
                 Voo v = new Voo();
@@ -28,6 +28,32 @@ public class VooModelo {
                 v.setCompanhia(rs.getString("companhia"));
                 v.setAeroDestino(ac.consultarAeroportoCodigo(rs.getInt("cod_destino")));
                 v.setAeroPartida(ac.consultarAeroportoCodigo(rs.getInt("cod_local_partida")));
+                v.setStatus(rs.getInt("status"));
+                lista.add(v);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VooModelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+        public ArrayList<Voo> consultarVoosInativos() {
+        ArrayList<Voo> lista = new ArrayList<>();
+        try {
+            Connection conn = new ConexaoMySQLSky().conectar();
+            AeroportoModelo ac = new AeroportoModelo();
+            String sql = "SELECT * FROM voo where status=0";
+            ResultSet rs = conn.createStatement().executeQuery(sql);
+            while (rs.next()) {
+                Voo v = new Voo();
+                v.setCodVoo(rs.getInt("cod_voo"));
+                v.setNumVoo(rs.getString("num_voo"));
+                v.setDataHoraChegada(rs.getTimestamp("data_hora_chegada").toLocalDateTime());
+                v.setDataHoraPartida(rs.getTimestamp("data_hora_partida").toLocalDateTime());
+                v.setAviao(rs.getString("aviao"));
+                v.setCompanhia(rs.getString("companhia"));
+                v.setAeroDestino(ac.consultarAeroportoCodigo(rs.getInt("cod_destino")));
+                v.setAeroPartida(ac.consultarAeroportoCodigo(rs.getInt("cod_local_partida")));
+                v.setStatus(rs.getInt("status"));
                 lista.add(v);
             }
         } catch (SQLException ex) {
@@ -54,6 +80,7 @@ public class VooModelo {
                 v.setDataHoraPartida(rs.getTimestamp("data_hora_partida").toLocalDateTime());
                 v.setAviao(rs.getString("aviao"));
                 v.setCompanhia(rs.getString("companhia"));
+                v.setStatus(rs.getInt("status"));
                 v.setAeroDestino(ac.consultarAeroportoCodigo(rs.getInt("cod_destino")));
                 v.setAeroPartida(ac.consultarAeroportoCodigo(rs.getInt("cod_local_partida")));
             }
@@ -66,7 +93,7 @@ public class VooModelo {
     public String inserirVoo(Voo v) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "INSERT INTO voo (cod_voo, num_voo, data_hora_chegada, data_hora_partida, aviao, companhia, cod_destino, cod_local_partida) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO voo (cod_voo, num_voo, data_hora_chegada, data_hora_partida, aviao, companhia, cod_destino, cod_local_partida,status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, v.getCodVoo());
             stm.setString(2, v.getNumVoo());
@@ -76,6 +103,7 @@ public class VooModelo {
             stm.setString(6, v.getCompanhia());
             stm.setInt(7, v.getAeroDestino().getCodAeroporto());
             stm.setInt(8, v.getAeroPartida().getCodAeroporto());
+            stm.setInt(9,v.getStatus());
             stm.executeUpdate();
             return "inserido";
         } catch (SQLException ex) {

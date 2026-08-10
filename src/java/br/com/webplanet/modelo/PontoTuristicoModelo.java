@@ -17,7 +17,7 @@ public class PontoTuristicoModelo {
             String sql = "SELECT pt.*, c.nome_cidade "
                     + "FROM ponto_turistico pt "
                     + "INNER JOIN cidade c "
-                    + "ON pt.cod_cidade = c.cod_cidade";
+                    + "ON pt.cod_cidade = c.cod_cidade where pt.status=1";
             PreparedStatement stm = conn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -26,6 +26,39 @@ public class PontoTuristicoModelo {
                 p.setCodPonto(rs.getInt("cod_ponto"));
                 p.setDescricao(rs.getString("descricao"));
                 p.setEndereco(rs.getString("endereco"));
+                p.setStatus(rs.getInt("status"));
+
+                Cidade cidade = new Cidade();
+                cidade.setCodCidade(rs.getInt("cod_cidade"));
+                cidade.setNomeCidade(rs.getString("nome_cidade"));
+                p.setCidade(cidade);
+
+                lista.add(p);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PontoTuristicoModelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+    
+        public ArrayList<PontoTuristico> consultarPontosInativos() {
+        ArrayList<PontoTuristico> lista = new ArrayList<>();
+        try {
+            Connection conn = new ConexaoMySQLSky().conectar();
+            String sql = "SELECT pt.*, c.nome_cidade "
+                    + "FROM ponto_turistico pt "
+                    + "INNER JOIN cidade c "
+                    + "ON pt.cod_cidade = c.cod_cidade where pt.status=0";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                PontoTuristico p = new PontoTuristico();
+                p.setCodPonto(rs.getInt("cod_ponto"));
+                p.setDescricao(rs.getString("descricao"));
+                p.setEndereco(rs.getString("endereco"));
+                p.setStatus(rs.getInt("status"));
 
                 Cidade cidade = new Cidade();
                 cidade.setCodCidade(rs.getInt("cod_cidade"));
@@ -56,6 +89,7 @@ public class PontoTuristicoModelo {
                 p.setCodPonto(rs.getInt("cod_ponto"));
                 p.setDescricao(rs.getString("descricao"));
                 p.setEndereco(rs.getString("endereco"));
+                p.setStatus(rs.getInt("status"));
 
                 Cidade cidade = new Cidade();
                 cidade.setCodCidade(rs.getInt("cod_cidade"));
@@ -71,13 +105,14 @@ public class PontoTuristicoModelo {
     public String inserirPonto(PontoTuristico p) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "INSERT INTO ponto_turistico (cod_ponto, descricao, endereco, cod_cidade) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO ponto_turistico (cod_ponto, descricao, endereco, cod_cidade, status) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stm = conn.prepareStatement(sql);
 
             stm.setInt(1, p.getCodPonto());
             stm.setString(2, p.getDescricao());
             stm.setString(3, p.getEndereco());
             stm.setInt(4, p.getCidade().getCodCidade());
+            stm.setInt(5,p.getStatus());
 
             stm.executeUpdate();
             return "inserido";
@@ -91,13 +126,14 @@ public class PontoTuristicoModelo {
     public String alterarPonto(PontoTuristico p) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "UPDATE ponto_turistico SET descricao=?, endereco=?, cod_cidade=? WHERE cod_ponto=?";
+            String sql = "UPDATE ponto_turistico SET descricao=?, endereco=?, cod_cidade=?, status=? WHERE cod_ponto=?";
             PreparedStatement stm = conn.prepareStatement(sql);
 
             stm.setString(1, p.getDescricao());
             stm.setString(2, p.getEndereco());
             stm.setInt(3, p.getCidade().getCodCidade());
             stm.setInt(4, p.getCodPonto());
+            stm.setInt(5, p.getStatus());
 
             stm.executeUpdate();
             return "alterado";

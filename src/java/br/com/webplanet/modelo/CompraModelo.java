@@ -19,7 +19,7 @@ public class CompraModelo {
         ArrayList<Compra> vCompra = new ArrayList<>();
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String consulta = "SELECT * FROM compra";
+            String consulta = "SELECT * FROM compra where status=1";
             PreparedStatement stm = conn.prepareStatement(consulta);
             ResultSet resultado = stm.executeQuery();
 
@@ -29,6 +29,39 @@ public class CompraModelo {
                 com.setFormaPagamento(resultado.getString("forma_paga"));
                 com.setValor(resultado.getDouble("valor"));
                 com.setDataCompra(resultado.getString("data_compra"));
+                com.setStatus(resultado.getInt("status"));
+
+                Clientes cli = new Clientes();
+                cli.setCliCodigo(resultado.getInt("cod_cliente"));
+                com.setCodCliente(cli);
+
+                Pacote pac = new Pacote();
+                pac.setCodPacote(resultado.getInt("cod_pacote"));
+                com.setCodPacote(pac);
+
+                vCompra.add(com);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CompraModelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vCompra;
+    }
+    public ArrayList<Compra> consultarCompraInativa() {
+        ArrayList<Compra> vCompra = new ArrayList<>();
+        try {
+            Connection conn = new ConexaoMySQLSky().conectar();
+            String consulta = "SELECT * FROM compra where status=0";
+            PreparedStatement stm = conn.prepareStatement(consulta);
+            ResultSet resultado = stm.executeQuery();
+
+            while (resultado.next()) {
+                Compra com = new Compra();
+                com.setCodCompra(resultado.getInt("cod_compra"));
+                com.setFormaPagamento(resultado.getString("forma_paga"));
+                com.setValor(resultado.getDouble("valor"));
+                com.setDataCompra(resultado.getString("data_compra"));
+                com.setStatus(resultado.getInt("status"));
 
                 Clientes cli = new Clientes();
                 cli.setCliCodigo(resultado.getInt("cod_cliente"));
@@ -63,6 +96,7 @@ public class CompraModelo {
                 com.setFormaPagamento(resultado.getString("forma_paga"));
                 com.setValor(resultado.getDouble("valor"));
                 com.setDataCompra(resultado.getString("data_compra"));
+                com.setStatus(resultado.getInt("status"));
 
                 Clientes cli = new Clientes();
                 cli.setCliCodigo(resultado.getInt("cod_cliente"));
@@ -85,8 +119,8 @@ public class CompraModelo {
             Connection conn = new ConexaoMySQLSky().conectar();
 
             String sql = "INSERT INTO compra "
-                    + "(forma_paga, valor, data_compra, cod_cliente, cod_pacote) "
-                    + "VALUES (?, ?, ?, ?, ?)";
+                    + "(forma_paga, valor, data_compra, cod_cliente, cod_pacote,status) "
+                    + "VALUES (?, ?, ?, ?, ?,?)";
 
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, com.getFormaPagamento());
@@ -94,6 +128,7 @@ public class CompraModelo {
             stm.setString(3, com.getDataCompra());
             stm.setInt(4, com.getCodCliente().getCliCodigo());
             stm.setInt(5, com.getCodPacote().getCodPacote());
+            stm.setInt(6, com.getStatus());
 
             stm.executeUpdate();
             return "inserido";
@@ -111,7 +146,7 @@ public class CompraModelo {
 
             String sql = "UPDATE compra SET "
                     + "forma_paga = ?, valor = ?, data_compra = ?, "
-                    + "cod_cliente = ?, cod_pacote = ? WHERE cod_compra = ?";
+                    + "cod_cliente = ?, cod_pacote = ?, status = ? WHERE cod_compra = ?";
 
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, com.getFormaPagamento());
@@ -120,6 +155,7 @@ public class CompraModelo {
             stm.setInt(4, com.getCodCliente().getCliCodigo());
             stm.setInt(5, com.getCodPacote().getCodPacote());
             stm.setInt(6, com.getCodCompra());
+            stm.setInt(7, com.getStatus());
 
             stm.executeUpdate();
             return "alterado";

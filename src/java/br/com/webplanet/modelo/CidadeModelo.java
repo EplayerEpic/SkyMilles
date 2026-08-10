@@ -13,7 +13,30 @@ public class CidadeModelo {
         ArrayList<Cidade> lista = new ArrayList<>();
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "SELECT * FROM cidade";
+            String sql = "SELECT * FROM cidade where status=1";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                Cidade c = new Cidade();
+                c.setCodCidade(rs.getInt("cod_cidade"));
+                c.setDdd(rs.getString("ddd"));
+                c.setEstado(rs.getString("estado"));
+                c.setNomeCidade(rs.getString("nome_cidade"));
+                c.setStatus(rs.getInt("status"));
+                lista.add(c);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CidadeModelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+        public ArrayList<Cidade> consultarCidadesInativas() {
+        ArrayList<Cidade> lista = new ArrayList<>();
+        try {
+            Connection conn = new ConexaoMySQLSky().conectar();
+            String sql = "SELECT * FROM cidade where status=0";
             PreparedStatement stm = conn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 

@@ -17,7 +17,7 @@ public class ClientesModelo {
         try {
             ConexaoMySQLSky conexao = new ConexaoMySQLSky();
             Connection conn = conexao.conectar();
-            String consulta = "SELECT * FROM cliente";
+            String consulta = "SELECT * FROM cliente where status=1";
             Statement stm = conn.createStatement();
             ResultSet resultado = stm.executeQuery(consulta);
 
@@ -43,7 +43,38 @@ public class ClientesModelo {
         }
         return vClientes;
     }
+        public ArrayList<Clientes> consultarClientesInativos() {
+        ArrayList<Clientes> vClientes = new ArrayList<>();
+        try {
+            ConexaoMySQLSky conexao = new ConexaoMySQLSky();
+            Connection conn = conexao.conectar();
+            String consulta = "SELECT * FROM cliente where status=0";
+            Statement stm = conn.createStatement();
+            ResultSet resultado = stm.executeQuery(consulta);
 
+            while (resultado.next()) {
+                Clientes cli = new Clientes();
+                cli.setCliCodigo(resultado.getInt("cod_cliente"));
+                cli.setCliNome(resultado.getString("nome_cliente"));
+                cli.setCliEndereco(resultado.getString("endereco"));
+                cli.setCliCPF(resultado.getString("cpf"));
+                cli.setCliTelefone(resultado.getString("telefone"));
+                cli.setCliSexo(resultado.getString("sexo").charAt(0));
+                cli.setStatus(resultado.getInt("status"));
+
+                Date dataNasc = resultado.getDate("data_nasc");
+                if (dataNasc != null) {
+                    cli.setCliDataNasc(dataNasc.toLocalDate());
+                }
+
+                vClientes.add(cli);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientesModelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vClientes;
+    }
+    
     public Clientes consultarClienteCodigo(int cliCodigo) {
         Clientes cli = null;
 

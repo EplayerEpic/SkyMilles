@@ -20,7 +20,7 @@ public class UsuarioModelo {
             String sql = "SELECT u.*, c.nome_cliente "
                     + "FROM usuario u "
                     + "INNER JOIN cliente c "
-                    + "ON u.cod_cliente = c.cod_cliente";
+                    + "ON u.cod_cliente = c.cod_cliente where u.status=1";
             PreparedStatement stm = conn.prepareStatement(sql);
             ResultSet resultado = stm.executeQuery();
 
@@ -30,6 +30,39 @@ public class UsuarioModelo {
                 usu.setUsuLogin(resultado.getString("login"));
                 usu.setUsuSenha(resultado.getString("senha"));
                 usu.setUsuEmail(resultado.getString("e_mail"));
+                usu.setStatus(resultado.getInt("status"));
+
+                Clientes cli = new Clientes();
+                cli.setCliCodigo(resultado.getInt("cod_cliente"));
+                cli.setCliNome(resultado.getString("nome_cliente"));
+                usu.setUsuCliente(cli);
+
+                vUsuarios.add(usu);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioModelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vUsuarios;
+    }
+        public ArrayList<Usuario> consultarUsuariosInativos() {
+        ArrayList<Usuario> vUsuarios = new ArrayList<>();
+        try {
+            Connection conn = new ConexaoMySQLSky().conectar();
+            String sql = "SELECT u.*, c.nome_cliente "
+                    + "FROM usuario u "
+                    + "INNER JOIN cliente c "
+                    + "ON u.cod_cliente = c.cod_cliente where u.status=0";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            ResultSet resultado = stm.executeQuery();
+
+            while (resultado.next()) {
+                Usuario usu = new Usuario();
+                usu.setUsuCodigo(resultado.getInt("cod_usuario"));
+                usu.setUsuLogin(resultado.getString("login"));
+                usu.setUsuSenha(resultado.getString("senha"));
+                usu.setUsuEmail(resultado.getString("e_mail"));
+                usu.setStatus(resultado.getInt("status"));
 
                 Clientes cli = new Clientes();
                 cli.setCliCodigo(resultado.getInt("cod_cliente"));
@@ -60,6 +93,7 @@ public class UsuarioModelo {
                 usu.setUsuLogin(resultado.getString("login"));
                 usu.setUsuSenha(resultado.getString("senha"));
                 usu.setUsuEmail(resultado.getString("e_mail"));
+                usu.setStatus(resultado.getInt("status"));
 
                 Clientes cli = new Clientes();
                 cli.setCliCodigo(resultado.getInt("cod_cliente"));
@@ -75,13 +109,14 @@ public class UsuarioModelo {
     public String inserirUsuario(Usuario usu) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "INSERT INTO usuario (login, senha, e_mail, cod_cliente) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO usuario (login, senha, e_mail, cod_cliente,status) VALUES (?,?,?,?,?)";
             PreparedStatement stm = conn.prepareStatement(sql);
 
             stm.setString(1, usu.getUsuLogin());
             stm.setString(2, usu.getUsuSenha());
             stm.setString(3, usu.getUsuEmail());
             stm.setInt(4, usu.getUsuCliente().getCliCodigo());
+            stm.setInt(5,usu.getStatus());
 
             stm.executeUpdate();
             return "Inserido";
@@ -95,7 +130,7 @@ public class UsuarioModelo {
     public String alterarUsuario(Usuario usu) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "UPDATE usuario SET login=?, senha=?, e_mail=?, cod_cliente=? WHERE cod_usuario=?";
+            String sql = "UPDATE usuario SET login=?, senha=?, e_mail=?, cod_cliente=?,status=? WHERE cod_usuario=?";
             PreparedStatement stm = conn.prepareStatement(sql);
 
             stm.setString(1, usu.getUsuLogin());
@@ -103,6 +138,7 @@ public class UsuarioModelo {
             stm.setString(3, usu.getUsuEmail());
             stm.setInt(4, usu.getUsuCliente().getCliCodigo());
             stm.setInt(5, usu.getUsuCodigo());
+            stm.setInt(6,usu.getStatus());
 
             stm.executeUpdate();
             return "Alterado";

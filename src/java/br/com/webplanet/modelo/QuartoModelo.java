@@ -15,7 +15,7 @@ public class QuartoModelo {
         ArrayList<Quarto> lista = new ArrayList<>();
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "SELECT * FROM quarto";
+            String sql = "SELECT * FROM quarto where status=1";
             PreparedStatement stm = conn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -27,6 +27,37 @@ public class QuartoModelo {
                 q.setLocalChegada(rs.getString("local_chegada"));
                 q.setDataInicio(rs.getString("data_inicio"));
                 q.setQntdDiarias(rs.getInt("qntd_diarias"));
+                q.setStatus(rs.getInt("status"));
+
+                Hotel hot = new Hotel();
+                hot.setCodHotel(rs.getInt("cod_hotel"));
+                q.setHotel(hot);
+
+                lista.add(q);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(QuartoModelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+        public ArrayList<Quarto> consultarQuartosInativos() {
+        ArrayList<Quarto> lista = new ArrayList<>();
+        try {
+            Connection conn = new ConexaoMySQLSky().conectar();
+            String sql = "SELECT * FROM quarto where status=0";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                Quarto q = new Quarto();
+                q.setCodQuarto(rs.getInt("cod_quarto"));
+                q.setValorReserva(rs.getDouble("valor_reserva"));
+                q.setLocalSaida(rs.getString("local_saida"));
+                q.setLocalChegada(rs.getString("local_chegada"));
+                q.setDataInicio(rs.getString("data_inicio"));
+                q.setQntdDiarias(rs.getInt("qntd_diarias"));
+                q.setStatus(rs.getInt("status"));
 
                 Hotel hot = new Hotel();
                 hot.setCodHotel(rs.getInt("cod_hotel"));
@@ -58,6 +89,7 @@ public class QuartoModelo {
                 q.setLocalChegada(rs.getString("local_chegada"));
                 q.setDataInicio(rs.getString("data_inicio"));
                 q.setQntdDiarias(rs.getInt("qntd_diarias"));
+                q.setStatus(rs.getInt("status"));
 
 
                 Hotel hot = new Hotel();
@@ -76,7 +108,7 @@ public class QuartoModelo {
     public String inserirQuarto(Quarto q) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "INSERT INTO quarto (valor_reserva, local_saida, local_chegada, data_inicio, qntd_diarias, cod_hotel) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO quarto (valor_reserva, local_saida, local_chegada, data_inicio, qntd_diarias, cod_hotel, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stm = conn.prepareStatement(sql);
 
             stm.setDouble(1, q.getValorReserva());
@@ -85,6 +117,7 @@ public class QuartoModelo {
             stm.setString(4, q.getDataInicio());
             stm.setInt(5, q.getQntdDiarias());
             stm.setInt(6, q.getHotel().getCodHotel());
+            stm.setInt(7,q.getStatus());
 
             stm.executeUpdate();
             return "inserido";
@@ -97,7 +130,7 @@ public class QuartoModelo {
     public String alterarQuarto(Quarto q) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "UPDATE quarto SET valor_reserva = ?, local_saida = ?, local_chegada =?, data_inicio = ?, qntd_diarias = ?, cod_hotel = ? WHERE cod_quarto=?";
+            String sql = "UPDATE quarto SET valor_reserva = ?, local_saida = ?, local_chegada =?, data_inicio = ?, qntd_diarias = ?, cod_hotel = ?, status=? WHERE cod_quarto=?";
             PreparedStatement stm = conn.prepareStatement(sql);
 
             stm.setDouble(1, q.getValorReserva());
@@ -107,6 +140,7 @@ public class QuartoModelo {
             stm.setInt(5, q.getQntdDiarias());
             stm.setInt(6, q.getHotel().getCodHotel());
             stm.setInt(7, q.getCodQuarto());
+            stm.setInt(8,q.getStatus());
 
             stm.executeUpdate();
             return "Alterado";
