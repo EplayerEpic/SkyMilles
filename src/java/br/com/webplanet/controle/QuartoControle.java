@@ -34,7 +34,7 @@ public class QuartoControle {
     }
 
     @GetMapping("/removerQuarto")
-    public String removerQuarti() {
+    public String removerQuarto() {
         return "removerQuarto";
     }
 
