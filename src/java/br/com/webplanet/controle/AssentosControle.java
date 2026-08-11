@@ -30,14 +30,14 @@ public class AssentosControle {
         return new ModelAndView("adicionarAssento", "assento", new Assentos());
     }
 
-    @RequestMapping(value = "/ConsultarAssento", method = RequestMethod.GET)
+    @RequestMapping(value = "/consultarAssento", method = RequestMethod.GET)
     public ModelAndView consultarAssento() {
-        return new ModelAndView("ConsultarAssento", "assento", new Assentos());
+        return new ModelAndView("consultarAssento", "assento", new Assentos());
     }
 
-    @RequestMapping(value = "/AlterarAssento", method = RequestMethod.GET)
+    @RequestMapping(value = "/alterarAssento", method = RequestMethod.GET)
     public ModelAndView AlterarAssento() {
-        return new ModelAndView("AlterarAssento", "assento", new Assentos());
+        return new ModelAndView("alterarAssento", "assento", new Assentos());
     }
 
     @RequestMapping(value = "/listarTodosAssentos", method = RequestMethod.GET)
@@ -95,10 +95,10 @@ public class AssentosControle {
      * @param modelo
      * @return
      */
-    @RequestMapping(value = "/ConsultarAssento", method = RequestMethod.POST)
+    @RequestMapping(value = "/consultarAssento", method = RequestMethod.POST)
     public String ConsultarAssento(@ModelAttribute("assento") Assentos est, BindingResult bindingResult, Model modelo) {
         if (bindingResult.hasErrors()) {
-            return "ConsultarAssento";
+            return "consultarAssento";
         }
         AssentosModelo assM = new AssentosModelo();
         Assentos assen = assM.consultarCodAssento(est.getCodAssento());
@@ -110,13 +110,13 @@ public class AssentosControle {
         modelo.addAttribute("codDestino", assen.getCodDestino());
         modelo.addAttribute("codLocalPartida", assen.getCodLocalPartida());
         modelo.addAttribute("voo", assen.getVoo());
-        return "ConsultarAssento";
+        return "consultarAssento";
     }
 
-    @RequestMapping(value = "/AlterarAssento", method = RequestMethod.POST)
+    @RequestMapping(value = "/alterarAssento", method = RequestMethod.POST)
     public String AlterarAssento(@ModelAttribute("assento") Assentos est, BindingResult bindingResult, Model modelo) {
         if (bindingResult.hasErrors()) {
-            return "AlterarAssento";
+            return "alterarAssento";
         }
 
         AssentosModelo assM = new AssentosModelo();
@@ -139,6 +139,6 @@ public class AssentosControle {
             modelo.addAttribute("assento", assentoSelect);
         }
 
-        return "AlterarAssento";
+        return "alterarAssento";
     }
 }
