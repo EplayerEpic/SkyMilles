@@ -17,17 +17,27 @@ public class Compra {
     private String dataCompra;
     private Clientes cliente;
     private Pacote pacote;
+    private int status;
 
     public Compra() {
     }
 
-    public Compra(int codCompra, String formaPagamento, double valor, String dataCompra, Clientes cliente, Pacote pacote) {
+    public Compra(int codCompra, String formaPagamento, double valor, String dataCompra, Clientes cliente, Pacote pacote, int status) {
         this.codCompra = codCompra;
         this.formaPagamento = formaPagamento;
         this.valor = valor;
         this.dataCompra = dataCompra;
         this.cliente = cliente;
         this.pacote = pacote;
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public int getCodCompra() {

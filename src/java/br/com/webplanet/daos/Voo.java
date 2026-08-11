@@ -17,12 +17,13 @@ public class Voo {
     private LocalDateTime dataHoraChegada;
     private String aviao;
     private String companhia;
+    private int status;
 
     public Voo() {
     }
 
     public Voo(int codVoo, String numVoo, Aeroporto AeroPartida, Aeroporto AeroDestino, LocalDateTime dataHoraPartida, LocalDateTime dataHoraChegada,
-            String aviao, String companhia) {
+            String aviao, String companhia, int status) {
         this.codVoo = codVoo;
         this.AeroPartida = AeroPartida;
         this.AeroDestino = AeroDestino;
@@ -30,9 +31,18 @@ public class Voo {
         this.dataHoraChegada = dataHoraChegada;
         this.aviao = aviao;
         this.companhia = companhia;
+        this.status = status;
+    }
+    
+    public int getStatus() {
+        return status;
     }
 
     // Getters e Setters
+    public void setStatus(int status) {    
+        this.status = status;
+    }
+
     public int getCodVoo() {
         return codVoo;
     }

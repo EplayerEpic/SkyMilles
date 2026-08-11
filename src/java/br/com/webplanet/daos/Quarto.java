@@ -9,11 +9,12 @@ public class Quarto {
     private int qntdDiarias;
     private Pacote pacote;
     private Hotel hotel;
+    private int status;
 
     public Quarto() {}
 
     public Quarto(int codQuarto, double valorReserva, String localSaida, String localChegada, 
-                  String dataInicio, int qntdDiarias, Pacote pacote, Hotel hotel) {
+                  String dataInicio, int qntdDiarias, Pacote pacote, Hotel hotel, int status) {
         this.codQuarto = codQuarto;
         this.valorReserva = valorReserva;
         this.localSaida = localSaida;
@@ -22,6 +23,7 @@ public class Quarto {
         this.qntdDiarias = qntdDiarias;
         this.pacote = pacote;
         this.hotel = hotel;
+        this.status = status;
     }
     public Quarto(double valorReserva, String localSaida, String localChegada, 
                   String dataInicio, int qntdDiarias, Pacote pacote, Hotel hotel) {
@@ -35,6 +37,17 @@ public class Quarto {
     }
 
     // Getters e Setters
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+    
+    
+    
     public int getCodQuarto() { return codQuarto; }
     public void setCodQuarto(int codQuarto) { this.codQuarto = codQuarto; }
     public double getValorReserva() { return valorReserva; }

@@ -13,6 +13,7 @@ public class Pacote {
     private double valorPacote;
     private Quarto quarto;
     private Assentos assento;
+    private int status;
 
     public Pacote() {
     }
@@ -32,13 +33,22 @@ public class Pacote {
     public void setAssento(Assentos assento) {
         this.assento = assento;
     }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
     
 
-    public Pacote(int codPacote, double valorPacote,Quarto quarto, Assentos assento) {
+    public Pacote(int codPacote, double valorPacote,Quarto quarto, Assentos assento, int status) {
         this.codPacote = codPacote;
         this.valorPacote = valorPacote;
         this.quarto = quarto;
         this.assento = assento;
+        this.status = status;
     }
 
     public int getCodPacote() {

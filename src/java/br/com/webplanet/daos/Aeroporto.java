@@ -6,13 +6,23 @@ public class Aeroporto {
     private int codAeroporto;
     private String nomeAero;
     private Cidade cidade;
+    private int status;
 
     public Aeroporto() {}
 
-    public Aeroporto(int codAeroporto, String nomeAero, Cidade cidade) {
+    public Aeroporto(int codAeroporto, String nomeAero, Cidade cidade, int status) {
         this.codAeroporto = codAeroporto;
         this.nomeAero = nomeAero;
         this.cidade = cidade;
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public int getCodAeroporto() { return codAeroporto; }

@@ -12,12 +12,13 @@ public class Clientes {
     private String cliTelefone;
     private LocalDate cliDataNasc;
     private char cliSexo;
+    private int status;
 
     public Clientes() {
     }
 
     public Clientes(int cliCodigo, String cliNome, String cliEndereco, String cliCPF,
-            String cliTelefone, LocalDate cliDataNasc, char cliSexo) {
+            String cliTelefone, LocalDate cliDataNasc, char cliSexo, int status) {
         this.cliCodigo = cliCodigo;
         this.cliNome = cliNome;
         this.cliEndereco = cliEndereco;
@@ -25,6 +26,15 @@ public class Clientes {
         this.cliTelefone = cliTelefone;
         this.cliDataNasc = cliDataNasc;
         this.cliSexo = cliSexo;
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
     
 

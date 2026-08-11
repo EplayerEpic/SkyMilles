@@ -5,14 +5,16 @@ public class PontoTuristico {
     private String descricao;
     private String endereco;
     private Cidade cidade;
+    private int status;
 
     public PontoTuristico() {}
 
-    public PontoTuristico(int codPonto, String descricao, String endereco, Cidade cidade) {
+    public PontoTuristico(int codPonto, String descricao, String endereco, Cidade cidade, int status) {
         this.codPonto = codPonto;
         this.descricao = descricao;
         this.endereco = endereco;
         this.cidade = cidade;
+        this.status = status;
     }
     public PontoTuristico(String descricao, String endereco, Cidade cidade) {
         this.descricao = descricao;
@@ -21,6 +23,17 @@ public class PontoTuristico {
     }
 
     // Getters e Setters
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+    
+    
+    
     public int getCodPonto() { return codPonto; }
     public void setCodPonto(int codPonto) { this.codPonto = codPonto; }
 

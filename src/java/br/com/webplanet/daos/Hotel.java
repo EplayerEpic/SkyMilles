@@ -11,12 +11,13 @@ public class Hotel {
     private LocalDate checkIn;
     private LocalDate checkOut;
     private Cidade cidade;
+    private int status;
 
     public Hotel() {
     }
 
     public Hotel(int codHotel, String CNPJ, String local, String endereco,
-                 LocalDate checkIn, LocalDate checkOut, Cidade cidade) {
+                 LocalDate checkIn, LocalDate checkOut, Cidade cidade, int status) {
         this.codHotel = codHotel;
         this.CNPJ = CNPJ;
         this.local = local;
@@ -24,6 +25,15 @@ public class Hotel {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.cidade = cidade;
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public int getCodHotel() {

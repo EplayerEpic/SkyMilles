@@ -7,14 +7,16 @@ public class Cidade {
     private String ddd;
     private String estado;
     private String nomeCidade;
+    private int status;
 
     public Cidade() {}
 
-    public Cidade(int codCidade, String ddd, String estado, String nomeCidade) {
+    public Cidade(int codCidade, String ddd, String estado, String nomeCidade, int status) {
         this.codCidade = codCidade;
         this.ddd = ddd;
         this.estado = estado;
         this.nomeCidade = nomeCidade;
+        this.status = status;
     }
     
 
@@ -24,6 +26,14 @@ public class Cidade {
 
     public String getDdd() { return ddd; }
     public void setDdd(String ddd) { this.ddd = ddd; }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public String getEstado() { return estado; }
     public void setEstado(String estado) { this.estado = estado; }
