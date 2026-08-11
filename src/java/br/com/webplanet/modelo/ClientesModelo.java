@@ -155,8 +155,8 @@ public class ClientesModelo {
             stm.setString(4, cli.getCliEndereco());
             stm.setString(5, cli.getCliTelefone());
             stm.setDate(6, cli.getCliDataNasc() != null ? Date.valueOf(cli.getCliDataNasc()) : null);
-            stm.setInt(7, cli.getCliCodigo());
-            stm.setInt(8, cli.getStatus()); 
+            stm.setInt(7, cli.getStatus());
+            stm.setInt(8, cli.getCliCodigo());
 
             stm.executeUpdate();
             resultado = "Alterado";

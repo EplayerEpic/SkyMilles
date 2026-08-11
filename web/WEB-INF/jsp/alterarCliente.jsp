@@ -4,23 +4,31 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Adicionar Cliente</title>
+    <title>Alterar Cliente</title>
     <style>
         body{ font-family: Arial, sans-serif; background:#f4f4f4; }
-        .form-centro{ width:420px; margin:40px auto; background:white; padding:20px; border-radius:8px; box-shadow:0px 0px 10px #999; }
+        .form-centro{ width:450px; margin:40px auto; background:#fff; padding:20px; border-radius:8px; box-shadow:0 0 10px #999; }
         .input-group{ margin-bottom:15px; }
         label{ display:block; font-weight:bold; margin-bottom:5px; }
         input, select{ width:100%; padding:8px; box-sizing:border-box; }
         .radio-group label{ display:inline-block; font-weight:normal; margin-right:15px; }
-        .footer{ text-align:center; }
+        .footer{ text-align:center; margin-top:20px; }
         .mensagem{ color:green; font-weight:bold; text-align:center; }
     </style>
 </head>
 <body>
 <div class="form-centro">
-<h2>Adicionar Cliente</h2>
-<form:form method="POST" action="${pageContext.request.contextPath}/adicionarCliente" modelAttribute="cliente">
+<h2>Alterar Cliente</h2>
+<form:form method="POST" action="${pageContext.request.contextPath}/alterarCliente" modelAttribute="cliente">
     <form:errors path="*" cssStyle="color:red"/>
+
+    <div class="input-group">
+        <form:label path="cliCodigo">Cliente</form:label>
+        <form:select path="cliCodigo" onchange="this.form.submit();">
+            <form:option value="0" label="Selecionar Cliente" disabled="true"/>
+            <form:options items="${webConsultaClientes}"/>
+        </form:select>
+    </div>
 
     <div class="input-group">
         <form:label path="cliNome">Nome</form:label>
@@ -54,11 +62,12 @@
     </div>
 
     <div class="footer">
-        <input type="submit" value="Cadastrar"/>
+        <input type="submit" value="Salvar Alterações"/>
     </div>
+
+    <br>
+    <div class="mensagem">${mensagem}</div>
 </form:form>
-<br>
-<div class="mensagem">${mensagem}</div>
 </div>
 </body>
 </html>

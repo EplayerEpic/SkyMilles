@@ -10,11 +10,6 @@
 </head>
 
 <body>
-    <!-- Cabeçalho -->
-    <a href="consultarCliente">Demiurgo</a>
-    <a href="listarTodos">Demiurgo</a>
-
-    <!-- CRUDs (rotas definidas, sem persistência real ainda) -->
     <a href="${pageContext.request.contextPath}/menuCidade">Menu Cidade</a>
     <a href="${pageContext.request.contextPath}/menuCompra">Menu Compra</a>
     <a href="${pageContext.request.contextPath}/menuPacote">Menu Pacote</a>
@@ -22,7 +17,10 @@
     <a href="${pageContext.request.contextPath}/menuVoo"> MenuVoo
     <a href="${pageContext.request.contextPath}/menuHotel"> MenuHotel
     <a href="${pageContext.request.contextPath}/menuQuarto"> MenuQuarto
-    <a href="${pageContext.request.contextPath}/menuUsuario"> MenuUsuario    
+    <a href="${pageContext.request.contextPath}/menuUsuario"> MenuUsuario
+    <a href="${pageContext.request.contextPath}/menuAeroporto"> MenuAeroporto
+    <a href="${pageContext.request.contextPath}/menuAssento"> MenuAssento
+    <a href="${pageContext.request.contextPath}/menuCliente"> MenuCliente    
     <header id="header">
         <a href="http://localhost/dashboard/SkyMilles/"><img id="Logo"
                 src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles"></a>

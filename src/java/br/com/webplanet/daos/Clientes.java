@@ -2,6 +2,7 @@ package br.com.webplanet.daos;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Clientes {
 
@@ -10,6 +11,8 @@ public class Clientes {
     private String cliEndereco;
     private String cliCPF;
     private String cliTelefone;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate cliDataNasc;
     private char cliSexo;
     private int status;

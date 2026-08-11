@@ -23,11 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Controlador de Compra.
- * Adicionar / Consultar / Alterar estão funcionais (gravam e leem do banco
- * via CompraModelo). Remover permanece apenas como rota (sem lógica de
- * exclusão) — vai ser feito de outra forma depois.
- *
  * @author aluno
  */
 @Controller

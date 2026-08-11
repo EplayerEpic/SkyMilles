@@ -7,5 +7,6 @@
     </head>
     <body>
         <h1>Página para remover assento</h1>
+        <a href="${pageContext.request.contextPath}/menuAssento">Voltar</a>
     </body>
 </html>

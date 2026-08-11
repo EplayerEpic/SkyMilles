@@ -12,10 +12,10 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-//import org.springframework.web.portlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -25,23 +25,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ClientesControle {
 
-    @RequestMapping(value = "/adicionarCliente", method = RequestMethod.GET)
-    public ModelAndView adicionarCliente() {
-        return new ModelAndView("adicionarCliente", "cliente", new Clientes());
-    }
-
-    @RequestMapping(value = "/consultarCliente", method = RequestMethod.GET)
-    public ModelAndView consultarCliente() {
-        return new ModelAndView("consultarCliente", "cliente", new Clientes());
-    }
-    @RequestMapping(value = "/listarTodos", method = RequestMethod.GET)
-    public ModelAndView listarTodos(){
-        ClientesModelo cm = new ClientesModelo();
-        ArrayList<Clientes> lista = cm.consultarClientes();  
-        ModelAndView mv = new ModelAndView("listarTodos");
-        mv.addObject("clientes", lista); 
-        
-        return mv;
+    @GetMapping("/menuCliente")
+    public String menuCliente() {
+        return "menuCliente";
     }
 
     @ModelAttribute("cliente")
@@ -61,19 +47,45 @@ public class ClientesControle {
         return fds;
     }
 
+    @RequestMapping(value = "/listarTodos", method = RequestMethod.GET)
+    public ModelAndView listarTodos() {
+        ClientesModelo cm = new ClientesModelo();
+        ArrayList<Clientes> lista = cm.consultarClientes();
+        ModelAndView mv = new ModelAndView("listarTodos");
+        mv.addObject("clientes", lista);
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/adicionarCliente", method = RequestMethod.GET)
+    public ModelAndView adicionarCliente() {
+        return new ModelAndView("adicionarCliente", "cliente", new Clientes());
+    }
+
     @RequestMapping(value = "/adicionarCliente", method = RequestMethod.POST)
     public String adicionarCliente(@ModelAttribute("cliente") Clientes est, BindingResult bindingResult, Model modelo) {
         if (bindingResult.hasErrors()) {
             return "adicionarCliente";
         }
-        ClientesModelo cm = new ClientesModelo();
-        cm.inserirCliente(est);
-        
-        modelo.addAttribute("mensagem", "cliente cadastrado com sucesso");
-        
-        // pegar os dados da interface gráfica e mandar para o modelo.
-        // inserir no banco chamando o modelo.
-        return "resultadoCliente";
+
+        if (est.getCliNome() != null && !est.getCliNome().trim().isEmpty()
+                && est.getCliCPF() != null && !est.getCliCPF().trim().isEmpty()
+                && (est.getCliSexo() == 'M' || est.getCliSexo() == 'F')) {
+
+            est.setStatus(1);
+            ClientesModelo cm = new ClientesModelo();
+            cm.inserirCliente(est);
+            modelo.addAttribute("mensagem", "Cliente cadastrado com sucesso");
+        } else {
+            modelo.addAttribute("mensagem", "Erro ao cadastrar cliente. Verifique nome, CPF e sexo.");
+        }
+
+        return "adicionarCliente";
+    }
+
+    @RequestMapping(value = "/consultarCliente", method = RequestMethod.GET)
+    public ModelAndView consultarCliente() {
+        return new ModelAndView("consultarCliente", "cliente", new Clientes());
     }
 
     @RequestMapping(value = "/consultarCliente", method = RequestMethod.POST)
@@ -83,16 +95,55 @@ public class ClientesControle {
         }
         ClientesModelo con = new ClientesModelo();
         Clientes cli = con.consultarClienteCodigo(est.getCliCodigo());
-        modelo.addAttribute("cliNome", cli.getCliNome());
-        modelo.addAttribute("cliEndereco", cli.getCliEndereco());
-        modelo.addAttribute("cliCPF", cli.getCliCPF());
-        modelo.addAttribute("cliTelefone", cli.getCliTelefone());
-        modelo.addAttribute("cliDataNasc", cli.getCliDataNasc());
-        modelo.addAttribute("cliSexo",
-                cli.getCliSexo() == 'M' ? "Masculino"
-                : cli.getCliSexo() == 'F' ? "Feminino"
-                : "Não informado");
+
+        if (cli != null) {
+            modelo.addAttribute("cliNome", cli.getCliNome());
+            modelo.addAttribute("cliEndereco", cli.getCliEndereco());
+            modelo.addAttribute("cliCPF", cli.getCliCPF());
+            modelo.addAttribute("cliTelefone", cli.getCliTelefone());
+            modelo.addAttribute("cliDataNasc", cli.getCliDataNasc());
+            modelo.addAttribute("cliSexo",
+                    cli.getCliSexo() == 'M' ? "Masculino"
+                    : cli.getCliSexo() == 'F' ? "Feminino"
+                    : "Não informado");
+        } else {
+            modelo.addAttribute("mensagem", "Cliente não encontrado");
+        }
 
         return "consultarCliente";
+    }
+
+    @RequestMapping(value = "/alterarCliente", method = RequestMethod.GET)
+    public ModelAndView alterarCliente() {
+        return new ModelAndView("alterarCliente", "cliente", new Clientes());
+    }
+
+    @RequestMapping(value = "/alterarCliente", method = RequestMethod.POST)
+    public String alterarCliente(@ModelAttribute("cliente") Clientes est, BindingResult bindingResult, Model modelo) {
+        if (bindingResult.hasErrors()) {
+            return "alterarCliente";
+        }
+
+        ClientesModelo cliM = new ClientesModelo();
+        Clientes clienteSelecionado = cliM.consultarClienteCodigo(est.getCliCodigo());
+
+        if (est.getCliNome() != null && !est.getCliNome().trim().isEmpty()
+                && est.getCliCPF() != null && !est.getCliCPF().trim().isEmpty()
+                && (est.getCliSexo() == 'M' || est.getCliSexo() == 'F')) {
+
+            est.setStatus(1);
+            cliM.alterarCliente(est);
+
+            modelo.addAttribute("cliente", new Clientes());
+            modelo.addAttribute("mensagem", "Cliente alterado com sucesso!");
+        } else {
+            modelo.addAttribute("cliente", clienteSelecionado != null ? clienteSelecionado : est);
+        }
+
+        return "alterarCliente";
+    }
+    @GetMapping("/removerCliente")
+    public String removerCliente() {
+        return "removerCliente";
     }
 }
