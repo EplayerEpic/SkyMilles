@@ -33,6 +33,11 @@
     <a href="${pageContext.request.contextPath}/removerVoo"> remover Voo</a>
     <a href="${pageContext.request.contextPath}/alterarVoo"> alterar Voo</a>
     <a href="${pageContext.request.contextPath}/consultarVoo"> consultar Voo</a>
+    <a href="${pageContext.request.contextPath}/adicionarAeroporto"> adicionar aero</a>
+    <a href="${pageContext.request.contextPath}/AlterarAeroporto"> alterar aero</a>
+    <a href="${pageContext.request.contextPath}/ConsultarAeroporto"> consultar aero</a>
+    <a href="${pageContext.request.contextPath}/ListarTodasAero"> consultar aero porcod</a>
+    <a href="${pageContext.request.contextPath}/removerAeroportos"> remover aero</a>
     <header id="header">
         <a href="http://localhost/dashboard/SkyMilles/"><img id="Logo"
                 src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles"></a>
