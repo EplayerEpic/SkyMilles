@@ -37,13 +37,6 @@ public class Pacote {
         this.assento = assento;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
     
 
     public Pacote(int codPacote, double valorPacote,Quarto quarto, Assentos assento, int status) {

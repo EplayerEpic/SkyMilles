@@ -74,6 +74,7 @@ public class AeroportoModelo {
                 a = new Aeroporto();
                 a.setCodAeroporto(rs.getInt("cod_aeroporto"));
                 a.setNomeAero(rs.getString("nome_aeroporto"));
+                a.setStatus(rs.getInt("status"));
 
                 Cidade c = new Cidade();
                 c.setCodCidade(rs.getInt("cod_cidade"));
@@ -86,7 +87,7 @@ public class AeroportoModelo {
         return a;
     }
 
-    public String inserirAeroporto(Aeroporto a) {
+    public String adicionarAeroporto(Aeroporto a) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
 
@@ -154,7 +155,7 @@ public class AeroportoModelo {
         c.setCodCidade(1); // precisa existir
         novo.setCidade(c);
 
-        System.out.println("Inserir: " + ac.inserirAeroporto(novo));
+        System.out.println("Inserir: " + ac.adicionarAeroporto(novo));
 
         // ===== READ =====
         ArrayList<Aeroporto> lista = ac.consultarAeroportos();
