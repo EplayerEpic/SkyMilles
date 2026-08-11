@@ -7,6 +7,7 @@ public class Cidade {
     private String ddd;
     private String estado;
     private String nomeCidade;
+    private int status;
 
     public Cidade() {}
 
@@ -30,6 +31,9 @@ public class Cidade {
 
     public String getNomeCidade() { return nomeCidade; }
     public void setNomeCidade(String nomeCidade) { this.nomeCidade = nomeCidade; }
+
+    public int getStatus() { return status; }
+    public void setStatus(int status) { this.status = status; }
 
     @Override
     public int hashCode() {

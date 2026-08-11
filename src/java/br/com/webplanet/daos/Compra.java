@@ -17,6 +17,7 @@ public class Compra {
     private String dataCompra;
     private Clientes cliente;
     private Pacote pacote;
+    private int status;
 
     public Compra() {
     }
@@ -29,6 +30,9 @@ public class Compra {
         this.cliente = cliente;
         this.pacote = pacote;
     }
+
+    public int getStatus() { return status; }
+    public void setStatus(int status) { this.status = status; }
 
     public int getCodCompra() {
         return codCompra;

@@ -13,11 +13,11 @@
     <!-- Cabeçalho -->
     <a href="consultarCliente">Demiurgo</a>
     <a href="listarTodos">Demiurgo</a>
-    <a href="ConsultarCidade">consultarCidade </a>
-    <a href ="listarTodasC">consultarTodasCidade</a>
-    <a href ="adicionarCidade">ADD Cidade </a>
-    <a href ="DeletarCidade"> removerCidade(Vai ficar de ultimo)</a>
-    <a href ="AlterarCidade"> AlterarCidade </a>
+
+    <!-- CRUDs (rotas definidas, sem persistência real ainda) -->
+    <a href="${pageContext.request.contextPath}/menuCidade">Menu Cidade</a>
+    <a href="${pageContext.request.contextPath}/menuCompra">Menu Compra</a>
+    <a href="${pageContext.request.contextPath}/menuPacote">Menu Pacote</a>
     <a href="${pageContext.request.contextPath}/listarPontos"> listar pontos</a>
     <a href="${pageContext.request.contextPath}/adicionarPonto"> adicionar ponto</a>
     <a href="${pageContext.request.contextPath}/removerPonto"> remover ponto</a>

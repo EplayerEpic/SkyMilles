@@ -13,9 +13,13 @@ public class Pacote {
     private double valorPacote;
     private Quarto quarto;
     private Assentos assento;
+    private int status;
 
     public Pacote() {
     }
+
+    public int getStatus() { return status; }
+    public void setStatus(int status) { this.status = status; }
 
     public Quarto getQuarto() {
         return quarto;
