@@ -72,8 +72,8 @@ public class QuartoModelo {
         return lista;
     }
 
-    public ArrayList<Quarto> consultarQuartoCodigo(int codQuarto) {
-        ArrayList<Quarto> lista = new ArrayList<>();
+    public Quarto consultarQuartoCodigo(int codQuarto) {
+        Quarto q = null;
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
             String sql = "SELECT * FROM quarto WHERE cod_quarto = ?";
@@ -81,8 +81,8 @@ public class QuartoModelo {
             stm.setInt(1, codQuarto);
             ResultSet rs = stm.executeQuery();
 
-            while (rs.next()) {
-                Quarto q = new Quarto();
+            if (rs.next()) {
+                q = new Quarto();
                 q.setCodQuarto(rs.getInt("cod_quarto"));
                 q.setValorReserva(rs.getDouble("valor_reserva"));
                 q.setLocalSaida(rs.getString("local_saida"));
@@ -91,24 +91,21 @@ public class QuartoModelo {
                 q.setQntdDiarias(rs.getInt("qntd_diarias"));
                 q.setStatus(rs.getInt("status"));
 
-
                 Hotel hot = new Hotel();
                 hot.setCodHotel(rs.getInt("cod_hotel"));
                 q.setHotel(hot);
-
-                lista.add(q);
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(QuartoModelo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return lista;
+        return q;
     }
 
     public String inserirQuarto(Quarto q) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "INSERT INTO quarto (valor_reserva, local_saida, local_chegada, data_inicio, qntd_diarias, cod_hotel, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO quarto (valor_reserva, local_saida, local_chegada, data_inicio, qntd_diarias, cod_hotel, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stm = conn.prepareStatement(sql);
 
             stm.setDouble(1, q.getValorReserva());

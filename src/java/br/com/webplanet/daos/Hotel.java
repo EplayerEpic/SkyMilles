@@ -1,6 +1,7 @@
 package br.com.webplanet.daos;
 
 import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Hotel {
 
@@ -8,8 +9,13 @@ public class Hotel {
     private String CNPJ;
     private String local;
     private String endereco;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate checkIn;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate checkOut;
+
     private Cidade cidade;
     private int status;
 
@@ -118,6 +124,4 @@ public class Hotel {
     public String toString() {
         return "codHotel=" + codHotel;
     }
-
-    
 }

@@ -13,8 +13,8 @@ public class Quarto {
 
     public Quarto() {}
 
-    public Quarto(int codQuarto, double valorReserva, String localSaida, String localChegada, 
-                  String dataInicio, int qntdDiarias, Pacote pacote, Hotel hotel, int status) {
+    public Quarto(int codQuarto, double valorReserva, String localSaida, String localChegada,
+                   String dataInicio, int qntdDiarias, Pacote pacote, Hotel hotel) {
         this.codQuarto = codQuarto;
         this.valorReserva = valorReserva;
         this.localSaida = localSaida;
@@ -25,7 +25,8 @@ public class Quarto {
         this.hotel = hotel;
         this.status = status;
     }
-    public Quarto(double valorReserva, String localSaida, String localChegada, 
+
+    public Quarto(double valorReserva, String localSaida, String localChegada,
                   String dataInicio, int qntdDiarias, Pacote pacote, Hotel hotel) {
         this.valorReserva = valorReserva;
         this.localSaida = localSaida;
@@ -35,35 +36,32 @@ public class Quarto {
         this.pacote = pacote;
         this.hotel = hotel;
     }
-
-    // Getters e Setters
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-    
-    
-    
     public int getCodQuarto() { return codQuarto; }
     public void setCodQuarto(int codQuarto) { this.codQuarto = codQuarto; }
+
     public double getValorReserva() { return valorReserva; }
     public void setValorReserva(double valorReserva) { this.valorReserva = valorReserva; }
+
     public String getLocalSaida() { return localSaida; }
     public void setLocalSaida(String localSaida) { this.localSaida = localSaida; }
+
     public String getLocalChegada() { return localChegada; }
     public void setLocalChegada(String localChegada) { this.localChegada = localChegada; }
+
     public String getDataInicio() { return dataInicio; }
     public void setDataInicio(String dataInicio) { this.dataInicio = dataInicio; }
+
     public int getQntdDiarias() { return qntdDiarias; }
     public void setQntdDiarias(int qntdDiarias) { this.qntdDiarias = qntdDiarias; }
+
     public Pacote getPacote() { return pacote; }
     public void setPacote(Pacote pacote) { this.pacote = pacote; }
+
     public Hotel getHotel() { return hotel; }
     public void setHotel(Hotel hotel) { this.hotel = hotel; }
+
+    public int getStatus() { return status; }
+    public void setStatus(int status) { this.status = status; }
 
     @Override
     public int hashCode() {
@@ -89,8 +87,6 @@ public class Quarto {
 
     @Override
     public String toString() {
-        return ""+codQuarto;
+        return "" + codQuarto;
     }
-    
-    
 }

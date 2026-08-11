@@ -16,24 +16,12 @@ public class PontoTuristico {
         this.cidade = cidade;
         this.status = status;
     }
+
     public PontoTuristico(String descricao, String endereco, Cidade cidade) {
         this.descricao = descricao;
         this.endereco = endereco;
         this.cidade = cidade;
     }
-
-    // Getters e Setters
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-    
-    
-    
     public int getCodPonto() { return codPonto; }
     public void setCodPonto(int codPonto) { this.codPonto = codPonto; }
 
@@ -45,6 +33,9 @@ public class PontoTuristico {
 
     public Cidade getCidade() { return cidade; }
     public void setCidade(Cidade cidade) { this.cidade = cidade; }
+
+    public int getStatus() { return status; }
+    public void setStatus(int status) { this.status = status; }
 
     @Override
     public int hashCode() {
@@ -72,5 +63,4 @@ public class PontoTuristico {
     public String toString() {
         return "PontoTuristico{" + "codPonto=" + codPonto + ", descricao=" + descricao + ", endereco=" + endereco + ", cidade=" + cidade + '}';
     }
-
 }

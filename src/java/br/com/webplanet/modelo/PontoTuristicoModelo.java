@@ -132,8 +132,8 @@ public class PontoTuristicoModelo {
             stm.setString(1, p.getDescricao());
             stm.setString(2, p.getEndereco());
             stm.setInt(3, p.getCidade().getCodCidade());
-            stm.setInt(4, p.getCodPonto());
-            stm.setInt(5, p.getStatus());
+            stm.setInt(4, p.getStatus());
+            stm.setInt(5, p.getCodPonto());
 
             stm.executeUpdate();
             return "alterado";
