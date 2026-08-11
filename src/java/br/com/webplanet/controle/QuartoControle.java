@@ -23,6 +23,12 @@ public class QuartoControle {
      *
      * @author aluno
      */
+    
+    @GetMapping("/menuQuarto")
+    public String menuQuarto() {
+        return "menuQuarto";
+    }
+    
     @GetMapping("/adicionarQuarto")
     public String adicionarQuarto() {
         return "adicionarQuarto";
