@@ -154,8 +154,8 @@ public class CompraModelo {
             stm.setString(3, com.getDataCompra());
             stm.setInt(4, com.getCodCliente().getCliCodigo());
             stm.setInt(5, com.getCodPacote().getCodPacote());
-            stm.setInt(6, com.getCodCompra());
-            stm.setInt(7, com.getStatus());
+            stm.setInt(6, com.getStatus());
+            stm.setInt(7, com.getCodCompra());
 
             stm.executeUpdate();
             return "alterado";

@@ -28,7 +28,7 @@ public class PacoteModelo {
                 pack.setStatus(resultado.getInt("status"));
                 
                 Quarto q = new Quarto();
-                q.setCodQuarto(resultado.getInt("cod_pacote"));
+                q.setCodQuarto(resultado.getInt("cod_quarto"));
                 
                 Assentos a = new Assentos();
                 a.setCodAssento(resultado.getInt("cod_assento"));
@@ -88,7 +88,7 @@ public class PacoteModelo {
 
             if (resultado.next()) {
                 pack = new Pacote();
-                pack.setCodPacote(resultado.getInt("cod_usuario"));
+                pack.setCodPacote(resultado.getInt("cod_pacote"));
                 pack.setValorPacote(resultado.getDouble("valor_pacote"));
                 pack.setStatus(resultado.getInt("status"));
 
@@ -111,14 +111,14 @@ public class PacoteModelo {
     public String inserirPacote(Pacote pack) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "INSERT INTO pacote (cod_pacote, valor_pacote, cod_assento, cod_quarto, status) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO pacote (cod_pacote, valor_pacote, cod_assento, cod_quarto, status) VALUES (?,?,?,?,?)";
             PreparedStatement stm = conn.prepareStatement(sql);
 
             stm.setInt(1, pack.getCodPacote());
             stm.setDouble(2, pack.getValorPacote());
-            stm.setInt(3, pack.getQuarto().getCodQuarto());
-            stm.setInt(4, pack.getAssento().getCodAssento());
-            stm.setInt(5,pack.getStatus());
+            stm.setInt(3, pack.getAssento().getCodAssento());
+            stm.setInt(4, pack.getQuarto().getCodQuarto());
+            stm.setInt(5, pack.getStatus());
 
             stm.executeUpdate();
             return "Inserido";
@@ -139,8 +139,8 @@ public class PacoteModelo {
             stm.setDouble(2, pack.getValorPacote());
             stm.setInt(3, pack.getQuarto().getCodQuarto());
             stm.setInt(4, pack.getAssento().getCodAssento());
-            stm.setInt(5, pack.getCodPacote());
-            stm.setInt(6,pack.getStatus());
+            stm.setInt(5, pack.getStatus());
+            stm.setInt(6, pack.getCodPacote());
 
             stm.executeUpdate();
             return "Alterado";

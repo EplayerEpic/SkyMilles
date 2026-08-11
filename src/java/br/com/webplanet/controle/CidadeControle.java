@@ -24,6 +24,16 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class CidadeControle {
 
+    @RequestMapping(value = "/menuCidade", method = RequestMethod.GET)
+    public String menuCidade() {
+        return "menuCidade";
+    }
+
+    @RequestMapping(value = "/DeletarCidade", method = RequestMethod.GET)
+    public String deletarCidade() {
+        return "removerCidade";
+    }
+
     @RequestMapping(value = "/adicionarCidade", method = RequestMethod.GET)
     public ModelAndView adicionarCidade() {
         return new ModelAndView("adicionarCidade", "cidade", new Cidade());
@@ -124,11 +134,9 @@ public class CidadeControle {
 
             cidM.alterarCidade(est);
 
-            // salvou com sucesso -> devolve form limpo, não repopulado
             modelo.addAttribute("cidade", new Cidade());
             modelo.addAttribute("mensagem", "Cidade alterada com sucesso!");
         } else {
-            // foi só a troca do select (onchange) -> aqui sim repopula
             modelo.addAttribute("cidade", cidadeSelect);
         }
 

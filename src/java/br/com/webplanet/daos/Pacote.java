@@ -18,6 +18,9 @@ public class Pacote {
     public Pacote() {
     }
 
+    public int getStatus() { return status; }
+    public void setStatus(int status) { this.status = status; }
+
     public Quarto getQuarto() {
         return quarto;
     }
