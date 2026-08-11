@@ -1,27 +1,30 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.webplanet.daos;
 
 import java.time.LocalDateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Voo {
 
-    private int codVoo;  //cod_voo num_voo data_hora_chegada data_hora_partida aviao companhia cod_destino cod_local_partida	
-
+    private int codVoo;
     private String numVoo;
     private Aeroporto AeroPartida;
     private Aeroporto AeroDestino;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime dataHoraPartida;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime dataHoraChegada;
+
     private String aviao;
     private String companhia;
+    private int status;
 
     public Voo() {
     }
 
-    public Voo(int codVoo, String numVoo, Aeroporto AeroPartida, Aeroporto AeroDestino, LocalDateTime dataHoraPartida, LocalDateTime dataHoraChegada,
+    public Voo(int codVoo, String numVoo, Aeroporto AeroPartida, Aeroporto AeroDestino,
+            LocalDateTime dataHoraPartida, LocalDateTime dataHoraChegada,
             String aviao, String companhia) {
         this.codVoo = codVoo;
         this.AeroPartida = AeroPartida;
@@ -32,7 +35,6 @@ public class Voo {
         this.companhia = companhia;
     }
 
-    // Getters e Setters
     public int getCodVoo() {
         return codVoo;
     }
@@ -97,9 +99,20 @@ public class Voo {
         this.companhia = companhia;
     }
 
-    @Override
-    public String toString() {
-        return "Voo{" + "codVoo=" + codVoo + ", numVoo=" + numVoo + ", AeroPartida=" + AeroPartida + ", AeroDestino=" + AeroDestino + ", dataHoraPartida=" + dataHoraPartida + ", dataHoraChegada=" + dataHoraChegada + ", aviao=" + aviao + ", companhia=" + companhia + '}';
+    public int getStatus() {
+        return status;
     }
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Voo{" + "codVoo=" + codVoo + ", numVoo=" + numVoo
+                + ", AeroPartida=" + AeroPartida + ", AeroDestino=" + AeroDestino
+                + ", dataHoraPartida=" + dataHoraPartida
+                + ", dataHoraChegada=" + dataHoraChegada
+                + ", aviao=" + aviao + ", companhia=" + companhia + '}';
+    }
 }

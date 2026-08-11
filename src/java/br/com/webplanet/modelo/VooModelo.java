@@ -111,6 +111,27 @@ public class VooModelo {
         }
     }
 
+    public String alterarVoo(Voo v) {
+        try {
+            Connection conn = new ConexaoMySQLSky().conectar();
+            String sql = "UPDATE voo SET num_voo=?, data_hora_chegada=?, data_hora_partida=?, aviao=?, companhia=?, cod_destino=?, cod_local_partida=?, status=? WHERE cod_voo=?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, v.getNumVoo());
+            stm.setTimestamp(2, Timestamp.valueOf(v.getDataHoraChegada()));
+            stm.setTimestamp(3, Timestamp.valueOf(v.getDataHoraPartida()));
+            stm.setString(4, v.getAviao());
+            stm.setString(5, v.getCompanhia());
+            stm.setInt(6, v.getAeroDestino().getCodAeroporto());
+            stm.setInt(7, v.getAeroPartida().getCodAeroporto());
+            stm.setInt(8, v.getStatus());
+            stm.setInt(9, v.getCodVoo());
+            stm.executeUpdate();
+            return "alterado";
+        } catch (SQLException ex) {
+            return ex.getSQLState();
+        }
+    }
+
     public String removerVoo(int cod) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
