@@ -15,7 +15,7 @@
         <ul>
             <li><a href="${pageContext.request.contextPath}/adicionarCidade">Adicionar Cidade</a></li>
             <li><a href="${pageContext.request.contextPath}/ConsultarCidade">Consultar Cidade</a></li>
-            <li><a href="${pageContext.request.contextPath}/AlterarCidade">Alterar Cidade</a></li>
+            <li><a href="${pageContext.request.contextPath}/alterarCidade">Alterar Cidade</a></li>
             <li><a href="${pageContext.request.contextPath}/DeletarCidade">Remover Cidade</a></li>
         </ul>
         <p><a href="${pageContext.request.contextPath}/listarTodasC">(Ver listagem completa de cidades)</a></p>

@@ -44,9 +44,9 @@ public class CidadeControle {
         return new ModelAndView("ConsultarCidade", "cidade", new Cidade());
     }
 
-    @RequestMapping(value = "/AlterarCidade", method = RequestMethod.GET)
-    public ModelAndView AlterarCidade() {
-        return new ModelAndView("AlterarCidade", "cidade", new Cidade());
+    @RequestMapping(value = "/alterarCidade", method = RequestMethod.GET)
+    public ModelAndView alterarCidade() {
+        return new ModelAndView("alterarCidade", "cidade", new Cidade());
     }
 
     @RequestMapping(value = "/listarTodasC", method = RequestMethod.GET)
@@ -119,10 +119,10 @@ public class CidadeControle {
     /**
      * Trabalhando(pqp que saco isso, ter que estudar mais pra mexer nisso)*
      */
-    @RequestMapping(value = "/AlterarCidade", method = RequestMethod.POST)
-    public String AlterarCidade(@ModelAttribute("cidade") Cidade est, BindingResult bindingResult, Model modelo) {
+    @RequestMapping(value = "/alterarCidade", method = RequestMethod.POST)
+    public String alterarCidade(@ModelAttribute("cidade") Cidade est, BindingResult bindingResult, Model modelo) {
         if (bindingResult.hasErrors()) {
-            return "AlterarCidade";
+            return "alterarCidade";
         }
 
         CidadeModelo cidM = new CidadeModelo();
@@ -140,6 +140,6 @@ public class CidadeControle {
             modelo.addAttribute("cidade", cidadeSelect);
         }
 
-        return "AlterarCidade";
+        return "alterarCidade";
     }
 }
