@@ -5,7 +5,7 @@ class SearchSystem {
         this.searchInputSelector = config.searchInputSelector || '#searchInput';
         this.searchButtonSelector = config.searchButtonSelector || '#btnSearch';
         this.resultsContainerSelector = config.resultsContainerSelector || '#searchResults';
-        this.apiUrl = config.apiUrl || 'http://localhost/dashboard/SkyMilles/api.php';
+        //this.apiUrl = config.apiUrl || 'http://localhost/dashboard/SkyMilles/api.php';
         this.resourceType = config.resourceType || 'voos'; // voos, hoteis, pacotes, clientes
         this.pageUrl = config.pageUrl || window.location.pathname.split('/').pop();
         

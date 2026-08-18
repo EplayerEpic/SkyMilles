@@ -22,7 +22,7 @@
     <a href="${pageContext.request.contextPath}/menuAssento"> MenuAssento
     <a href="${pageContext.request.contextPath}/menuCliente"> MenuCliente    
     <header id="header">
-        <a href="http://localhost/dashboard/SkyMilles/"><img id="Logo"
+        <a href="${pageContext.request.contextPath}/"><img id="Logo"
                 src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles"></a>
         <a id="NomeMarca" href="#"><span>SKY</span>MILLES</a>
 
@@ -40,9 +40,9 @@
 
         <!-- Menu Desktop -->
         <nav id="main-nav">
-            <button class="ButtonMenu" onclick="location.href='./destaques.jsp'">Destaques</button>
-            <button class="ButtonMenu" onclick="location.href='./pacotes.jsp'">Pacotes Promocionais</button>
-            <button class="ButtonMenu" onclick="location.href='./conheca.jsp'">Conheça a Sky Milles</button>
+            <button class="ButtonMenu" onclick="location.href='${pageContext.request.contextPath}/destaques'">Destaques</button>
+            <button class="ButtonMenu" onclick="location.href='${pageContext.request.contextPath}/pacotes'">Pacotes Promocionais</button>
+            <button class="ButtonMenu" onclick="location.href='${pageContext.request.contextPath}/conheca'">Conheça a Sky Milles</button>
         </nav>
 
         <!-- Perfil e Botão Hambúrguer -->
@@ -50,8 +50,8 @@
             <div class="perfil-container">
                 <img class="perfil" src="https://i.postimg.cc/qMvvdyYp/download-3.jpg" alt="Sua Foto" id="perfil-img">
                 <div class="dropdown-menu" id="dropdown-menu">
-                    <button onclick="location.href='./login.jsp'">Login</button>
-                    <button onclick="location.href='./cadastro.jsp'">Cadastrar</button>
+                    <button onclick="location.href='${pageContext.request.contextPath}/login'">Login</button>
+                    <button onclick="location.href='${pageContext.request.contextPath}/cadastro'">Cadastrar</button>
                 </div>
             </div>
 
@@ -76,15 +76,15 @@
                 <img class="mobile-menu-perfil" src="https://i.postimg.cc/qMvvdyYp/download-3.jpg" alt="Perfil"
                     id="mobile-perfil-img">
                 <div class="mobile-dropdown-menu" id="mobile-dropdown-menu">
-                    <button onclick="location.href='./login.jsp'">Login</button>
-                    <button onclick="location.href='./cadastro.jsp'">Cadastrar</button>
+                    <button onclick="location.href='./login'">Login</button>
+                    <button onclick="location.href='./cadastro'">Cadastrar</button>
                 </div>
             </div>
         </div>
         <nav class="mobile-menu-nav">
-            <button class="mobile-menu-item" onclick="location.href='./destaques.jsp'">DESTAQUES</button>
-            <button class="mobile-menu-item" onclick="location.href='./pacotes.jsp'">PACOTES PROMOCIONAIS</button>
-            <button class="mobile-menu-item" onclick="location.href='./conheca.jsp'">CONHEÇA A SKY MILLES</button>
+            <button class="mobile-menu-item" onclick="location.href='${pageContext.request.contextPath}/destaques'">DESTAQUES</button>
+            <button class="mobile-menu-item" onclick="location.href='${pageContext.request.contextPath}/pacotes'">PACOTES PROMOCIONAIS</button>
+            <button class="mobile-menu-item" onclick="location.href='${pageContext.request.contextPath}/conheca'">CONHEÇA A SKY MILLES</button>
         </nav>
         <!-- Logo no rodapé do menu -->
         <div class="mobile-menu-footer">
@@ -110,7 +110,7 @@
                         <div class="info">
                             <h2 class="pais">Paris</h2>
                             <p>Conheça a Torre Eiffel de perto.</p>
-                            <button class="ButtonPassagem" onclick="location.href='./passagens.jsp'">Ver Passagens</button>
+                            <button class="ButtonPassagem" onclick="location.href='${pageContext.request.contextPath}/passagens'">Ver Passagens</button>
                         </div>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
                         <div class="info">
                             <h2 class="pais">Roma</h2>
                             <p>Explore o Coliseu e o Vaticano.</p>
-                            <button class="ButtonPassagem" onclick="location.href='./passagens.jsp'">Ver Passagens</button>
+                            <button class="ButtonPassagem" onclick="location.href='${pageContext.request.contextPath}/passagens'">Ver Passagens</button>
                         </div>
                     </div>
                 </div>
@@ -144,7 +144,7 @@
                         <div class="info">
                             <h2 class="pais">Bruxelas</h2>
                             <p>Visite o Atomium e a Grand Place.</p>
-                            <button class="ButtonPassagem" onclick="location.href='./passagens.jsp'">Ver Passagens</button>
+                            <button class="ButtonPassagem" onclick="location.href='${pageContext.request.contextPath}/passagens'">Ver Passagens</button>
                         </div>
                     </div>
                 </div>
@@ -162,7 +162,7 @@
                         <div class="info">
                             <h2 class="pais">Gizé</h2>
                             <p>Conheça as pirâmides milenares.</p>
-                            <button class="ButtonPassagem" onclick="location.href='./passagens.jsp'">Ver Passagens</button>
+                            <button class="ButtonPassagem" onclick="location.href='${pageContext.request.contextPath}/passagens'">Ver Passagens</button>
                         </div>
                     </div>
                 </div>
@@ -180,7 +180,7 @@
                         <div class="info">
                             <h2 class="pais">Tóquio</h2>
                             <p>Descubra a cultura japonesa.</p>
-                            <button class="ButtonPassagem" onclick="location.href='./passagens.jsp'">Ver Passagens</button>
+                            <button class="ButtonPassagem" onclick="location.href='${pageContext.request.contextPath}/passagens'">Ver Passagens</button>
                         </div>
                     </div>
                 </div>
@@ -317,28 +317,28 @@
                 <div class="footer-column">
                     <h3>Nossos Serviços</h3>
                     <ul>
-                        <li><a href="./passagens.jsp">Passagens Aéreas</a></li>
-                        <li><a href="./hoteis.jsp">Reserva de Hotéis</a></li>
-                        <li><a href="./pacotes.jsp">Pacotes Promocionais</a></li>
+                        <li><a href="${pageContext.request.contextPath}/passagens">Passagens Aéreas</a></li>
+                        <li><a href="${pageContext.request.contextPath}/hoteis">Reserva de Hotéis</a></li>
+                        <li><a href="${pageContext.request.contextPath}/pacotes">Pacotes Promocionais</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
                     <h3>Institucional</h3>
                     <ul>
-                        <li><a href="./conheca.jsp">Conheça a Sky Milles</a></li>
-                        <li><a href="./termos.jsp">Termos de Serviço</a></li>
-                        <li><a href="./privacidade.jsp">Políticas de Privacidade</a></li>
+                        <li><a href="${pageContext.request.contextPath}/conheca">Conheça a Sky Milles</a></li>
+                        <li><a href="${pageContext.request.contextPath}/termos">Termos de Serviço</a></li>
+                        <li><a href="${pageContext.request.contextPath}/privacidade">Políticas de Privacidade</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
                     <h3>Ajuda</h3>
                     <ul>
-                        <li><a href="./adm.jsp">Demiurgo</a></li>
-                        <li><a href="./perguntas.jsp">Perguntas Frequentes</a></li>
-                        <li><a href="./suporte.jsp">Central de Suporte</a></li>
-                        <li><a href="./status-voo.jsp">Status de Voo</a></li>
+                        <li><a href="${pageContext.request.contextPath}/adm">Demiurgo</a></li>
+                        <li><a href="${pageContext.request.contextPath}/perguntas">Perguntas Frequentes</a></li>
+                        <li><a href="${pageContext.request.contextPath}/suporte">Central de Suporte</a></li>
+                        <li><a href="${pageContext.request.contextPath}/status-voo">Status de Voo</a></li>
                     </ul>
                 </div>
 
@@ -400,7 +400,7 @@
     </footer>
     <script src="${pageContext.request.contextPath}/resources/js/searchSystem.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/js.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js//auth.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/auth.js"></script>
 </body>
 
 </html>

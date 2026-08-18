@@ -6,15 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pacotes - SkyMilles</title>
-    <link rel="stylesheet" href="../css/css.css">
-    <link rel="stylesheet" href="../css/pacotes.css">
-    <link rel="stylesheet" href="../css/searchStyles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/css.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/pacotes.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/searchStyles.css">
 </head>
 
 <body>
     <!-- Cabeçalho -->
     <header id="header">
-        <a href="http://localhost/dashboard/SkyMilles"><img id="Logo"
+        <a href="${pageContext.request.contextPath}/"><img id="Logo"
             src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles"></a>
         <a id="NomeMarca" href="#"><span>SKY</span>MILLES</a>
 

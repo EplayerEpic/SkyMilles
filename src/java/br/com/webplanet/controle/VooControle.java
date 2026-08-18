@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class VooControle {
 
+    
     @GetMapping("/menuVoo")
     public String menuVoo() {
         return "menuVoo";

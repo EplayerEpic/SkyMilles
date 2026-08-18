@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagamento - SkyMilles</title>
-    <link rel="stylesheet" href="../css/pagamento.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/pagamento.css">
 </head>
 <body>
     <!-- Loading -->
@@ -17,10 +17,10 @@
 
     <!-- Header -->
     <header id="header">
-        <a href="http://localhost/dashboard/SkyMilles/"><img id="Logo"
+        <a href="${pageContext.request.contextPath}/"><img id="Logo"
                 src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles"></a>
         <a id="NomeMarca" href="./index.jsp"><span>SKY</span>MILLES</a>
-        <button class="btn-back" onclick="window.location.href='./index.jsp'">
+        <button class="btn-back" onclick="window.location.href='${pageContext.request.contextPath}/'">
                 ← Voltar para Início
             </button>
     </header>   

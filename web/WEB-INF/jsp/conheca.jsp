@@ -6,9 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conheça a SkyMilles</title>
-    <link rel="stylesheet" href="../css/css.css">
-    <link rel="stylesheet" href="../css/searchStyles.css">
-    <link rel="stylesheet" href="../css/conheca.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/css.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/searchStyles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/conheca.css">
 </head>
 
 <body>
@@ -33,9 +33,9 @@
 
         <!-- Menu Desktop -->
         <nav id="main-nav">
-            <button class="ButtonMenu" onclick="location.href='./destaques.jsp'">Destaques</button>
-            <button class="ButtonMenu" onclick="location.href='./pacotes.jsp'">Pacotes Promocionais</button>
-            <button class="ButtonMenu active" onclick="location.href='./conheca.jsp'">Conheça a Sky Milles</button>
+            <button class="ButtonMenu" onclick="location.href='${pageContext.request.contextPath}/destaques'">Destaques</button>
+            <button class="ButtonMenu" onclick="location.href='${pageContext.request.contextPath}/pacotes'">Pacotes Promocionais</button>
+            <button class="ButtonMenu active" onclick="location.href='${pageContext.request.contextPath}/conheca'">Conheça a Sky Milles</button>
         </nav>
 
         <!-- Perfil e Botão Hambúrguer -->
@@ -75,9 +75,9 @@
             </div>
         </div>
         <nav class="mobile-menu-nav">
-            <button class="mobile-menu-item" onclick="location.href='./destaques.jsp'">DESTAQUES</button>
-            <button class="mobile-menu-item" onclick="location.href='./pacotes.jsp'">PACOTES PROMOCIONAIS</button>
-            <button class="mobile-menu-item active" onclick="location.href='./conheca.jsp'">CONHEÇA A SKY MILLES</button>
+            <button class="mobile-menu-item" onclick="location.href='${pageContext.request.contextPath}/destaques'">DESTAQUES</button>
+            <button class="mobile-menu-item" onclick="location.href='${pageContext.request.contextPath}/pacotes'">PACOTES PROMOCIONAIS</button>
+            <button class="mobile-menu-item active" onclick="location.href='${pageContext.request.contextPath}/conheca'">CONHEÇA A SKY MILLES</button>
         </nav>
         <!-- Logo no rodapé do menu -->
         <div class="mobile-menu-footer">
@@ -276,7 +276,7 @@
         <div class="container">
             <h2>Pronto para Decolar?</h2>
             <p>Reserve agora sua próxima viagem com a SkyMilles e descubra o prazer de voar com conforto e segurança</p>
-            <button class="btn-cta" onclick="location.href='./pacotes.jsp'">Ver Pacotes Promocionais</button>
+            <button class="btn-cta" onclick="location.href='${pageContext.request.contextPath}/pacotes'">Ver Pacotes Promocionais</button>
         </div>
     </section>
 
@@ -289,14 +289,14 @@
                     <ul>
                         <li><a href="./passagens.jsp">Passagens Aéreas</a></li>
                         <li><a href="./hoteis.jsp">Reserva de Hotéis</a></li>
-                        <li><a href="./pacotes.jsp">Pacotes Promocionais</a></li>
+                        <li><a href="${pageContext.request.contextPath}/pacotes">Pacotes Promocionais</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
                     <h3>Institucional</h3>
                     <ul>
-                        <li><a href="./conheca.jsp">Conheça a Sky Milles</a></li>
+                        <li><a href="${pageContext.request.contextPath}/conheca">Conheça a Sky Milles</a></li>
                         <li><a href="./termos.jsp">Termos de Serviço</a></li>
                         <li><a href="./privacidade.jsp">Políticas de Privacidade</a></li>
                     </ul>
