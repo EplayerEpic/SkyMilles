@@ -50,6 +50,26 @@ public class IndexControle {
     public String privacidade(){
         return "privacidade";
     }
+    @GetMapping("/adm")
+    public String adm(){
+        return "adm";
+    }
+    @GetMapping("/suporte")
+    public String suporte(){
+        return "suporte";
+    }
+    @GetMapping("/status-voo")
+    public String status_voo(){
+        return "status-voo";
+    }
+    @GetMapping("/perguntas")
+    public String perguntas(){
+        return "perguntas";
+    }
+    @GetMapping("/termos")
+    public String termos(){
+        return "termos";
+    }
     
     
     
