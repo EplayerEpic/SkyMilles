@@ -153,8 +153,29 @@ public class QuartoControle {
         return "removerQuarto";
     }
 
-    @RequestMapping(value = "/removerQuarto", method = RequestMethod.POST)
-    public String removerQuarto(@RequestParam("codQuarto") int codQuarto, Model modelo) {
+    @org.springframework.web.bind.annotation.PostMapping("/removerQuarto")
+    public String processarRemocao(@ModelAttribute("quarto") Quarto entidade, BindingResult bindingResult,
+            org.springframework.ui.Model modelo,
+            @org.springframework.web.bind.annotation.RequestParam(value = "acao", required = false) String acao) {
+        int cod = entidade.getCodQuarto();
+
+        if ("remover".equals(acao) && cod > 0) {
+            // botão Remover: desativa (status = 0) e os triggers fazem a cascata
+            String resultado = new br.com.webplanet.modelo.QuartoModelo().removerQuarto(cod);
+            br.com.webplanet.utils.RemocaoUtils.preencher(modelo, resultado, "Quarto", cod);
+            entidade.setCodQuarto(0);                              // limpa a seleção
+            modelo.addAttribute("webConsultarQuartos", consultarQuartosMap());   // atualiza o select
+        } else if (cod > 0) {
+            // onchange do select: só mostra os dados do registro escolhido
+            try {
+                consultarQuarto(entidade, bindingResult, modelo);
+                if (!modelo.containsAttribute("mensagem")) {
+                    modelo.addAttribute("selecionado", true);
+                }
+            } catch (Exception ex) {
+                modelo.addAttribute("erro", "Quarto não encontrado.");
+            }
+        }
         return "removerQuarto";
     }
 }

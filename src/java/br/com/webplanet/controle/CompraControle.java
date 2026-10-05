@@ -178,4 +178,30 @@ public class CompraControle {
     public String removerCompra() {
         return "removerCompra";
     }
+
+    @org.springframework.web.bind.annotation.PostMapping("/removerCompra")
+    public String processarRemocao(@ModelAttribute("compra") Compra entidade, BindingResult bindingResult,
+            org.springframework.ui.Model modelo,
+            @org.springframework.web.bind.annotation.RequestParam(value = "acao", required = false) String acao) {
+        int cod = entidade.getCodCompra();
+
+        if ("remover".equals(acao) && cod > 0) {
+            // botão Remover: desativa (status = 0) e os triggers fazem a cascata
+            String resultado = new br.com.webplanet.modelo.CompraModelo().deletarCompra(cod);
+            br.com.webplanet.utils.RemocaoUtils.preencher(modelo, resultado, "Compra", cod);
+            entidade.setCodCompra(0);                              // limpa a seleção
+            modelo.addAttribute("webConsultarCompras", consultarComprasMap());   // atualiza o select
+        } else if (cod > 0) {
+            // onchange do select: só mostra os dados do registro escolhido
+            try {
+                consultarCompra(entidade, bindingResult, modelo);
+                if (!modelo.containsAttribute("mensagem")) {
+                    modelo.addAttribute("selecionado", true);
+                }
+            } catch (Exception ex) {
+                modelo.addAttribute("erro", "Compra não encontrado.");
+            }
+        }
+        return "removerCompra";
+    }
 }

@@ -144,15 +144,21 @@ public class PontoTuristicoModelo {
         }
     }
 
+    /**
+     * Remoção lógica: não existe DELETE no sistema. O registro recebe status = 0
+     * e os triggers do banco desativam os dependentes em cascata.
+     * Retorna "removido", "inexistente" (não achou ou já estava desativado)
+     * ou o SQLState em caso de erro.
+     */
     public String removerPonto(int cod) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "DELETE FROM ponto_turistico WHERE cod_ponto = ?";
+            String sql = "UPDATE ponto_turistico SET status = 0 WHERE cod_ponto = ? AND status = 1";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, cod);
 
-            stm.executeUpdate();
-            return "removido";
+            int linhas = stm.executeUpdate();
+            return linhas > 0 ? "removido" : "inexistente";
 
         } catch (SQLException ex) {
             System.out.println(ex);

@@ -167,19 +167,24 @@ public class CompraModelo {
     }
 
     // DELETE
+    /**
+     * Remoção lógica: não existe DELETE no sistema. O registro recebe status = 0
+     * e os triggers do banco desativam os dependentes em cascata.
+     * Retorna "removido", "inexistente" (não achou ou já estava desativado)
+     * ou o SQLState em caso de erro.
+     */
     public String deletarCompra(int cod_compra) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-
-            String sql = "DELETE FROM compra WHERE cod_compra = ?";
+            String sql = "UPDATE compra SET status = 0 WHERE cod_compra = ? AND status = 1";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, cod_compra);
 
-            stm.executeUpdate();
-            return "deletado";
+            int linhas = stm.executeUpdate();
+            return linhas > 0 ? "removido" : "inexistente";
 
         } catch (SQLException ex) {
-            System.err.println(ex);
+            System.out.println(ex);
             return ex.getSQLState();
         }
     }

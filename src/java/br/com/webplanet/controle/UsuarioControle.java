@@ -151,8 +151,29 @@ public class UsuarioControle {
         return "removerUsuario";
     }
 
-    @RequestMapping(value = "/removerUsuario", method = RequestMethod.POST)
-    public String removerUsuario(@RequestParam("usuCodigo") int usuCodigo, Model modelo) {
+    @org.springframework.web.bind.annotation.PostMapping("/removerUsuario")
+    public String processarRemocao(@ModelAttribute("usuario") Usuario entidade, BindingResult bindingResult,
+            org.springframework.ui.Model modelo,
+            @org.springframework.web.bind.annotation.RequestParam(value = "acao", required = false) String acao) {
+        int cod = entidade.getUsuCodigo();
+
+        if ("remover".equals(acao) && cod > 0) {
+            // botão Remover: desativa (status = 0) e os triggers fazem a cascata
+            String resultado = new br.com.webplanet.modelo.UsuarioModelo().deletarUsuario(cod);
+            br.com.webplanet.utils.RemocaoUtils.preencher(modelo, resultado, "Usuário", cod);
+            entidade.setUsuCodigo(0);                              // limpa a seleção
+            modelo.addAttribute("webConsultarUsuarios", consultarUsuariosMap());   // atualiza o select
+        } else if (cod > 0) {
+            // onchange do select: só mostra os dados do registro escolhido
+            try {
+                consultarUsuario(entidade, bindingResult, modelo);
+                if (!modelo.containsAttribute("mensagem")) {
+                    modelo.addAttribute("selecionado", true);
+                }
+            } catch (Exception ex) {
+                modelo.addAttribute("erro", "Usuário não encontrado.");
+            }
+        }
         return "removerUsuario";
     }
 }

@@ -142,4 +142,30 @@ public class CidadeControle {
 
         return "alterarCidade";
     }
+
+    @org.springframework.web.bind.annotation.PostMapping("/DeletarCidade")
+    public String processarRemocao(@ModelAttribute("cidade") Cidade entidade, BindingResult bindingResult,
+            org.springframework.ui.Model modelo,
+            @org.springframework.web.bind.annotation.RequestParam(value = "acao", required = false) String acao) {
+        int cod = entidade.getCodCidade();
+
+        if ("remover".equals(acao) && cod > 0) {
+            // botão Remover: desativa (status = 0) e os triggers fazem a cascata
+            String resultado = new br.com.webplanet.modelo.CidadeModelo().removerCidade(cod);
+            br.com.webplanet.utils.RemocaoUtils.preencher(modelo, resultado, "Cidade", cod);
+            entidade.setCodCidade(0);                              // limpa a seleção
+            modelo.addAttribute("webConsultarCidades", consultarCidades());   // atualiza o select
+        } else if (cod > 0) {
+            // onchange do select: só mostra os dados do registro escolhido
+            try {
+                ConsultarCidade(entidade, bindingResult, modelo);
+                if (!modelo.containsAttribute("mensagem")) {
+                    modelo.addAttribute("selecionado", true);
+                }
+            } catch (Exception ex) {
+                modelo.addAttribute("erro", "Cidade não encontrado.");
+            }
+        }
+        return "removerCidade";
+    }
 }

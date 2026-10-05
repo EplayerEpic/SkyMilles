@@ -150,8 +150,29 @@ public class PontoTuristicoControle {
         return "removerPonto";
     }
 
-    @RequestMapping(value = "/removerPonto", method = RequestMethod.POST)
-    public String removerPonto(@RequestParam("codPonto") int codPonto, Model modelo) {
+    @org.springframework.web.bind.annotation.PostMapping("/removerPonto")
+    public String processarRemocao(@ModelAttribute("ponto") PontoTuristico entidade, BindingResult bindingResult,
+            org.springframework.ui.Model modelo,
+            @org.springframework.web.bind.annotation.RequestParam(value = "acao", required = false) String acao) {
+        int cod = entidade.getCodPonto();
+
+        if ("remover".equals(acao) && cod > 0) {
+            // botão Remover: desativa (status = 0) e os triggers fazem a cascata
+            String resultado = new br.com.webplanet.modelo.PontoTuristicoModelo().removerPonto(cod);
+            br.com.webplanet.utils.RemocaoUtils.preencher(modelo, resultado, "Ponto Turístico", cod);
+            entidade.setCodPonto(0);                              // limpa a seleção
+            modelo.addAttribute("webConsultarPontos", consultarPontosMap());   // atualiza o select
+        } else if (cod > 0) {
+            // onchange do select: só mostra os dados do registro escolhido
+            try {
+                consultarPonto(entidade, bindingResult, modelo);
+                if (!modelo.containsAttribute("mensagem")) {
+                    modelo.addAttribute("selecionado", true);
+                }
+            } catch (Exception ex) {
+                modelo.addAttribute("erro", "Ponto Turístico não encontrado.");
+            }
+        }
         return "removerPonto";
     }
 }
