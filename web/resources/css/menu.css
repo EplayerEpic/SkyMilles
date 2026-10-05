@@ -1,0 +1,103 @@
+:root{
+  --sky-1:#3f93ae; --sky-2:#7fb3c8; --sky-3:#b9cdd9; --sky-4:#dfe4ea; --glow:255,236,214;
+  --px:0; --py:0;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;overflow:hidden}
+body{background:linear-gradient(180deg,var(--sky-1) 0%,var(--sky-2) 42%,var(--sky-3) 72%,var(--sky-4) 100%)}
+.sky{position:fixed;inset:0;overflow:hidden}
+.sky::before{content:"";position:absolute;inset:0;
+  background:radial-gradient(75% 38% at 50% 105%,rgba(var(--glow),.8),transparent 70%),
+             radial-gradient(60% 30% at 15% 0%,rgba(255,255,255,.18),transparent 70%)}
+.cloud{position:absolute;left:-12vw;width:124vw;
+  transform:translate3d(calc(var(--px)*1px),calc(var(--py)*1px),0);transition:transform .6s ease-out}
+.cloud svg{width:100%;height:100%;display:block;animation:drift 120s ease-in-out infinite alternate}
+.c-back{bottom:12vh;height:42vh;opacity:.5;--m:linear-gradient(180deg,transparent,#000 45%,transparent);-webkit-mask-image:var(--m);mask-image:var(--m)}
+.c-mid{bottom:-4vh;height:52vh;opacity:.8;--m:linear-gradient(180deg,transparent,#000 40%);-webkit-mask-image:var(--m);mask-image:var(--m)}
+.c-mid svg{animation-duration:90s;animation-direction:alternate-reverse}
+.c-front{bottom:-10vh;height:38vh;opacity:1;--m:linear-gradient(180deg,transparent,#000 55%);-webkit-mask-image:var(--m);mask-image:var(--m)}
+.c-front svg{animation-duration:65s}
+@keyframes drift{to{transform:translateX(7vw)}}
+.plane{position:absolute;top:17vh;left:0;display:flex;align-items:center;animation:fly 70s linear infinite;opacity:.95}
+.plane svg{width:46px;height:22px;fill:#fff;transform:scaleX(-1);filter:drop-shadow(0 2px 3px rgba(20,60,80,.25))}
+.trail{width:22vw;height:2px;margin-right:-4px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.75));border-radius:2px}
+@keyframes fly{from{transform:translateX(-30vw) translateY(2vh)}to{transform:translateX(112vw) translateY(-3vh)}}
+@media (prefers-reduced-motion:reduce){.cloud svg,.plane{animation:none}.plane{left:62vw}}
+
+/* ===== Etapa 3: painel e componentes ===== */
+:root{--ink:#0f2a38;--ink-soft:#48697a;--accent:#1f6f8b;--warm:#b4574a;--glass:rgba(255,255,255,.55);--line:rgba(255,255,255,.85);
+  --f-display:'Unbounded',sans-serif;--f-text:'Figtree',system-ui,sans-serif}
+body{font-family:var(--f-text);color:var(--ink);display:grid;place-items:center}
+.panel{position:relative;width:min(1180px,90vw);padding:clamp(28px,5vh,52px) clamp(32px,4vw,56px);
+  background:var(--glass);backdrop-filter:blur(22px) saturate(1.2);-webkit-backdrop-filter:blur(22px) saturate(1.2);
+  border:1px solid var(--line);border-radius:32px;box-shadow:0 40px 80px -40px rgba(10,50,70,.55),inset 0 1px 0 #fff}
+.head{margin-bottom:clamp(24px,5vh,48px)}
+.h1{font-family:var(--f-display);font-weight:600;font-size:clamp(2.2rem,4.6vw,3.8rem);line-height:1.05;letter-spacing:-.03em;margin:0 0 12px}
+.sub{margin:0;font-size:1.08rem;color:var(--ink-soft)}
+.t2{display:block;font-family:var(--f-display);font-weight:500;font-size:1.25rem;letter-spacing:-.02em}
+.t3{display:block;font-size:.95rem;line-height:1.4;color:var(--ink-soft);margin-top:6px}
+.ico{display:block;width:48px;height:48px;border-radius:14px;background:var(--ico);flex:none}
+
+.tickets{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,24px)}
+.ticket{appearance:none;font:inherit;color:inherit;text-align:left;cursor:pointer;padding:0;border:0;background:var(--paper);
+  display:grid;grid-template-rows:1fr 64px;height:clamp(230px,34vh,300px);
+  --m1:radial-gradient(circle 11px at 0 calc(100% - 64px),#0000 97%,#000);--m2:radial-gradient(circle 11px at 100% calc(100% - 64px),#0000 97%,#000);
+  -webkit-mask-image:var(--m1),var(--m2);-webkit-mask-composite:source-in;mask-image:var(--m1),var(--m2);mask-composite:intersect;
+  border-radius:22px;filter:drop-shadow(0 14px 18px rgba(10,50,70,.18));transition:transform .25s,filter .25s}
+.ticket:hover{transform:translateY(-8px) rotate(-.6deg);filter:drop-shadow(0 22px 24px rgba(10,50,70,.28))}
+.ticket:focus-visible,.lnk:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.body{padding:24px 22px;display:flex;flex-direction:column;gap:20px;border-bottom:2px dashed var(--dash)}
+.body .t2{margin-top:auto}
+.body .t3{margin-top:-14px}
+.stub{display:flex;align-items:center;justify-content:space-between;padding:0 22px;background:var(--stub);transition:background .25s,color .25s}
+.code{font-family:var(--f-display);font-weight:600;font-size:1.05rem;letter-spacing:.12em}
+.bars{width:70px;height:26px;opacity:.75;background:repeating-linear-gradient(90deg,currentColor 0 2px,transparent 2px 4px,currentColor 4px 5px,transparent 5px 8px,currentColor 8px 11px,transparent 11px 13px)}
+.ticket:hover .stub,.ticket[aria-expanded="true"] .stub{background:var(--accent);color:var(--on-accent)}
+.t-rem .ico{background:var(--ico-warm)}
+.t-rem:hover .stub{background:var(--warm)}
+
+.board{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.2,.8,.2,1)}
+.board.open{grid-template-rows:1fr}
+.board-in{overflow:hidden;min-height:0}
+.board-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,1.6vw,24px);padding-top:clamp(16px,3vh,28px)}
+.lnk{appearance:none;font:inherit;color:inherit;text-align:left;cursor:pointer;display:flex;align-items:center;gap:18px;
+  padding:20px 24px;border-radius:20px;border:1px solid var(--line);background:var(--paper-2);transition:background .2s,transform .2s}
+.lnk:hover{background:var(--paper-3);transform:translateX(4px)}
+@media (prefers-reduced-motion:reduce){.ticket,.board,.lnk{transition:none}}
+
+/* ===== Etapa 4: ícones ===== */
+.ico{display:grid;place-items:center;transition:background .25s}
+.ico svg{width:26px;height:26px;fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:stroke .25s}
+.t-rem .ico svg{stroke:var(--warm)}
+.ticket:hover .ico,.lnk:hover .ico{background:var(--accent)}
+.t-rem:hover .ico{background:var(--warm)}
+.ticket:hover .ico svg,.lnk:hover .ico svg{stroke:var(--on-accent)}
+
+/* ===== Ícones temáticos de aviação ===== */
+.sprite{position:absolute;width:0;height:0}
+.ico svg{stroke-width:2}
+.ico svg *{vector-effect:non-scaling-stroke}
+#plane path{vector-effect:non-scaling-stroke}
+
+/* ===== Etapa 5: tokens de tema + modo escuro ===== */
+:root{--paper:rgba(255,255,255,.85);--paper-2:rgba(255,255,255,.7);--paper-3:#fff;--dash:rgba(15,42,56,.2);
+  --stub:rgba(31,111,139,.08);--ico:rgba(31,111,139,.12);--ico-warm:rgba(180,87,74,.14);--on-accent:#fff}
+@media (prefers-color-scheme:dark){
+  :root{--sky-1:#0f2e3d;--sky-2:#1b4155;--sky-3:#2a4156;--sky-4:#34465a;--glow:110,140,165;
+    --ink:#e8f2f7;--ink-soft:#a8bfce;--accent:#7cc4dc;--warm:#e58b7f;--glass:rgba(12,30,42,.55);--line:rgba(255,255,255,.14);
+    --paper:rgba(20,44,58,.88);--paper-2:rgba(255,255,255,.07);--paper-3:rgba(255,255,255,.14);--dash:rgba(255,255,255,.22);
+    --stub:rgba(124,196,220,.12);--ico:rgba(124,196,220,.16);--ico-warm:rgba(229,139,127,.18);--on-accent:#0b1e28}
+  .cloud{filter:brightness(.5)}
+  .plane svg{fill:#dcebf2}
+}
+
+/* ===== Botão voltar ===== */
+.back{display:inline-flex;align-items:center;gap:8px;margin-bottom:clamp(14px,3vh,26px);padding:10px 20px 10px 12px;border-radius:999px;
+  border:1px solid var(--line);background:var(--paper-2);color:var(--ink);text-decoration:none;font-weight:500;font-size:.95rem;transition:background .2s}
+.back svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+.back:hover{background:var(--paper-3)}
+.back:hover svg{transform:translateX(-3px)}
+.back:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.back,.back svg{transition:none}}
+[hidden]{display:none!important}
+a.ticket,a.lnk{text-decoration:none}
