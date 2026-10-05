@@ -154,20 +154,26 @@ public class AssentosModelo {
     }
 
     // ── REMOVER ──────────────────────────────────────────────────────────────
+    /**
+     * Remoção lógica: não existe DELETE no sistema. O registro recebe status = 0
+     * e os triggers do banco desativam os dependentes em cascata.
+     * Retorna "removido", "inexistente" (não achou ou já estava desativado)
+     * ou o SQLState em caso de erro.
+     */
     public String removerAssento(int codAssento) {
-        String resultado = "";
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "DELETE FROM assento WHERE cod_assento = ?";
+            String sql = "UPDATE assento SET status = 0 WHERE cod_assento = ? AND status = 1";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, codAssento);
-            stm.executeUpdate();
-            resultado = "removido";
+
+            int linhas = stm.executeUpdate();
+            return linhas > 0 ? "removido" : "inexistente";
+
         } catch (SQLException ex) {
-            resultado = ex.getSQLState();
-            Logger.getLogger(AssentosModelo.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+            return ex.getSQLState();
         }
-        return resultado;
     }
 
     // ── MAIN (teste) ─────────────────────────────────────────────────────────

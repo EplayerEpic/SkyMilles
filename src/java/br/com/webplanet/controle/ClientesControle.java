@@ -146,4 +146,30 @@ public class ClientesControle {
     public String removerCliente() {
         return "removerCliente";
     }
+
+    @org.springframework.web.bind.annotation.PostMapping("/removerCliente")
+    public String processarRemocao(@ModelAttribute("cliente") Clientes entidade, BindingResult bindingResult,
+            org.springframework.ui.Model modelo,
+            @org.springframework.web.bind.annotation.RequestParam(value = "acao", required = false) String acao) {
+        int cod = entidade.getCliCodigo();
+
+        if ("remover".equals(acao) && cod > 0) {
+            // botão Remover: desativa (status = 0) e os triggers fazem a cascata
+            String resultado = new br.com.webplanet.modelo.ClientesModelo().deletarCliente(cod);
+            br.com.webplanet.utils.RemocaoUtils.preencher(modelo, resultado, "Cliente", cod);
+            entidade.setCliCodigo(0);                              // limpa a seleção
+            modelo.addAttribute("webConsultaClientes", consultarClientes());   // atualiza o select
+        } else if (cod > 0) {
+            // onchange do select: só mostra os dados do registro escolhido
+            try {
+                consultarCliente(entidade, bindingResult, modelo);
+                if (!modelo.containsAttribute("mensagem")) {
+                    modelo.addAttribute("selecionado", true);
+                }
+            } catch (Exception ex) {
+                modelo.addAttribute("erro", "Cliente não encontrado.");
+            }
+        }
+        return "removerCliente";
+    }
 }

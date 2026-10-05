@@ -1,0 +1,785 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Tempo de geração: 06/10/2026 às 00:06
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Banco de dados: `Skymilles`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `aeroporto`
+--
+
+CREATE TABLE `aeroporto` (
+  `cod_aeroporto` int(11) NOT NULL,
+  `nome_aeroporto` varchar(30) DEFAULT NULL,
+  `endereco` varchar(50) DEFAULT NULL,
+  `CEP` varchar(20) NOT NULL DEFAULT '00000-000',
+  `cod_cidade` int(11) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `aeroporto`
+--
+
+INSERT INTO `aeroporto` (`cod_aeroporto`, `nome_aeroporto`, `endereco`, `CEP`, `cod_cidade`, `status`) VALUES
+(1, 'JFK International Airport', 'Queens, NY', '11430', 1, 1),
+(2, 'Charles de Gaulle', 'Roissy-en-France, Paris', '95700', 2, 1),
+(3, 'Narita International', 'Narita, Chiba', '282-0004', 3, 1),
+(4, 'Heathrow Airport', 'Longford, London', 'TW6', 4, 1),
+(5, 'Ezeiza Airport', 'Autopista Ricchieri, Buenos Aires', '1802', 5, 1),
+(6, 'Confins - Tancredo Neves', 'Rod. LMG-800, km 7.9', '33400-900', 6, 0),
+(7, 'Congonhas - São Paulo', 'Av. Washington Luís, 6050', '04626-911', 7, 1),
+(8, 'Galeão - RJ', 'Av. Vinte de Janeiro, s/n', '21941-900', 8, 1),
+(9, 'Viracopos - Campinas', 'Rod. Santos Dumont, s/n', '13052-901', 9, 1),
+(10, 'Pinto Martins - Fortaleza', 'Av. Senador Carlos Jereissati, 3000', '60741-900', 10, 1),
+(11, 'Aeroporto da Silva', NULL, '00000-000', 2, 1);
+
+--
+-- Acionadores `aeroporto`
+--
+DELIMITER $$
+CREATE TRIGGER `trg_aeroporto_bloqueia_delete` BEFORE DELETE ON `aeroporto` FOR EACH ROW BEGIN
+  SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Não é possível deletar registros do sistema. Desative o registro (status = 0).';
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trg_aeroporto_desativar` AFTER UPDATE ON `aeroporto` FOR EACH ROW BEGIN
+  IF OLD.status = 1 AND NEW.status = 0 THEN
+
+    UPDATE voo
+       SET status = 0
+     WHERE (
+            cod_destino = NEW.cod_aeroporto
+            OR cod_local_partida = NEW.cod_aeroporto
+           )
+       AND status = 1;
+
+  END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `assento`
+--
+
+CREATE TABLE `assento` (
+  `cod_assento` int(11) NOT NULL,
+  `num_bilhete` int(11) DEFAULT NULL,
+  `data_emissao` date NOT NULL DEFAULT curdate(),
+  `_classe` enum('1','E','T') NOT NULL,
+  `valor_ass` decimal(7,0) NOT NULL,
+  `status` tinyint(1) DEFAULT 1,
+  `_status` tinyint(1) DEFAULT 1,
+  `cod_destino` int(11) DEFAULT NULL,
+  `cod_local_partida` int(11) DEFAULT NULL,
+  `cod_voo` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `assento`
+--
+
+INSERT INTO `assento` (`cod_assento`, `num_bilhete`, `data_emissao`, `_classe`, `valor_ass`, `status`, `_status`, `cod_destino`, `cod_local_partida`, `cod_voo`) VALUES
+(1, 80001, '2025-10-01', 'E', 3800, 0, 1, 1, 5, 1),
+(2, 80002, '2025-09-25', 'T', 2900, 1, 1, 2, 1, 2),
+(3, 80003, '2025-09-15', 'E', 4600, 1, 1, 3, 2, 3),
+(4, 80004, '2025-08-28', 'T', 3100, 1, 1, 4, 3, 4),
+(5, 80005, '2025-08-10', 'E', 3300, 1, 1, 5, 4, 5),
+(6, 80006, '2025-10-02', 'E', 3800, 0, 1, 1, 5, 1),
+(7, 80007, '2025-10-30', 'E', 3800, 0, 1, 1, 5, 1),
+(8, 80008, '2025-10-10', 'E', 3800, 0, 1, 1, 5, 1),
+(9, 80009, '2025-10-09', 'E', 3800, 0, 1, 1, 5, 1),
+(10, 80010, '2025-10-04', 'E', 3800, 0, 1, 1, 5, 1);
+
+--
+-- Acionadores `assento`
+--
+DELIMITER $$
+CREATE TRIGGER `trg_assento_bloqueia_delete` BEFORE DELETE ON `assento` FOR EACH ROW BEGIN
+  SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Não é possível deletar registros do sistema. Desative o registro (status = 0).';
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trg_assento_desativar` AFTER UPDATE ON `assento` FOR EACH ROW BEGIN
+  IF OLD.status = 1 AND NEW.status = 0 THEN
+
+    UPDATE pacote
+       SET status = 0
+     WHERE cod_assento = NEW.cod_assento
+       AND status = 1;
+
+  END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `cidade`
+--
+
+CREATE TABLE `cidade` (
+  `cod_cidade` int(11) NOT NULL,
+  `DDD` varchar(3) DEFAULT NULL,
+  `estado` varchar(20) DEFAULT NULL,
+  `nome_cidade` varchar(40) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `cidade`
+--
+
+INSERT INTO `cidade` (`cod_cidade`, `DDD`, `estado`, `nome_cidade`, `status`) VALUES
+(1, '212', 'New York', 'New York', 1),
+(2, '33', 'Île-de-France', 'Paris', 1),
+(3, '81', 'Kantō', 'Tokyo', 1),
+(4, '44', 'England', 'London', 1),
+(5, '55', 'Buenos Aires', 'Buenos Aires', 1),
+(6, '11', 'São Paulo', 'São Paulo', 0),
+(7, '21', 'Rio de Janeiro', 'Rio de Janeiro', 1),
+(8, '31', 'Minas Gerais', 'Belo Horizonte', 1),
+(9, '61', 'Distrito Federal', 'Brasília', 1),
+(10, '91', 'Pará', 'Belém', 1),
+(11, '34', 'Fodase', 'AAAAAAAAAAAAAAAAAAAAa', 1),
+(27, '22', 'Fodase', 'Caguei', 1),
+(36, '12', 'umamerda', 'OIE', 1),
+(37, '100', 'SP', 'BBB', 1),
+(38, '100', 'SP', 'BBB', 1),
+(39, '31', 'umamerda', 'BBB', 1),
+(40, '31', 'SP', 'alo', 1);
+
+--
+-- Acionadores `cidade`
+--
+DELIMITER $$
+CREATE TRIGGER `trg_cidade_bloqueia_delete` BEFORE DELETE ON `cidade` FOR EACH ROW BEGIN
+  SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Não é possível deletar registros do sistema. Desative o registro (status = 0).';
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trg_cidade_desativar` AFTER UPDATE ON `cidade` FOR EACH ROW BEGIN
+  IF OLD.status = 1 AND NEW.status = 0 THEN
+
+    UPDATE aeroporto
+       SET status = 0
+     WHERE cod_cidade = NEW.cod_cidade
+       AND status = 1;
+
+    UPDATE hotel
+       SET status = 0
+     WHERE cod_cidade = NEW.cod_cidade
+       AND status = 1;
+
+    UPDATE ponto_turistico
+       SET status = 0
+     WHERE cod_cidade = NEW.cod_cidade
+       AND status = 1;
+
+  END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `cliente`
+--
+
+CREATE TABLE `cliente` (
+  `cod_cliente` int(11) NOT NULL,
+  `endereco` varchar(50) DEFAULT NULL,
+  `sexo` enum('F','M') DEFAULT NULL,
+  `nome_cliente` varchar(50) NOT NULL,
+  `CPF` varchar(20) DEFAULT NULL,
+  `data_nasc` date DEFAULT NULL,
+  `telefone` varchar(15) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `cliente`
+--
+
+INSERT INTO `cliente` (`cod_cliente`, `endereco`, `sexo`, `nome_cliente`, `CPF`, `data_nasc`, `telefone`, `status`) VALUES
+(1, 'Serra do Caparaó', 'F', 'Camille Evelyn da Silva Barros', '705.634.316-36', '2008-07-05', NULL, 1),
+(2, 'São Simão', 'M', 'Enzo Leonardo Soares Araújo', '122.950.686-14', '2008-07-03', NULL, 0),
+(3, 'Agripino Valeriano da Silva', 'M', 'João Lucas Silva Sivieri', '134.629.606-52', '2007-10-25', NULL, 1),
+(4, 'Cordilheira dos Andes', 'F', 'Júlia de Andrade Serpa', '157.528.536-30', '2007-09-21', NULL, 1),
+(5, 'Serra do Caparaó', 'F', 'Gislene Luiz da Silva', '012.896.286-36', '1980-01-18', NULL, 1),
+(6, 'Serra do Caparaó', 'M', 'Elmo da Silva Barros', '050.365.226-43', '1983-02-02', NULL, 1),
+(7, 'Agripino Valeriano da Silva', 'F', 'Lilian Ribeiro da Silva Sivieri', '794.297.746-38', '1981-03-07', NULL, 1),
+(8, 'Agripino Valeriano da Silva', 'M', 'João Marcos Sivieri', '511.779.176-29', '1980-02-20', NULL, 1),
+(9, 'São Simão', 'F', 'Milene Soares de Briti', '921.783.186-73', '1978-04-13', NULL, 1),
+(10, 'São Simão', 'M', 'Evalcir Osório de Araújo', '945.971.396-30', '1975-11-30', NULL, 1),
+(14, 'Rua nao sei', 'F', 'Camila II', '700.100.300-00', '2009-03-13', '(34) 99201-7191', 1),
+(17, 'a', 'M', 'A', '111.111.111-11', '1911-11-11', '(34) 11111-1111', 1),
+(18, 'aaaaa', 'M', 'aaaa', '11111111111', '2005-08-27', '34991111111', 1);
+
+--
+-- Acionadores `cliente`
+--
+DELIMITER $$
+CREATE TRIGGER `trg_cliente_bloqueia_delete` BEFORE DELETE ON `cliente` FOR EACH ROW BEGIN
+  SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Não é possível deletar registros do sistema. Desative o registro (status = 0).';
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trg_cliente_desativar` AFTER UPDATE ON `cliente` FOR EACH ROW BEGIN
+  IF OLD.status = 1 AND NEW.status = 0 THEN
+
+    UPDATE usuario
+       SET status = 0
+     WHERE cod_cliente = NEW.cod_cliente
+       AND status = 1;
+
+    UPDATE compra
+       SET status = 0
+     WHERE cod_cliente = NEW.cod_cliente
+       AND status = 1;
+
+  END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `compra`
+--
+
+CREATE TABLE `compra` (
+  `cod_compra` int(11) NOT NULL,
+  `forma_paga` varchar(20) DEFAULT NULL,
+  `valor` decimal(8,0) NOT NULL DEFAULT 1,
+  `data_compra` date DEFAULT NULL,
+  `cod_cliente` int(11) DEFAULT NULL,
+  `cod_pacote` int(11) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `compra`
+--
+
+INSERT INTO `compra` (`cod_compra`, `forma_paga`, `valor`, `data_compra`, `cod_cliente`, `cod_pacote`, `status`) VALUES
+(1, 'Pix', 1, '2025-07-05', 1, 2, 1),
+(2, 'Crédito', 1, '2025-07-03', 2, 3, 0),
+(3, 'Crédito', 1, '2025-10-25', 3, 5, 1),
+(4, 'Pix', 1, '2025-09-18', 4, 2, 1),
+(5, 'Crédito', 1, '2026-02-02', 5, 4, 1),
+(6, 'Débito', 1, '2026-01-18', 6, 5, 1),
+(7, 'Débito', 1, '2027-10-25', 7, 9, 0),
+(8, 'Boleto', 1, '2028-05-14', 8, 8, 0),
+(9, 'Boleto', 1, '2030-08-04', 9, 5, 1),
+(10, 'Pix', 1, '2025-12-10', 10, 7, 0),
+(11, 'PIX', 10, '2026-08-11', 3, 9, 0);
+
+--
+-- Acionadores `compra`
+--
+DELIMITER $$
+CREATE TRIGGER `trg_compra_bloqueia_delete` BEFORE DELETE ON `compra` FOR EACH ROW BEGIN
+  SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Não é possível deletar registros do sistema. Desative o registro (status = 0).';
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `hotel`
+--
+
+CREATE TABLE `hotel` (
+  `cod_hotel` int(11) NOT NULL,
+  `CNPJ` varchar(20) NOT NULL,
+  `_local` varchar(40) DEFAULT NULL,
+  `endereco` varchar(50) DEFAULT NULL,
+  `check_in` date DEFAULT NULL,
+  `check_out` date DEFAULT NULL,
+  `cod_cidade` int(11) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `hotel`
+--
+
+INSERT INTO `hotel` (`cod_hotel`, `CNPJ`, `_local`, `endereco`, `check_in`, `check_out`, `cod_cidade`, `status`) VALUES
+(1, '01.234.567/0001-01', 'Manhattan', '5th Avenue, NY', '2025-12-20', '2025-12-27', 1, 1),
+(2, '02.345.678/0001-02', 'Champs-Élysées', 'Av. des Champs, Paris', '2025-11-10', '2025-11-15', 2, 1),
+(3, '03.456.789/0001-03', 'Shinjuku', 'Tokyo Central', '2025-10-05', '2025-10-12', 3, 1),
+(4, '04.567.890/0001-04', 'Westminster', 'Victoria Street, London', '2025-09-01', '2025-09-06', 4, 1),
+(5, '05.678.901/0001-05', 'Recoleta', 'Av. Santa Fe, Buenos Aires', '2025-08-15', '2025-08-20', 5, 1),
+(6, '06.789.012/0001-06', 'Ibirapuera', 'Av. Pedro Álvares Cabral, SP', '2025-10-10', '2025-10-20', 6, 0),
+(7, '07.890.123/0001-07', 'Copacabana', 'Av. Atlântica, Rio de Janeiro', '2025-09-05', '2025-09-12', 7, 1),
+(8, '08.901.234/0001-08', 'Mineirão', 'Av. Antônio Carlos, Belo Horizonte', '2025-08-25', '2025-08-30', 8, 1),
+(9, '09.012.345/0001-09', 'Palácio do Planalto', 'Praça dos Três Poderes, Brasília', '2025-07-20', '2025-07-27', 9, 1),
+(10, '10.123.456/0001-10', 'Estádio Mangueirão', 'Av. Dalcídio Jurandir, Belém', '2025-06-15', '2025-06-20', 10, 0),
+(13, '12.345.678/03', 'Pampulha', 'Rua BH n0', '2026-05-20', '2026-05-30', 8, 0);
+
+--
+-- Acionadores `hotel`
+--
+DELIMITER $$
+CREATE TRIGGER `trg_hotel_bloqueia_delete` BEFORE DELETE ON `hotel` FOR EACH ROW BEGIN
+  SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Não é possível deletar registros do sistema. Desative o registro (status = 0).';
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trg_hotel_desativar` AFTER UPDATE ON `hotel` FOR EACH ROW BEGIN
+  IF OLD.status = 1 AND NEW.status = 0 THEN
+
+    UPDATE quarto
+       SET status = 0
+     WHERE cod_hotel = NEW.cod_hotel
+       AND status = 1;
+
+  END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `pacote`
+--
+
+CREATE TABLE `pacote` (
+  `cod_pacote` int(11) NOT NULL,
+  `cod_assento` int(11) DEFAULT NULL,
+  `cod_quarto` int(11) DEFAULT NULL,
+  `valor_pacote` decimal(7,0) NOT NULL DEFAULT 1,
+  `status` tinyint(1) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `pacote`
+--
+
+INSERT INTO `pacote` (`cod_pacote`, `cod_assento`, `cod_quarto`, `valor_pacote`, `status`) VALUES
+(1, 1, 1, 7800, 0),
+(2, 2, 2, 6550, 1),
+(3, 3, 3, 9150, 1),
+(4, 3, 4, 4999, 1),
+(5, 4, 3, 11200, 1),
+(6, 5, 5, 7340, 1),
+(7, 6, 6, 8499, 0),
+(8, 7, 7, 6200, 0),
+(9, 8, 8, 9990, 0),
+(10, 9, 9, 5700, 0);
+
+--
+-- Acionadores `pacote`
+--
+DELIMITER $$
+CREATE TRIGGER `trg_pacote_bloqueia_delete` BEFORE DELETE ON `pacote` FOR EACH ROW BEGIN
+  SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Não é possível deletar registros do sistema. Desative o registro (status = 0).';
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trg_pacote_desativar` AFTER UPDATE ON `pacote` FOR EACH ROW BEGIN
+  IF OLD.status = 1 AND NEW.status = 0 THEN
+
+    UPDATE compra
+       SET status = 0
+     WHERE cod_pacote = NEW.cod_pacote
+       AND status = 1;
+
+  END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `ponto_turistico`
+--
+
+CREATE TABLE `ponto_turistico` (
+  `cod_ponto` int(11) NOT NULL,
+  `descricao` varchar(1000) NOT NULL,
+  `endereco` varchar(40) NOT NULL,
+  `cod_cidade` int(11) NOT NULL,
+  `status` tinyint(1) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `ponto_turistico`
+--
+
+INSERT INTO `ponto_turistico` (`cod_ponto`, `descricao`, `endereco`, `cod_cidade`, `status`) VALUES
+(6, 'Estátua da Liberdade, símbolo de liberdade', 'Liberty Island, NY', 1, 1),
+(7, 'Torre Eiffel, ícone parisiense', 'Champ de Mars, Paris', 2, 1),
+(8, 'Senso-ji, templo budista histórico', 'Asakusa, Tokyo', 3, 1),
+(9, 'Big Ben, famoso relógio londrino', 'Westminster, London', 4, 1),
+(10, 'Obelisco de Buenos Aires, marco histórico', 'Av. 9 de Julio', 5, 1);
+
+--
+-- Acionadores `ponto_turistico`
+--
+DELIMITER $$
+CREATE TRIGGER `trg_ponto_bloqueia_delete` BEFORE DELETE ON `ponto_turistico` FOR EACH ROW BEGIN
+  SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Não é possível deletar registros do sistema. Desative o registro (status = 0).';
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `quarto`
+--
+
+CREATE TABLE `quarto` (
+  `cod_quarto` int(11) NOT NULL,
+  `valor_reserva` decimal(7,0) NOT NULL,
+  `local_saida` varchar(30) DEFAULT NULL,
+  `local_chegada` varchar(30) DEFAULT NULL,
+  `data_inicio` date DEFAULT NULL,
+  `qntd_diarias` int(11) DEFAULT NULL,
+  `cod_hotel` int(11) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `quarto`
+--
+
+INSERT INTO `quarto` (`cod_quarto`, `valor_reserva`, `local_saida`, `local_chegada`, `data_inicio`, `qntd_diarias`, `cod_hotel`, `status`) VALUES
+(1, 3200, 'Rio de Janeiro', 'New York', '2025-12-20', 7, 1, 1),
+(2, 2800, 'São Paulo', 'Paris', '2025-11-10', 5, 2, 1),
+(3, 4100, 'Londres', 'Tokyo', '2025-10-05', 7, 3, 1),
+(4, 3000, 'Buenos Aires', 'London', '2025-09-01', 5, 4, 1),
+(5, 2600, 'Paris', 'Buenos Aires', '2025-08-15', 5, 5, 1),
+(6, 3200, 'São Paulo', 'São Paulo', '2025-10-10', 10, 6, 0),
+(7, 4500, 'Rio de Janeiro', 'Rio de Janeiro', '2025-09-05', 7, 7, 1),
+(8, 3800, 'Belo Horizonte', 'Belo Horizonte', '2025-08-25', 5, 8, 1),
+(9, 5200, 'Brasília', 'Brasília', '2025-07-20', 7, 9, 1),
+(10, 2700, 'Belém', 'Belém', '2025-06-15', 5, 10, 0);
+
+--
+-- Acionadores `quarto`
+--
+DELIMITER $$
+CREATE TRIGGER `trg_quarto_bloqueia_delete` BEFORE DELETE ON `quarto` FOR EACH ROW BEGIN
+  SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Não é possível deletar registros do sistema. Desative o registro (status = 0).';
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trg_quarto_desativar` AFTER UPDATE ON `quarto` FOR EACH ROW BEGIN
+  IF OLD.status = 1 AND NEW.status = 0 THEN
+
+    UPDATE pacote
+       SET status = 0
+     WHERE cod_quarto = NEW.cod_quarto
+       AND status = 1;
+
+  END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `cod_usuario` int(11) NOT NULL,
+  `login` varchar(50) DEFAULT NULL,
+  `senha` varchar(50) NOT NULL,
+  `e_mail` varchar(100) DEFAULT NULL,
+  `cod_cliente` int(11) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `usuario`
+--
+
+INSERT INTO `usuario` (`cod_usuario`, `login`, `senha`, `e_mail`, `cod_cliente`, `status`) VALUES
+(2, 'EnzoAraujo', 'mar92794', 'enzo@gmail.com', 2, 0),
+(3, 'JoaoSivieri', 'JL2510', 'joao@hotmail.com', 3, 1),
+(4, 'JuliaSerpa', 'Jujubs07', 'julia@gmail.com', 4, 1),
+(6, 'ElmoBarros', 'Elmo1234', 'elmo@hotmail.com', 6, 1),
+(7, 'LilianSivieri', 'Lilian1981', 'lilian@gmail.com', 7, 1),
+(13, 'Budrys', '12345678', '123@123.com', 13, 1);
+
+--
+-- Acionadores `usuario`
+--
+DELIMITER $$
+CREATE TRIGGER `trg_usuario_bloqueia_delete` BEFORE DELETE ON `usuario` FOR EACH ROW BEGIN
+  SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Não é possível deletar registros do sistema. Desative o registro (status = 0).';
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `voo`
+--
+
+CREATE TABLE `voo` (
+  `cod_voo` int(11) NOT NULL,
+  `num_voo` varchar(11) DEFAULT NULL,
+  `data_hora_chegada` datetime DEFAULT NULL,
+  `data_hora_partida` datetime DEFAULT NULL,
+  `aviao` varchar(30) NOT NULL,
+  `companhia` varchar(30) NOT NULL,
+  `cod_destino` int(11) NOT NULL,
+  `cod_local_partida` int(11) NOT NULL,
+  `status` tinyint(1) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `voo`
+--
+
+INSERT INTO `voo` (`cod_voo`, `num_voo`, `data_hora_chegada`, `data_hora_partida`, `aviao`, `companhia`, `cod_destino`, `cod_local_partida`, `status`) VALUES
+(1, '8901', '2025-12-21 00:00:00', '2025-12-20 00:00:00', 'Boeing 787', 'Azul', 1, 6, 0),
+(2, '7822', '2025-11-11 00:00:00', '2025-11-10 00:00:00', 'Airbus A350', 'Air France', 2, 7, 1),
+(3, '5630', '2025-10-06 00:00:00', '2025-10-05 00:00:00', 'Boeing 777', 'Japan Airlines', 3, 8, 1),
+(4, '4755', '2025-09-02 00:00:00', '2025-09-01 00:00:00', 'Airbus A330', 'Air France', 4, 9, 1),
+(5, '3210', '2025-08-16 00:00:00', '2025-08-15 00:00:00', 'Boeing 737 MAX', 'Latam', 5, 10, 1),
+(6, '8906', '2025-12-22 00:00:00', '2025-12-21 00:00:00', 'Boeing 787', 'Latam', 2, 6, 0),
+(7, '8907', '2025-11-12 00:00:00', '2025-11-11 00:00:00', 'Airbus A320', 'Gol', 3, 7, 1),
+(8, '8908', '2025-10-07 00:00:00', '2025-10-06 00:00:00', 'Airbus A330', 'Air France', 4, 8, 1),
+(9, '8909', '2025-09-03 00:00:00', '2025-09-02 00:00:00', 'Boeing 737', 'Azul', 5, 9, 1),
+(10, '8910', '2025-08-17 00:00:00', '2025-08-16 00:00:00', 'Boeing 767', 'Latam', 1, 10, 1),
+(11, NULL, '2026-05-20 16:00:00', '2026-05-20 15:00:00', 'Boeing 737', 'Latam', 8, 9, 1);
+
+--
+-- Acionadores `voo`
+--
+DELIMITER $$
+CREATE TRIGGER `trg_voo_bloqueia_delete` BEFORE DELETE ON `voo` FOR EACH ROW BEGIN
+  SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Não é possível deletar registros do sistema. Desative o registro (status = 0).';
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trg_voo_desativar` AFTER UPDATE ON `voo` FOR EACH ROW BEGIN
+  IF OLD.status = 1 AND NEW.status = 0 THEN
+
+    UPDATE assento
+       SET status = 0
+     WHERE cod_voo = NEW.cod_voo
+       AND status = 1;
+
+  END IF;
+END
+$$
+DELIMITER ;
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices de tabela `aeroporto`
+--
+ALTER TABLE `aeroporto`
+  ADD PRIMARY KEY (`cod_aeroporto`),
+  ADD KEY `fk_aeroporto_cidade` (`cod_cidade`);
+
+--
+-- Índices de tabela `assento`
+--
+ALTER TABLE `assento`
+  ADD PRIMARY KEY (`cod_assento`),
+  ADD KEY `fk_assento_voo` (`cod_voo`);
+
+--
+-- Índices de tabela `cidade`
+--
+ALTER TABLE `cidade`
+  ADD PRIMARY KEY (`cod_cidade`),
+  ADD KEY `idx_cidade_ddd` (`DDD`);
+
+--
+-- Índices de tabela `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`cod_cliente`),
+  ADD UNIQUE KEY `uq_cliente_CPF` (`CPF`),
+  ADD UNIQUE KEY `uq_cliente_telefone` (`telefone`);
+
+--
+-- Índices de tabela `compra`
+--
+ALTER TABLE `compra`
+  ADD PRIMARY KEY (`cod_compra`),
+  ADD KEY `fk_compra_cliente` (`cod_cliente`),
+  ADD KEY `fk_compra_pacote` (`cod_pacote`);
+
+--
+-- Índices de tabela `hotel`
+--
+ALTER TABLE `hotel`
+  ADD PRIMARY KEY (`cod_hotel`),
+  ADD KEY `fk_hotel_cidade` (`cod_cidade`);
+
+--
+-- Índices de tabela `pacote`
+--
+ALTER TABLE `pacote`
+  ADD PRIMARY KEY (`cod_pacote`),
+  ADD KEY `fk_pacote_assento` (`cod_assento`),
+  ADD KEY `fk_pacote_quarto` (`cod_quarto`);
+
+--
+-- Índices de tabela `ponto_turistico`
+--
+ALTER TABLE `ponto_turistico`
+  ADD PRIMARY KEY (`cod_ponto`),
+  ADD UNIQUE KEY `uq_ponto_endereco` (`endereco`),
+  ADD KEY `fk_ponto_cidade` (`cod_cidade`);
+
+--
+-- Índices de tabela `quarto`
+--
+ALTER TABLE `quarto`
+  ADD PRIMARY KEY (`cod_quarto`),
+  ADD KEY `fk_quarto_hotel` (`cod_hotel`);
+
+--
+-- Índices de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`cod_usuario`),
+  ADD UNIQUE KEY `uq_usuario_login` (`login`),
+  ADD UNIQUE KEY `uq_usuario_email` (`e_mail`),
+  ADD KEY `fk_usuario_cliente` (`cod_cliente`);
+
+--
+-- Índices de tabela `voo`
+--
+ALTER TABLE `voo`
+  ADD PRIMARY KEY (`cod_voo`),
+  ADD KEY `fk_voo_partida` (`cod_local_partida`),
+  ADD KEY `fk_voo_destino` (`cod_destino`);
+
+--
+-- AUTO_INCREMENT para tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `aeroporto`
+--
+ALTER TABLE `aeroporto`
+  MODIFY `cod_aeroporto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de tabela `assento`
+--
+ALTER TABLE `assento`
+  MODIFY `cod_assento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de tabela `cidade`
+--
+ALTER TABLE `cidade`
+  MODIFY `cod_cidade` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT de tabela `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `cod_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT de tabela `compra`
+--
+ALTER TABLE `compra`
+  MODIFY `cod_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de tabela `hotel`
+--
+ALTER TABLE `hotel`
+  MODIFY `cod_hotel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT de tabela `pacote`
+--
+ALTER TABLE `pacote`
+  MODIFY `cod_pacote` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de tabela `ponto_turistico`
+--
+ALTER TABLE `ponto_turistico`
+  MODIFY `cod_ponto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de tabela `quarto`
+--
+ALTER TABLE `quarto`
+  MODIFY `cod_quarto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `cod_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT de tabela `voo`
+--
+ALTER TABLE `voo`
+  MODIFY `cod_voo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

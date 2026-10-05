@@ -148,4 +148,30 @@ public class AeroportoControle {
     public String removerAeroporto() {
         return "removerAeroporto";
     }
+
+    @org.springframework.web.bind.annotation.PostMapping("/removerAeroporto")
+    public String processarRemocao(@ModelAttribute("aeroporto") Aeroporto entidade, BindingResult bindingResult,
+            org.springframework.ui.Model modelo,
+            @org.springframework.web.bind.annotation.RequestParam(value = "acao", required = false) String acao) {
+        int cod = entidade.getCodAeroporto();
+
+        if ("remover".equals(acao) && cod > 0) {
+            // botão Remover: desativa (status = 0) e os triggers fazem a cascata
+            String resultado = new br.com.webplanet.modelo.AeroportoModelo().removerAeroporto(cod);
+            br.com.webplanet.utils.RemocaoUtils.preencher(modelo, resultado, "Aeroporto", cod);
+            entidade.setCodAeroporto(0);                              // limpa a seleção
+            modelo.addAttribute("webConsultarAeroportos", consultarAeroportosMap());   // atualiza o select
+        } else if (cod > 0) {
+            // onchange do select: só mostra os dados do registro escolhido
+            try {
+                consultarAeroporto(entidade, bindingResult, modelo);
+                if (!modelo.containsAttribute("mensagem")) {
+                    modelo.addAttribute("selecionado", true);
+                }
+            } catch (Exception ex) {
+                modelo.addAttribute("erro", "Aeroporto não encontrado.");
+            }
+        }
+        return "removerAeroporto";
+    }
 }

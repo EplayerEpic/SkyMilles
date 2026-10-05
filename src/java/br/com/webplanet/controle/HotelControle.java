@@ -154,8 +154,29 @@ public class HotelControle {
         return "removerHotel";
     }
 
-    @RequestMapping(value = "/removerHotel", method = RequestMethod.POST)
-    public String removerHotel(@RequestParam("codHotel") int codHotel, Model modelo) {
+    @org.springframework.web.bind.annotation.PostMapping("/removerHotel")
+    public String processarRemocao(@ModelAttribute("hotel") Hotel entidade, BindingResult bindingResult,
+            org.springframework.ui.Model modelo,
+            @org.springframework.web.bind.annotation.RequestParam(value = "acao", required = false) String acao) {
+        int cod = entidade.getCodHotel();
+
+        if ("remover".equals(acao) && cod > 0) {
+            // botão Remover: desativa (status = 0) e os triggers fazem a cascata
+            String resultado = new br.com.webplanet.modelo.HotelModelo().deletarHotel(cod);
+            br.com.webplanet.utils.RemocaoUtils.preencher(modelo, resultado, "Hotel", cod);
+            entidade.setCodHotel(0);                              // limpa a seleção
+            modelo.addAttribute("webConsultarHoteis", consultarHoteisMap());   // atualiza o select
+        } else if (cod > 0) {
+            // onchange do select: só mostra os dados do registro escolhido
+            try {
+                consultarHotel(entidade, bindingResult, modelo);
+                if (!modelo.containsAttribute("mensagem")) {
+                    modelo.addAttribute("selecionado", true);
+                }
+            } catch (Exception ex) {
+                modelo.addAttribute("erro", "Hotel não encontrado.");
+            }
+        }
         return "removerHotel";
     }
 }
