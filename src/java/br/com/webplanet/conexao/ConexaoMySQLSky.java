@@ -23,7 +23,8 @@ public class ConexaoMySQLSky {
             String bd = "Skymilles";
             //String bd = "skymilles";
             String pw = "";
-            conn = DriverManager.getConnection("jdbc:mysql://" + ip + "/" + bd , us , pw);
+            conn = DriverManager.getConnection("jdbc:mysql://" + ip + "/" + bd
+                    + "?useUnicode=true&characterEncoding=UTF-8", us, pw);
             System.out.println("Conectado.");
         } catch (SQLException ex) {
             System.out.println("Erro na conexão: " + ex.getMessage());
