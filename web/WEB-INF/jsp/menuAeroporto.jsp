@@ -24,15 +24,15 @@
   <a class="back" href="${pageContext.request.contextPath}/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>Voltar</a>
   <header class="head"><h1 class="h1">Gerenciar Aeroporto</h1><p class="sub">Escolha uma ação para os aeroportos.</p></header>
   <nav class="tickets" aria-label="Ações de voos">
-    <a class="ticket t-add" href="${pageContext.request.contextPath}/adicionarUsuario">
+    <a class="ticket t-add" href="${pageContext.request.contextPath}/adicionarAeroporto">
       <span class="body"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#plane" x="1" y="0" width="15" height="15"/><path d="M18.5 14v8M14.5 18h8"/></svg></span><span class="t2">Adicionar</span><span class="t3">Cadastrar um novo aeroporto</span></span>
       <span class="stub"><span class="code">ADD</span><span class="bars"></span></span>
     </a>
-    <a class="ticket t-alt" href="${pageContext.request.contextPath}/alterarUsuario">
+    <a class="ticket t-alt" href="${pageContext.request.contextPath}/AlterarAeroporto">
       <span class="body"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#plane" x="6.5" y="6" width="11" height="11"/><path d="M4.2 12a8 8 0 0 1 13.6-5.7M19.8 12a8 8 0 0 1-13.6 5.7M18.2 2.8v3.6h-3.6M5.8 21.2v-3.6h3.6"/></svg></span><span class="t2">Alterar</span><span class="t3">Editar os dados de um aeroporto</span></span>
       <span class="stub"><span class="code">ALT</span><span class="bars"></span></span>
     </a>
-    <a class="ticket t-rem" href="${pageContext.request.contextPath}/removerUsuario">
+    <a class="ticket t-rem" href="${pageContext.request.contextPath}/removerAeroporto">
       <span class="body"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#plane" x="2" y="2" width="20" height="20"/><path d="M3.5 3.5l17 17"/></svg></span><span class="t2">Desativar</span><span class="t3">Desativar um aeroporto</span></span>
       <span class="stub"><span class="code">DES</span><span class="bars"></span></span>
     </a>
@@ -42,8 +42,8 @@
     </button>
   </nav>
   <div class="board" id="board"><div class="board-in"><div class="board-row">
-    <a class="lnk" href="${pageContext.request.contextPath}/listarVoos"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="4.5" height="4" rx="1"/><path d="M10.5 6h10.5"/><rect x="3" y="10" width="4.5" height="4" rx="1"/><path d="M10.5 12h10.5"/><rect x="3" y="16" width="4.5" height="4" rx="1"/><path d="M10.5 18h10.5"/></svg></span><span><span class="t2">Todos os aeroporto</span><span class="t3">Lista completa de aeroporto</span></span></a>
-    <a class="lnk" href="${pageContext.request.contextPath}/consultarVoo"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2.2a2.8 2.8 0 0 0 0 5.6V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2.2a2.8 2.8 0 0 0 0-5.6z"/><path d="M8 9.5v5M11 9.5v5M14 9.5v5M17 9.5v5"/></svg></span><span><span class="t2">Por código</span><span class="t3">Buscar um aeroporto específico</span></span></a>
+    <a class="lnk" href="${pageContext.request.contextPath}/listarTodasAero"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="4.5" height="4" rx="1"/><path d="M10.5 6h10.5"/><rect x="3" y="10" width="4.5" height="4" rx="1"/><path d="M10.5 12h10.5"/><rect x="3" y="16" width="4.5" height="4" rx="1"/><path d="M10.5 18h10.5"/></svg></span><span><span class="t2">Todos os aeroporto</span><span class="t3">Lista completa de aeroporto</span></span></a>
+    <a class="lnk" href="${pageContext.request.contextPath}/ConsultarAeroporto"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2.2a2.8 2.8 0 0 0 0 5.6V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2.2a2.8 2.8 0 0 0 0-5.6z"/><path d="M8 9.5v5M11 9.5v5M14 9.5v5M17 9.5v5"/></svg></span><span><span class="t2">Por código</span><span class="t3">Buscar um aeroporto específico</span></span></a>
   </div></div></div>
 </main>
 </body>
