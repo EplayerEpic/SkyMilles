@@ -167,23 +167,26 @@ public class ClientesModelo {
         return resultado;
     }
 
+    /**
+     * Remoção lógica: não existe DELETE no sistema. O registro recebe status = 0
+     * e os triggers do banco desativam os dependentes em cascata.
+     * Retorna "removido", "inexistente" (não achou ou já estava desativado)
+     * ou o SQLState em caso de erro.
+     */
     public String deletarCliente(int cliCodigo) {
-        String resultado = "";
         try {
-            ConexaoMySQLSky conexao = new ConexaoMySQLSky();
-            Connection conn = conexao.conectar();
-
-            String consulta = "UPDATE cliente set status =0 WHERE cod_cliente = ?";
-            PreparedStatement stm = conn.prepareStatement(consulta);
+            Connection conn = new ConexaoMySQLSky().conectar();
+            String sql = "UPDATE cliente SET status = 0 WHERE cod_cliente = ? AND status = 1";
+            PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, cliCodigo);
 
-            stm.executeUpdate();
-            resultado = "Deletado";
+            int linhas = stm.executeUpdate();
+            return linhas > 0 ? "removido" : "inexistente";
+
         } catch (SQLException ex) {
-            resultado = ex.getSQLState();
             System.out.println(ex);
+            return ex.getSQLState();
         }
-        return resultado;
     }
 
     public static void main(String[] args) {

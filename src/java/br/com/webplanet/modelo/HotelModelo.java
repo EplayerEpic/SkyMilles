@@ -185,16 +185,21 @@ public class HotelModelo {
         }
     }
 
+    /**
+     * Remoção lógica: não existe DELETE no sistema. O registro recebe status = 0
+     * e os triggers do banco desativam os dependentes em cascata.
+     * Retorna "removido", "inexistente" (não achou ou já estava desativado)
+     * ou o SQLState em caso de erro.
+     */
     public String deletarHotel(int codHotel) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-
-            String sql = "UPDATE hotel set status = 0 where cod_hotel=?";
+            String sql = "UPDATE hotel SET status = 0 WHERE cod_hotel = ? AND status = 1";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, codHotel);
 
-            stm.executeUpdate();
-            return "Deletado";
+            int linhas = stm.executeUpdate();
+            return linhas > 0 ? "removido" : "inexistente";
 
         } catch (SQLException ex) {
             System.out.println(ex);

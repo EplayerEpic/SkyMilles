@@ -162,34 +162,29 @@ public class VooControle {
         return "removerVoo";
     }
 
-    @RequestMapping(value = "/removerVoo", method = RequestMethod.POST)
-    public String removerVoo(@ModelAttribute("voo") Voo v, BindingResult bindingResult, Model modelo) {
-        if (bindingResult.hasErrors()) {
-            return "removerVoo";
+    @org.springframework.web.bind.annotation.PostMapping("/removerVoo")
+    public String processarRemocao(@ModelAttribute("voo") Voo entidade, BindingResult bindingResult,
+            org.springframework.ui.Model modelo,
+            @org.springframework.web.bind.annotation.RequestParam(value = "acao", required = false) String acao) {
+        int cod = entidade.getCodVoo();
+
+        if ("remover".equals(acao) && cod > 0) {
+            // botão Remover: desativa (status = 0) e os triggers fazem a cascata
+            String resultado = new br.com.webplanet.modelo.VooModelo().removerVoo(cod);
+            br.com.webplanet.utils.RemocaoUtils.preencher(modelo, resultado, "Voo", cod);
+            entidade.setCodVoo(0);                              // limpa a seleção
+            modelo.addAttribute("webConsultarVoos", consultarVoosMap());   // atualiza o select
+        } else if (cod > 0) {
+            // onchange do select: só mostra os dados do registro escolhido
+            try {
+                consultarVoo(entidade, bindingResult, modelo);
+                if (!modelo.containsAttribute("mensagem")) {
+                    modelo.addAttribute("selecionado", true);
+                }
+            } catch (Exception ex) {
+                modelo.addAttribute("erro", "Voo não encontrado.");
+            }
         }
-
-        VooModelo vM = new VooModelo();
-        Voo vooSelecionado = vM.consultarVooCodigo(v.getCodVoo());
-
-        if (v.getNumVoo() != null && !v.getNumVoo().trim().isEmpty()
-                && v.getAviao() != null && !v.getAviao().trim().isEmpty()
-                && v.getCompanhia() != null && !v.getCompanhia().trim().isEmpty()
-                && v.getDataHoraPartida() != null && v.getDataHoraChegada() != null
-                && v.getAeroPartida() != null && v.getAeroPartida().getCodAeroporto() > 0
-                && v.getAeroDestino() != null && v.getAeroDestino().getCodAeroporto() > 0) {
-
-            v.setStatus(0);
-            vM.removerVoo(v.getCodVoo());
-
-            Voo vazio = new Voo();
-            vazio.setAeroPartida(new Aeroporto());
-            vazio.setAeroDestino(new Aeroporto());
-            modelo.addAttribute("voo", vazio);
-            modelo.addAttribute("mensagem", "Voo remover com sucesso!");
-        } else {
-            modelo.addAttribute("voo", vooSelecionado != null ? vooSelecionado : v);
-        }
-
-        return "alterarVoo";
+        return "removerVoo";
     }
 }

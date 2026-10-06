@@ -175,4 +175,30 @@ public class PacoteControle {
     public String removerPacote() {
         return "removerPacote";
     }
+
+    @org.springframework.web.bind.annotation.PostMapping("/removerPacote")
+    public String processarRemocao(@ModelAttribute("pacote") Pacote entidade, BindingResult bindingResult,
+            org.springframework.ui.Model modelo,
+            @org.springframework.web.bind.annotation.RequestParam(value = "acao", required = false) String acao) {
+        int cod = entidade.getCodPacote();
+
+        if ("remover".equals(acao) && cod > 0) {
+            // botão Remover: desativa (status = 0) e os triggers fazem a cascata
+            String resultado = new br.com.webplanet.modelo.PacoteModelo().deletarPacote(cod);
+            br.com.webplanet.utils.RemocaoUtils.preencher(modelo, resultado, "Pacote", cod);
+            entidade.setCodPacote(0);                              // limpa a seleção
+            modelo.addAttribute("webConsultarPacotes", consultarPacotesMap());   // atualiza o select
+        } else if (cod > 0) {
+            // onchange do select: só mostra os dados do registro escolhido
+            try {
+                consultarPacote(entidade, bindingResult, modelo);
+                if (!modelo.containsAttribute("mensagem")) {
+                    modelo.addAttribute("selecionado", true);
+                }
+            } catch (Exception ex) {
+                modelo.addAttribute("erro", "Pacote não encontrado.");
+            }
+        }
+        return "removerPacote";
+    }
 }

@@ -151,15 +151,21 @@ public class PacoteModelo {
         }
     }
 
+    /**
+     * Remoção lógica: não existe DELETE no sistema. O registro recebe status = 0
+     * e os triggers do banco desativam os dependentes em cascata.
+     * Retorna "removido", "inexistente" (não achou ou já estava desativado)
+     * ou o SQLState em caso de erro.
+     */
     public String deletarPacote(int codPacote) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "UPDATE pacote set status =0 WHERE cod_pacote=?";
+            String sql = "UPDATE pacote SET status = 0 WHERE cod_pacote = ? AND status = 1";
             PreparedStatement stm = conn.prepareStatement(sql);
-
             stm.setInt(1, codPacote);
-            stm.executeUpdate();
-            return "Deletado";
+
+            int linhas = stm.executeUpdate();
+            return linhas > 0 ? "removido" : "inexistente";
 
         } catch (SQLException ex) {
             System.out.println(ex);

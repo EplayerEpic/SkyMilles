@@ -182,4 +182,30 @@ public class AssentosControle {
     public String removerAssento() {
         return "removerAssento";
     }
+
+    @org.springframework.web.bind.annotation.PostMapping("/removerAssento")
+    public String processarRemocao(@ModelAttribute("assento") Assentos entidade, BindingResult bindingResult,
+            org.springframework.ui.Model modelo,
+            @org.springframework.web.bind.annotation.RequestParam(value = "acao", required = false) String acao) {
+        int cod = entidade.getCodAssento();
+
+        if ("remover".equals(acao) && cod > 0) {
+            // botão Remover: desativa (status = 0) e os triggers fazem a cascata
+            String resultado = new br.com.webplanet.modelo.AssentosModelo().removerAssento(cod);
+            br.com.webplanet.utils.RemocaoUtils.preencher(modelo, resultado, "Assento", cod);
+            entidade.setCodAssento(0);                              // limpa a seleção
+            modelo.addAttribute("webConsultarAssentos", consultarAssentosMap());   // atualiza o select
+        } else if (cod > 0) {
+            // onchange do select: só mostra os dados do registro escolhido
+            try {
+                consultarAssento(entidade, bindingResult, modelo);
+                if (!modelo.containsAttribute("mensagem")) {
+                    modelo.addAttribute("selecionado", true);
+                }
+            } catch (Exception ex) {
+                modelo.addAttribute("erro", "Assento não encontrado.");
+            }
+        }
+        return "removerAssento";
+    }
 }

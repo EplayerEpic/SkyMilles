@@ -148,17 +148,24 @@ public class QuartoModelo {
         }
     }
 
+    /**
+     * Remoção lógica: não existe DELETE no sistema. O registro recebe status = 0
+     * e os triggers do banco desativam os dependentes em cascata.
+     * Retorna "removido", "inexistente" (não achou ou já estava desativado)
+     * ou o SQLState em caso de erro.
+     */
     public String removerQuarto(int cod) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "UPDATE quarto set status =0 WHERE cod_quarto = ?";
+            String sql = "UPDATE quarto SET status = 0 WHERE cod_quarto = ? AND status = 1";
             PreparedStatement stm = conn.prepareStatement(sql);
-
             stm.setInt(1, cod);
-            stm.executeUpdate();
-            return "removido";
+
+            int linhas = stm.executeUpdate();
+            return linhas > 0 ? "removido" : "inexistente";
 
         } catch (SQLException ex) {
+            System.out.println(ex);
             return ex.getSQLState();
         }
     }
