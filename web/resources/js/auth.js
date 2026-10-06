@@ -116,7 +116,7 @@ function updateProfileUI() {
     updateDropdownButtons(user);
 }
 
-function updateDropdownButtons(user) {
+/*function updateDropdownButtons(user) {
     // Desktop dropdown
     const dropdownMenu = document.getElementById('dropdown-menu');
     if (dropdownMenu) {
@@ -132,8 +132,9 @@ function updateDropdownButtons(user) {
             `;
         }
     }
-    
+    */
     // Mobile dropdown
+    /*
     const mobileDropdownMenu = document.getElementById('mobile-dropdown-menu');
     if (mobileDropdownMenu) {
         if (user) {
@@ -149,7 +150,7 @@ function updateDropdownButtons(user) {
         }
     }
 }
-
+*/
 // ==========================================
 // FUNÇÕES DE NAVEGAÇÃO
 // ==========================================

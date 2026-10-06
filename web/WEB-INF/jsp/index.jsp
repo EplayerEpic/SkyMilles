@@ -298,7 +298,7 @@
     </section>
 
     <!-- Seção de Planos -->
-    <section class="planos-section">
+    <section class="planos-section" id = "planos">
         <h2 style="text-align: center; margin-bottom: 40px; color: white; font-size: 2.5em;">Escolha seu Plano</h2>
         <div class="planos-container">
             <!-- Plano Básico -->
@@ -314,7 +314,7 @@
                             <li>Check-in online</li>
                             <li>25% de desconto em passagens para voos internacionais</li>
                         </ul>
-                        <button class="btn-assinar" onclick="assinarPlano('basico')">Assinar</button>
+                        <button class="btn-assinar" onclick="location.href='${pageContext.request.contextPath}/pagamento?plano=basico'">Assinar</button>
                     </div>
                 </div>
             </div>
@@ -334,7 +334,7 @@
                             <li>Embarque prioritário</li>
                             <li>Suporte prioritário</li>
                         </ul>
-                        <button class="btn-assinar" onclick="assinarPlano('plus')">Assinar</button>
+                        <button class="btn-assinar" onclick="location.href='${pageContext.request.contextPath}/pagamento?plano=plus'">Assinar</button>
                     </div>
                 </div>
                 <p class="plano-nota">*Passagens não inclusas</p>
@@ -355,7 +355,7 @@
                             <li>Lounge VIP</li>
                             <li>Suporte 24 horas</li>
                         </ul>
-                        <button class="btn-assinar" onclick="assinarPlano('premium')">Assinar</button>
+                        <button class="btn-assinar" onclick="location.href='${pageContext.request.contextPath}/pagamento?plano=premium'">Assinar</button>
                     </div>
                 </div>
             </div>
@@ -411,7 +411,7 @@
 
             <div class="footer-bottom">
                 <div class="footer-brand">
-                    <a href="http://localhost/dashboard/SkyMilles/"><img
+                    <a href="${pageContext.request.contextPath}/"><img
                             src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Logo SkyMilles"></a>
                     <div class="footer-brand-text"><span>SKY</span>MILLES</div>
                 </div>
@@ -455,7 +455,7 @@
     </footer>
     <script src="${pageContext.request.contextPath}/resources/js/searchSystem.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/js.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/auth.js"></script>
+    <!--<script src="${pageContext.request.contextPath}/resources/js/auth.js"></script>-->
      <script src="${pageContext.request.contextPath}/resources/js/nav.js"></script>
 </body>
 

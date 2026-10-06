@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login.css">
     <title>Login - SkyMilles</title>
 </head>
 
@@ -140,7 +140,7 @@
     <!-- Google Identity Services -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="${pageContext.request.contextPath}/resources/js/login.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/auth.js"></script>
+    <!--<script src="${pageContext.request.contextPath}/resources/js/auth.js"></script>-->
 </body>
 
 </html>

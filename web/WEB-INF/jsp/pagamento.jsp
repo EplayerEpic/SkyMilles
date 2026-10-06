@@ -17,9 +17,9 @@
 
     <!-- Header -->
     <header id="header">
-        <a href="${pageContext.request.contextPath}/"><img id="Logo"
+        <a href="${pageContext.request.contextPath}/#planos"><img id="Logo"
                 src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Logo SkyMilles"></a>
-        <a id="NomeMarca" href="./index.jsp"><span>SKY</span>MILLES</a>
+        <a id="NomeMarca" href="${pageContext.request.contextPath}/"><span>SKY</span>MILLES</a>
         <button class="btn-back" onclick="window.location.href='${pageContext.request.contextPath}/'">
                 ← Voltar para Início
             </button>

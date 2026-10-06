@@ -23,7 +23,7 @@
                 <div class="search-input-container" id="searchInputContainer">
                     <input type="text" id="search-input" placeholder="Buscar voos...">
                 </div>
-                <img class="lupa" id="searchIcon" src="${pageContext.request.contextPath}/resources/54481.png"
+                <img class="lupa" id="searchIcon" src="${pageContext.request.contextPath}/resources/images/54481.png"
                     alt="Buscar">
             </div>
             <div id="searchResults"></div>
@@ -39,7 +39,7 @@
         <!-- Perfil e Botão Hambúrguer -->
         <div class="header-right">
             <div class="perfil-container">
-                <img class="perfil" src="${pageContext.request.contextPath}/resources/foto-perfil.jpg" alt="Sua Foto" id="perfil-img">
+                <img class="perfil" src="${pageContext.request.contextPath}/resources/images/foto-perfil.jpg" alt="Sua Foto" id="perfil-img">
                 <div class="dropdown-menu" id="dropdown-menu">
                     <button onclick="location.href='${pageContext.request.contextPath}/login'">Login</button>
                     <button onclick="location.href='${pageContext.request.contextPath}/cadastro'">Cadastrar</button>
@@ -164,7 +164,7 @@
 
             <div class="footer-bottom">
                 <div class="footer-brand">
-                    <a href="http://localhost/dashboard/SkyMilles/"><img
+                    <a href="${pageContext.request.contextPath}/"><img
                             src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Logo SkyMilles"></a>
                     <div class="footer-brand-text"><span>SKY</span>MILLES</div>
                 </div>
@@ -290,7 +290,8 @@
 
     <script src="${pageContext.request.contextPath}/resources/js/searchSystem.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/destaques.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/auth.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/js.js"></script>
+    <!--<script src="${pageContext.request.contextPath}/resources/js/auth.js"></script>-->
 </body>
 
 </html>
