@@ -1,0 +1,191 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500&display=swap");
+
+:root {
+    --amarelo:       #FCCB57;
+    --amarelo-claro: #F4CF78;
+    --bege:          #D5C28A;
+    --verde-acinz:   #94A596;
+    --azul:          #4C9DB4;
+    --azul-escuro:   #26738F;
+
+    --card:          rgba(28, 66, 86, 0.92);
+    --bloco:         #2D6479;
+    --campo:         #1F4A5F;
+    --texto:         #EAF3F6;
+    --texto-suave:   #9FC3D0;
+    --texto-escuro:  #1B4456;
+    --erro:          #FFB4AB;
+}
+
+* { box-sizing: border-box; }
+
+/* ---------- Fundo: nuvens escuras ---------- */
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 40px 16px;
+    font-family: "Josefin Sans", Arial, sans-serif;
+    color: var(--texto);
+    background-color: #35607A;
+    background-image:
+        linear-gradient(rgba(15, 37, 48, .45), rgba(15, 37, 48, .45)),
+        url("../img/fundo-nuvens.jpg"),
+        radial-gradient(ellipse 45% 30% at 15% 20%, rgba(220, 230, 236, .55), transparent 70%),
+        radial-gradient(ellipse 50% 35% at 80% 30%, rgba(200, 212, 222, .50), transparent 70%),
+        radial-gradient(ellipse 55% 30% at 35% 75%, rgba(215, 225, 232, .45), transparent 70%),
+        radial-gradient(ellipse 40% 28% at 90% 85%, rgba(190, 204, 214, .50), transparent 70%);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* ---------- Card ---------- */
+.form-centro {
+    width: 100%;
+    max-width: 420px;
+    margin: 40px auto;
+    padding: 28px;
+    background: var(--card);
+    border-radius: 20px;
+}
+
+.form-centro .subtitulo {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: .5px;
+    color: var(--texto-suave);
+}
+
+.form-centro h2 {
+    margin: 0 0 20px;
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: #E4EEF2;
+}
+
+/* ---------- Blocos dos campos ---------- */
+.input-group {
+    margin-bottom: 12px;
+    padding: 12px 14px;
+    background: var(--bloco);
+    border-radius: 14px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: lowercase;
+    color: #FFFFFF;
+}
+
+.input-group small {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--texto-suave);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 12px;
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--texto);
+    background: var(--campo);
+    border: 1.5px solid transparent;
+    border-radius: 10px;
+    transition: border-color .2s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--amarelo);
+}
+
+/* campo com erro (cssErrorClass="campo-erro" no form:input) */
+.input-group input.campo-erro { border-color: var(--erro); }
+
+/* Estado e DDD lado a lado */
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* ---------- Erros do form:errors ---------- */
+.erros {
+    display: block;
+    margin-bottom: 14px;
+    padding: 9px 14px;
+    font-size: 13px;
+    color: var(--erro);
+    background: var(--bloco);
+    border-radius: 12px;
+}
+
+.erros:empty { display: none; }
+
+/* ---------- Botões ---------- */
+.footer {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.footer input[type="submit"] {
+    flex: 1;
+    height: 44px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--texto-escuro);
+    background: var(--amarelo);
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background .2s;
+}
+
+.footer input[type="submit"]:hover { background: var(--amarelo-claro); }
+
+.btn-voltar {
+    display: inline-flex;
+    align-items: center;
+    height: 44px;
+    padding: 0 20px;
+    font-size: 16px;
+    color: #D8E6EC;
+    text-decoration: none;
+    background: var(--bloco);
+    border-radius: 14px;
+    transition: background .2s;
+}
+
+.btn-voltar:hover { background: #38748A; }
+
+/* ---------- Mensagem de sucesso ---------- */
+.mensagem {
+    margin-top: 14px;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    color: var(--texto-escuro);
+    background: var(--amarelo-claro);
+    border-radius: 12px;
+}
+
+.mensagem:empty { display: none; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 480px) {
+    body { padding: 16px 10px; }
+    .form-centro { margin: 16px auto; padding: 20px 16px; }
+    .input-row { grid-template-columns: 1fr; gap: 0; }
+}
