@@ -66,7 +66,7 @@ public class Cidade {
 
     @Override
     public String toString() {
-        return nomeCidade;
+        return nomeCidade != null ? nomeCidade : "";
     }
 
     
