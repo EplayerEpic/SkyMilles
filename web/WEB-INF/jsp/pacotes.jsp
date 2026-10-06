@@ -15,7 +15,7 @@
     <!-- Cabeçalho -->
     <header id="header">
         <a href="${pageContext.request.contextPath}/"><img id="Logo"
-            src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles"></a>
+            src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Logo SkyMilles"></a>
         <a id="NomeMarca" href="#"><span>SKY</span>MILLES</a>
 
         <!-- Barra de pesquisa (visível apenas no desktop) -->
@@ -24,7 +24,7 @@
                 <div class="search-input-container" id="searchInputContainer">
                     <input type="text" id="search-input" placeholder="Buscar destinos...">
                 </div>
-                <img class="lupa" id="searchIcon" src="https://cdn-icons-png.flaticon.com/512/54/54481.png"
+                <img class="lupa" id="searchIcon" src="${pageContext.request.contextPath}/resources/images/54481.png"
                     alt="Buscar">
             </div>
             <div id="searchResults"></div>
@@ -40,10 +40,10 @@
         <!-- Perfil e Botão Hambúrguer -->
         <div class="header-right">
             <div class="perfil-container">
-                <img class="perfil" src="https://i.postimg.cc/qMvvdyYp/download-3.jpg" alt="Sua Foto" id="perfil-img">
+                <img class="perfil" src="${pageContext.request.contextPath}/resources/images/foto-perfil.jpg" alt="Sua Foto" id="perfil-img">
                 <div class="dropdown-menu" id="dropdown-menu">
-                    <button onclick="location.href='login.jsp' ">Login</button>
-                    <button onclick="location.href='cadastro.jsp' ">Cadastrar</button>
+                    <button onclick="location.href='${pageContext.request.contextPath}/login' ">Login</button>
+                    <button onclick="location.href='${pageContext.request.contextPath}/cadastro' ">Cadastrar</button>
                 </div>
             </div>
 
@@ -65,22 +65,22 @@
             <button class="back-arrow" id="back-arrow">←</button>
             <span class="mobile-menu-title">Faça seu login</span>
             <div class="mobile-perfil-container">
-                <img class="mobile-menu-perfil" src="https://i.postimg.cc/qMvvdyYp/download-3.jpg" alt="Perfil"
+                <img class="mobile-menu-perfil" src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Perfil"
                     id="mobile-perfil-img">
                 <div class="mobile-dropdown-menu" id="mobile-dropdown-menu">
-                    <button onclick="location.href='login.jsp'">Login</button>
-                    <button onclick="location.href='cadastro.jsp'">Cadastrar</button>
+                    <button onclick="location.href='${pageContext.request.contextPath}/login'">Login</button>
+                    <button onclick="location.href='${pageContext.request.contextPath}/cadastro'">Cadastrar</button>
                 </div>
             </div>
         </div>
         <nav class="mobile-menu-nav">
-            <button class="mobile-menu-item" id="destaque-item" onclick="location.href='destaques.jsp'">DESTAQUES</button>
-            <button class="mobile-menu-item" onclick="location.href='pacotes.jsp'">PACOTES PROMOCIONAIS</button>
-            <button class="mobile-menu-item" onclick="location.href='conheca.jsp'">CONHEÇA A SKY MILLES</button>
+            <button class="mobile-menu-item" id="destaque-item" onclick="location.href='${pageContext.request.contextPath}/destaques'">DESTAQUES</button>
+            <button class="mobile-menu-item" onclick="location.href='${pageContext.request.contextPath}/pacotes'">PACOTES PROMOCIONAIS</button>
+            <button class="mobile-menu-item" onclick="location.href='${pageContext.request.contextPath}/conheca'">CONHEÇA A SKY MILLES</button>
         </nav>
         <!-- Logo no rodapé do menu -->
         <div class="mobile-menu-footer">
-            <img src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles">
+            <img src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Logo SkyMilles">
             <div class="mobile-menu-footer-text"><span>SKY</span>MILLES</div>
         </div>
     </div>
@@ -143,7 +143,7 @@
             <!-- Pacote 1 - Paris -->
             <div class="pacote-card" data-continente="europa" data-preco="4200" data-duracao="7">
                 <div class="pacote-imagem-container">
-                    <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=500" alt="Paris"
+                    <img src="${pageContext.request.contextPath}/resources/images/paris-gay.jpg" alt="Paris"
                         class="pacote-imagem">
                     <div class="pacote-badge popular">Popular</div>
                 </div>
@@ -204,7 +204,7 @@
             <!-- Pacote 2 - Tóquio -->
             <div class="pacote-card" data-continente="asia" data-preco="5500" data-duracao="10">
                 <div class="pacote-imagem-container">
-                    <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=500" alt="Tóquio"
+                    <img src="${pageContext.request.contextPath}/resources/images/tokyo-gay.jpg" alt="Tóquio"
                         class="pacote-imagem">
                     <div class="pacote-badge popular">Popular</div>
                 </div>
@@ -264,7 +264,7 @@
             <!-- Pacote 3 - Nova York -->
             <div class="pacote-card" data-continente="america" data-preco="6200" data-duracao="8">
                 <div class="pacote-imagem-container">
-                    <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=500" alt="Nova York"
+                    <img src="${pageContext.request.contextPath}/resources/images/ny-gay.jpg" alt="Nova York"
                         class="pacote-imagem">
                     <div class="pacote-badge premium">Premium</div>
                 </div>
@@ -324,7 +324,7 @@
             <!-- Pacote 4 - Cairo -->
             <div class="pacote-card" data-continente="africa" data-preco="4800" data-duracao="9">
                 <div class="pacote-imagem-container">
-                    <img src="https://images.unsplash.com/photo-1572252009286-268acec5ca0a?w=500" alt="Cairo"
+                    <img src="${pageContext.request.contextPath}/resources/images/cairo-gay.jpg" alt="Cairo"
                         class="pacote-imagem">
                     <div class="pacote-badge promocao">Promoção</div>
                 </div>
@@ -384,7 +384,7 @@
             <!-- Pacote 5 - Roma -->
             <div class="pacote-card" data-continente="europa" data-preco="5200" data-duracao="7">
                 <div class="pacote-imagem-container">
-                    <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=500" alt="Roma"
+                    <img src="${pageContext.request.contextPath}/resources/images/roma-gay.jpg" alt="Roma"
                         class="pacote-imagem">
                     <div class="pacote-badge popular">Popular</div>
                 </div>
@@ -444,7 +444,7 @@
             <!-- Pacote 6 - Sydney -->
             <div class="pacote-card" data-continente="oceania" data-preco="7800" data-duracao="14">
                 <div class="pacote-imagem-container">
-                    <img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=500" alt="Sydney"
+                    <img src="${pageContext.request.contextPath}/resources/images/sidney-gay.jpg" alt="Sydney" />
                         class="pacote-imagem">
                     <div class="pacote-badge premium">Premium</div>
                 </div>
@@ -507,7 +507,7 @@
             <div class="pacote-card pagina-2" data-continente="europa" data-preco="4800" data-duracao="7"
                 style="display: none;">
                 <div class="pacote-imagem-container">
-                    <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=500" alt="Londres"
+                    <img src="${pageContext.request.contextPath}/resources/images/londres-gay.jpg" alt="Londres"
                         class="pacote-imagem">
                     <div class="pacote-badge popular">Popular</div>
                 </div>
@@ -568,7 +568,7 @@
             <div class="pacote-card pagina-2" data-continente="asia" data-preco="3500" data-duracao="8"
                 style="display: none;">
                 <div class="pacote-imagem-container">
-                    <img src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=500" alt="Bangkok"
+                    <img src="${pageContext.request.contextPath}/resources/images/bangkok.jpg" alt="Bangkok"
                         class="pacote-imagem">
                     <div class="pacote-badge promocao">Promoção</div>
                 </div>
@@ -629,7 +629,7 @@
             <div class="pacote-card pagina-2" data-continente="asia" data-preco="5800" data-duracao="6"
                 style="display: none;">
                 <div class="pacote-imagem-container">
-                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=500" alt="Dubai"
+                    <img src="${pageContext.request.contextPath}/resources/images/dubai-gay.jpg" alt="Dubai" 
                         class="pacote-imagem">
                     <div class="pacote-badge premium">Premium</div>
                 </div>
@@ -690,7 +690,7 @@
             <div class="pacote-card pagina-2" data-continente="america" data-preco="2200" data-duracao="5"
                 style="display: none;">
                 <div class="pacote-imagem-container">
-                    <img src="https://images.unsplash.com/photo-1589909202802-8f4aadce1849?w=500" alt="Buenos Aires"
+                    <img src="${pageContext.request.contextPath}/resources/images/buenos-aires.jpg" alt="Buenos Aires" 
                         class="pacote-imagem">
                     <div class="pacote-badge promocao">Promoção</div>
                 </div>
@@ -751,7 +751,7 @@
             <div class="pacote-card pagina-2" data-continente="africa" data-preco="5200" data-duracao="10"
                 style="display: none;">
                 <div class="pacote-imagem-container">
-                    <img src="https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=500" alt="Cape Town"
+                    <img src="${pageContext.request.contextPath}/resources/images/capetao.jpg" alt="Cape Town" 
                         class="pacote-imagem">
                     <div class="pacote-badge popular">Popular</div>
                 </div>
@@ -812,7 +812,7 @@
             <div class="pacote-card pagina-2" data-continente="oceania" data-preco="8200" data-duracao="12"
                 style="display: none;">
                 <div class="pacote-imagem-container">
-                    <img src="https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=500" alt="Auckland"
+                    <img src="${pageContext.request.contextPath}/resources/images/auckland.jpg" alt="Auckland" 
                         class="pacote-imagem">
                     <div class="pacote-badge premium">Premium</div>
                 </div>
@@ -875,7 +875,7 @@
             <div class="pacote-card pagina-3" data-continente="europa" data-preco="4500" data-duracao="7"
                 style="display: none;">
                 <div class="pacote-imagem-container">
-                    <img src="https://images.unsplash.com/photo-1583422409516-2895a77efded?w=500" alt="Barcelona"
+                    <img src="${pageContext.request.contextPath}/resources/images/barcelona.jpg" alt="Barcelona" 
                         class="pacote-imagem">
                     <div class="pacote-badge popular">Popular</div>
                 </div>
@@ -936,7 +936,7 @@
             <div class="pacote-card pagina-3" data-continente="asia" data-preco="6200" data-duracao="8"
                 style="display: none;">
                 <div class="pacote-imagem-container">
-                    <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=500" alt="Singapura"
+                    <img src="${pageContext.request.contextPath}/resources/images/singapura.jpg" alt="Singapura" 
                         class="pacote-imagem">
                     <div class="pacote-badge premium">Premium</div>
                 </div>
@@ -997,7 +997,7 @@
             <div class="pacote-card pagina-3" data-continente="america" data-preco="3200" data-duracao="6"
                 style="display: none;">
                 <div class="pacote-imagem-container">
-                    <img src="https://images.unsplash.com/photo-1568402102990-bc541580b59f?w=500" alt="Cancún"
+                    <img src="${pageContext.request.contextPath}/resources/images/cancun.jpg" alt="Cancún" 
                         class="pacote-imagem">
                     <div class="pacote-badge promocao">Promoção</div>
                 </div>
@@ -1058,7 +1058,7 @@
             <div class="pacote-card pagina-3" data-continente="africa" data-preco="4100" data-duracao="7"
                 style="display: none;">
                 <div class="pacote-imagem-container">
-                    <img src="https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=500" alt="Marrakech"
+                    <img src="${pageContext.request.contextPath}/resources/images/marrakesh.jpg" alt="Marrakech" 
                         class="pacote-imagem">
                     <div class="pacote-badge popular">Popular</div>
                 </div>
@@ -1119,7 +1119,7 @@
             <div class="pacote-card pagina-3" data-continente="oceania" data-preco="9500" data-duracao="10"
                 style="display: none;">
                 <div class="pacote-imagem-container">
-                    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=500" alt="Fiji"
+                    <img src="${pageContext.request.contextPath}/resources/images/fiji.jpg" alt="Fiji" 
                         class="pacote-imagem">
                     <div class="pacote-badge premium">Premium</div>
                 </div>
@@ -1180,7 +1180,7 @@
             <div class="pacote-card pagina-3" data-continente="europa" data-preco="4300" data-duracao="6"
                 style="display: none;">
                 <div class="pacote-imagem-container">
-                    <img src="https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=500" alt="Amsterdã"
+                    <img src="${pageContext.request.contextPath}/resources/images/amsterdan.jpg" alt="Amsterdã" 
                         class="pacote-imagem">
                     <div class="pacote-badge popular">Popular</div>
                 </div>
@@ -1255,46 +1255,47 @@
                 <div class="footer-column">
                     <h3>Nossos Serviços</h3>
                     <ul>
-                        <li><a href="./passagens.jsp">Passagens Aéreas</a></li>
-                        <li><a href="./hoteis.jsp">Reserva de Hotéis</a></li>
-                        <li><a href="./pacotes.jsp">Pacotes Promocionais</a></li>
+                        <li><a href="${pageContext.request.contextPath}/passagens">Passagens Aéreas</a></li>
+                        <li><a href="${pageContext.request.contextPath}/hoteis">Reserva de Hotéis</a></li>
+                        <li><a href="${pageContext.request.contextPath}/pacotes">Pacotes Promocionais</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
                     <h3>Institucional</h3>
                     <ul>
-                        <li><a href="./conheca.jsp">Conheça a Sky Milles</a></li>
-                        <li><a href="./termos.jsp">Termos de Serviço</a></li>
-                        <li><a href="./privacidade.jsp">Políticas de Privacidade</a></li>
+                        <li><a href="${pageContext.request.contextPath}/conheca">Conheça a Sky Milles</a></li>
+                        <li><a href="${pageContext.request.contextPath}/termos">Termos de Serviço</a></li>
+                        <li><a href="${pageContext.request.contextPath}/privacidade">Políticas de Privacidade</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
                     <h3>Ajuda</h3>
                     <ul>
-                        <li><a href="./perguntas.jsp">Perguntas Frequentes</a></li>
-                        <li><a href="./suporte.jsp">Central de Suporte</a></li>
-                        <li><a href="./status-voo.jsp">Status de Voo</a></li>
+                        <li><a href="${pageContext.request.contextPath}/adm">Demiurgo</a></li>
+                        <li><a href="${pageContext.request.contextPath}/perguntas">Perguntas Frequentes</a></li>
+                        <li><a href="${pageContext.request.contextPath}/suporte">Central de Suporte</a></li>
+                        <li><a href="${pageContext.request.contextPath}/status-voo">Status de Voo</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
                     <h3>Formas de Pagamento</h3>
                     <div class="payment-methods">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
+                        <img src="${pageContext.request.contextPath}/resources/images/Mastercard-logo.svg"
                             alt="Mastercard">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa">
-                        <img src="https://i.postimg.cc/ZnqJNwgm/boleto.png" alt="Boleto">
-                        <img src="https://i.postimg.cc/zvfqhxMv/pix.png" alt="Pix">
+                        <img src="${pageContext.request.contextPath}/resources/images/Visa_Inc._logo_(2021–present).svg" alt="Visa">
+                        <img src="${pageContext.request.contextPath}/resources/images/boleto.png" alt="Boleto">
+                        <img src="${pageContext.request.contextPath}/resources/images/pix.png" alt="Pix">
                     </div>
                 </div>
             </div>
 
             <div class="footer-bottom">
                 <div class="footer-brand">
-                    <a href="http://localhost/dashboard/SkyMilles/"><img
-                            src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles"></a>
+                    <a href="${pageContext.request.contextPath}/"><img
+                            src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Logo SkyMilles"></a>
                     <div class="footer-brand-text"><span>SKY</span>MILLES</div>
                 </div>
 
@@ -1304,7 +1305,7 @@
                         <a href="#" title="WhatsApp">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366">
                                 <path
-                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487.5-.669.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
                             </svg>
                         </a>
                         <a href="#" title="Facebook">
@@ -1323,7 +1324,7 @@
                                     </linearGradient>
                                 </defs>
                                 <path
-                                    d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.419-.419.679-.819.896-1.381.164-.422.36-1.057.413-2.227.057-1.266.07-1.646.07-4.85s-.015-3.585-.074-4.85c-.061-1.17-.256-1.805-.421-2.227-.224-.562-.479-.96-.899-1.382-.419-.419-.824-.679-1.38-.896-.42-.164-1.065-.36-2.235-.413-1.274-.057-1.649-.07-4.859-.07-3.211 0-3.586.015-4.859.074-1.171.061-1.816.256-2.236.421-.569.224-.96.479-1.379.899-.421.419-.69.824-.9 1.38-.165.42-.359 1.065-.42 2.235-.045 1.26-.061 1.649-.061 4.844 0 3.196.016 3.586.061 4.861.061 1.17.255 1.814.42 2.234.21.57.479.96.9 1.381.419.419.81.689 1.379.898.42.166 1.051.361 2.221.421 1.275.045 1.65.06 4.859.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z" />
+                                    d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z" />
                             </svg>
                         </a>
                     </div>
@@ -1335,9 +1336,9 @@
             </div>
         </div>
     </footer>
-    <script src="../js/searchSystem.js"></script>
-    <script src="../js/pacotes.js"></script>
-    <script src="../js/auth.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/searchSystem.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/pacotes.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/auth.js"></script>
 </body>
 
 </html>

@@ -36,7 +36,7 @@
         </button>
 
         <div class="profile-image" onclick="openAvatarModal()">
-            <img id="selectedAvatar" src="https://i.postimg.cc/qMvvdyYp/download-3.jpg" alt="Avatar">
+            <img id="selectedAvatar" src="${pageContext.request.contextPath}/resources/images/foto-perfil.jpg" alt="Avatar">
         </div>
         <p style="color: white; margin-top: 15px; font-size: 14px;">Clique para escolher seu avatar</p>
     </div>
@@ -47,7 +47,7 @@
             <div class="cadastro-header">
                 <h1>Cadastro</h1>
                 <a href="./index.jsp" class="logo-box">
-                    <img src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="SkyMilles Logo">
+                    <img src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="SkyMilles Logo">
                 </a>
             </div>
 
@@ -143,7 +143,7 @@
             </div>
         </div>
     </div>
-    <script src="../js/cadastro.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/cadastro.js"></script>
 </body>
 
 </html>

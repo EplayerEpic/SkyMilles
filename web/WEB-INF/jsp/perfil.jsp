@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Perfil - Skymilles</title>
-    <link rel="stylesheet" href="../css/perfil.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/perfil.css">
 </head>
 <body>
     <!-- Loading -->
@@ -16,10 +16,10 @@
 
     <!-- Header -->
     <header id="header">
-        <a href="http://localhost/dashboard/SkyMilles/"><img id="Logo"
-                src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles"></a>
+        <a href="${pageContext.request.contextPath}/"><img id="Logo"
+                src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Logo SkyMilles"></a>
         <a id="NomeMarca" href="./index.jsp"><span>SKY</span>MILLES</a>
-        <button class="btn-back" onclick="window.location.href='./index.jsp'">
+        <button class="btn-back" onclick="window.location.href='${pageContext.request.contextPath}/'">
                 ← Voltar para Início
             </button>
     </header>
@@ -30,7 +30,7 @@
         <aside class="sidebar">
             <div class="profile-card">
                 <div class="profile-avatar">
-                    <img id="profileAvatar" src="https://i.postimg.cc/qMvvdyYp/download-3.jpg" alt="Avatar">
+                    <img id="profileAvatar" src="${pageContext.request.contextPath}/resources/images/foto-perfil.jpg" alt="Avatar">
                     <button class="btn-change-avatar" onclick="openAvatarModal()">
                         📷
                     </button>

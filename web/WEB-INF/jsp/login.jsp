@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
     <title>Login - SkyMilles</title>
 </head>
 
@@ -20,13 +20,13 @@
             <a href="adm.jsp"></a>
             <!-- Logos decorativas flutuantes -->
             <div class="logo-decoration">
-                <img src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="SkyMilles Logo">
+                <img src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="SkyMilles Logo">
             </div>
             <div class="logo-decoration">
-                <img src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="SkyMilles Logo">
+                <img src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="SkyMilles Logo">
             </div>
             <div class="logo-decoration">
-                <img src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="SkyMilles Logo">
+                <img src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="SkyMilles Logo">
             </div>
 
             <div class="left-content">
@@ -80,8 +80,8 @@
                 <!-- Cabeçalho com Login e Logo -->
                 <div class="login-header">
                     <h1>Login</h1>
-                    <a href="./index.jsp" class="logo-box">
-                        <img src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="SkyMilles Logo">
+                    <a href="${pageContext.request.contextPath}/" class="logo-box">
+                        <img src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="SkyMilles Logo">
                     </a>
                 </div>
 
@@ -139,8 +139,8 @@
 
     <!-- Google Identity Services -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="../js/login.js"></script>
-    <script src="../js/auth.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/login.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/auth.js"></script>
 </body>
 
 </html>
