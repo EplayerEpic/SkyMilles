@@ -151,7 +151,7 @@ public class QuartoModelo {
     public String removerQuarto(int cod) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "DELETE FROM quarto WHERE cod_quarto = ?";
+            String sql = "UPDATE quarto set status =0 WHERE cod_quarto = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
 
             stm.setInt(1, cod);

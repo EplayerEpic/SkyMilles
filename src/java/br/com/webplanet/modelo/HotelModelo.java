@@ -189,7 +189,7 @@ public class HotelModelo {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
 
-            String sql = "DELETE FROM hotel WHERE cod_hotel=?";
+            String sql = "UPDATE hotel set status = 0 where cod_hotel=?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, codHotel);
 

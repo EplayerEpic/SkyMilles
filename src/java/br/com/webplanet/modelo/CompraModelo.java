@@ -171,7 +171,7 @@ public class CompraModelo {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
 
-            String sql = "DELETE FROM compra WHERE cod_compra = ?";
+            String sql = "UPDATE compra set status = 0 WHERE cod_compra = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, cod_compra);
 

@@ -158,7 +158,7 @@ public class AssentosModelo {
         String resultado = "";
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "DELETE FROM assento WHERE cod_assento = ?";
+            String sql = "UPDATE assento set status =0 WHERE cod_assento = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, codAssento);
             stm.executeUpdate();

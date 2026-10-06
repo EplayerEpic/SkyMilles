@@ -18,7 +18,7 @@
     <!-- Header -->
     <header id="header">
         <a href="${pageContext.request.contextPath}/"><img id="Logo"
-                src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles"></a>
+                src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Logo SkyMilles"></a>
         <a id="NomeMarca" href="./index.jsp"><span>SKY</span>MILLES</a>
         <button class="btn-back" onclick="window.location.href='${pageContext.request.contextPath}/'">
                 ← Voltar para Início
@@ -98,8 +98,8 @@
                     <label>Número do Cartão</label>
                     <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19" required>
                     <div class="card-brands">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
+                        <img src="${pageContext.request.contextPath}/resources/images/Visa_Inc._logo_(2021–present).svg" alt="Visa">
+                        <img src="${pageContext.request.contextPath}/resources/images/Mastercard-logo.svg" alt="Mastercard">
                     </div>
                 </div>
 
@@ -142,7 +142,7 @@
                     <p>Escaneie o QR Code abaixo ou copie o código:</p>
                     
                     <div class="qr-code">
-                        <img id="qrCodePix" src="https://i.postimg.cc/htYzdLTw/meu-pix.jpg" alt="QR Code PIX">
+                        <img id="qrCodePix" src="${pageContext.request.contextPath}/resources/images/meu-pix.jpg" alt="QR Code PIX">
                     </div>
 
                     <div class="pix-code">
@@ -201,7 +201,7 @@
             <h2>Pagamento Confirmado!</h2>
             <p>Sua assinatura foi ativada com sucesso.</p>
             <p>Enviamos um e-mail de confirmação com todos os detalhes.</p>
-            <button class="btn-primary" onclick="window.location.href='perfil.jsp'">
+            <button class="btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/perfil'">
                 Ir para Meu Perfil
             </button>
         </div>
@@ -221,6 +221,6 @@
         </div>
     </footer>
 
-    <script src="../js/pagamento.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/pagamento.js"></script>
 </body>
 </html>

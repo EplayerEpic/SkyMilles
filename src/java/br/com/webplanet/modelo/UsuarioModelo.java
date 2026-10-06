@@ -152,7 +152,7 @@ public class UsuarioModelo {
     public String deletarUsuario(int usuCodigo) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "DELETE FROM usuario WHERE cod_usuario=?";
+            String sql = "UPDATE usuario SET status =0 WHERE cod_usuario=?";
             PreparedStatement stm = conn.prepareStatement(sql);
 
             stm.setInt(1, usuCodigo);

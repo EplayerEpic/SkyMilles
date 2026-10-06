@@ -130,7 +130,7 @@ public class AeroportoModelo {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
 
-            String sql = "DELETE FROM aeroporto WHERE cod_aeroporto=?";
+            String sql = "UPDATE aeroporto set status =0 WHERE cod_aeroporto=?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, cod);
 

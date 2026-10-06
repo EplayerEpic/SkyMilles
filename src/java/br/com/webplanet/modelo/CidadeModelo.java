@@ -119,7 +119,7 @@ public class CidadeModelo {
     public String removerCidade(int cod) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "DELETE FROM cidade WHERE cod_cidade=?";
+            String sql = "UPDATE cidade set status =0 WHERE cod_cidade=?";
             PreparedStatement stm = conn.prepareStatement(sql);
 
             stm.setInt(1, cod);

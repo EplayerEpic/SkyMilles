@@ -147,7 +147,7 @@ public class PontoTuristicoModelo {
     public String removerPonto(int cod) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "DELETE FROM ponto_turistico WHERE cod_ponto = ?";
+            String sql = "UPDATE ponto_turistico SET status =0 WHERE cod_ponto = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, cod);
 

@@ -23,7 +23,7 @@
     <a href="${pageContext.request.contextPath}/menuCliente"> MenuCliente    
     <header id="header">
         <a href="${pageContext.request.contextPath}/"><img id="Logo"
-                src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles"></a>
+                src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Logo SkyMilles"></a>
         <a id="NomeMarca" href="#"><span>SKY</span>MILLES</a>
 
         <!-- Barra de pesquisa (visível apenas no desktop) -->
@@ -32,7 +32,7 @@
                 <div class="search-input-container" id="searchInputContainer">
                     <input type="text" id="search-input" placeholder="Buscar voos...">
                 </div>
-                <img class="lupa" id="searchIcon" src="https://cdn-icons-png.flaticon.com/512/54/54481.png"
+                <img class="lupa" id="searchIcon" src="${pageContext.request.contextPath}/resources/images/54481.png"
                     alt="Buscar">
             </div>
             <div id="searchResults"></div>
@@ -48,7 +48,7 @@
         <!-- Perfil e Botão Hambúrguer -->
         <div class="header-right">
             <div class="perfil-container">
-                <img class="perfil" src="https://i.postimg.cc/qMvvdyYp/download-3.jpg" alt="Sua Foto" id="perfil-img">
+                <img class="perfil" src="${pageContext.request.contextPath}/resources/images/foto-perfil.jpg" alt="Sua Foto" id="perfil-img">
                 <div class="dropdown-menu" id="dropdown-menu">
                     <button onclick="location.href='${pageContext.request.contextPath}/login'">Login</button>
                     <button onclick="location.href='${pageContext.request.contextPath}/cadastro'">Cadastrar</button>
@@ -73,7 +73,7 @@
             <button class="back-arrow" id="back-arrow">←</button>
             <span class="mobile-menu-title">Faça seu login</span>
             <div class="mobile-perfil-container">
-                <img class="mobile-menu-perfil" src="https://i.postimg.cc/qMvvdyYp/download-3.jpg" alt="Perfil"
+                <img class="mobile-menu-perfil" src="${pageContext.request.contextPath}/resources/images/foto-perfil.jpg" alt="Perfil"
                     id="mobile-perfil-img">
                 <div class="mobile-dropdown-menu" id="mobile-dropdown-menu">
                     <button onclick="location.href='./login'">Login</button>
@@ -88,7 +88,7 @@
         </nav>
         <!-- Logo no rodapé do menu -->
         <div class="mobile-menu-footer">
-            <img src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles">
+            <img src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Logo SkyMilles">
             <div class="mobile-menu-footer-text"><span>SKY</span>MILLES</div>
         </div>
     </div>
@@ -101,7 +101,7 @@
                 <!-- Paris -->
                 <div class="card-wrapper">
                     <div class="card" data-name="paris">
-                        <img src="https://i.postimg.cc/KvmgZ1nk/download-3.jpg" alt="Paris">
+                        <img src="${pageContext.request.contextPath}/resources/images/paris.jpg" alt="Paris">
                         <div class="card-label">
                             <span>Paris</span>
                         </div>
@@ -118,7 +118,7 @@
                 <!-- Roma/Santorini -->
                 <div class="card-wrapper">
                     <div class="card" data-name="roma">
-                        <img src="https://i.postimg.cc/5NfFxXw2/download-6.jpg" alt="Roma">
+                        <img src="${pageContext.request.contextPath}/resources/images/roma.jpg" alt="Roma">
                         <div class="card-label">
                             <span>Roma</span>
                         </div>
@@ -135,7 +135,7 @@
                 <!-- Bruxelas -->
                 <div class="card-wrapper">
                     <div class="card" data-name="Bruxelas">
-                        <img src="https://i.postimg.cc/3rXv5XDH/atonium.jpg" alt="Bruxelas">
+                        <img src="${pageContext.request.contextPath}/resources/images/bruxelas.jpg" alt="Bruxelas">
                         <div class="card-label">
                             <span>Bruxelas</span>
                         </div>
@@ -152,7 +152,7 @@
                 <!-- Egito -->
                 <div class="card-wrapper">
                     <div class="card" data-name="Egito">
-                        <img src="https://i.postimg.cc/vTsX8GvJ/Embark-on-a-one-way-voyage-for-15-days-from-Piraeus-Athens-to-Dubai-with-a-late-night-stay-in-Safa.jpg"
+                        <img src="${pageContext.request.contextPath}/resources/images/gize.jpg"
                             alt="Egito">
                         <div class="card-label">
                             <span>Gizé</span>
@@ -170,7 +170,7 @@
                 <!-- Tóquio -->
                 <div class="card-wrapper">
                     <div class="card" data-name="Japão">
-                        <img src="https://i.postimg.cc/7YqTx5gw/Japan-by-Season-The-Best-Itineraries-for-Spring-Summer-Fall-and-Winter.jpg"
+                        <img src="${pageContext.request.contextPath}/resources/images/tokyo.jpg"
                             alt="Japão">
                         <div class="card-label">
                             <span>Tóquio</span>
@@ -194,7 +194,7 @@
         <button class="nav-arrow left-arrow">&#9664;</button>
         <section class="airline-selector">
             <div class="airline-display">
-                <img id="current-airline-logo" src="https://i.postimg.cc/T39wB2pH/embraer-1.jpg" alt="Embraer">
+                <img id="current-airline-logo" src="${pageContext.request.contextPath}/resources/images/embraer.jpg" alt="Embraer">
 
             </div>
             <div class="current-airline-name">Embraer</div>
@@ -205,39 +205,39 @@
     <!-- Grid de Companhias -->
     <section class="airlines-grid">
         <div class="airline-card" data-airline="embraer">
-            <img src="https://i.postimg.cc/T39wB2pH/embraer-1.jpg" alt="Embraer">
+            <img src="${pageContext.request.contextPath}/resources/images/embraer.jpg" alt="Embraer">
             <span>Embraer</span>
         </div>
         <div class="airline-card" data-airline="azul">
-            <img src="https://i.postimg.cc/hGtjnFdr/azul.png" alt="Azul">
+            <img src="${pageContext.request.contextPath}/resources/images/azul.png" alt="Azul">
             <span>Azul</span>
         </div>
         <div class="airline-card" data-airline="latam">
-            <img src="https://i.postimg.cc/TP3wx8D0/latam.png" alt="LATAM">
+            <img src="${pageContext.request.contextPath}/resources/images/latam.png" alt="LATAM">
             <span>LATAM</span>
         </div>
         <div class="airline-card" data-airline="qatar">
-            <img src="https://i.postimg.cc/Bng6RZX7/qatar.jpg" alt="Qatar Airways">
+            <img src="${pageContext.request.contextPath}/resources/images/qatar.jpg" alt="Qatar Airways">
             <span>Qatar Airways</span>
         </div>
         <div class="airline-card" data-airline="eurowings">
-            <img src="https://i.postimg.cc/YC39T2hX/eurowings-1.jpg" alt="Eurowings">
+            <img src="${pageContext.request.contextPath}/resources/images/eurowings.jpg" alt="Eurowings">
             <span>Eurowings</span>
         </div>
         <div class="airline-card" data-airline="airfrance">
-            <img src="https://i.postimg.cc/nLhzx8DK/france-Airlines.jpg" alt="Air France">
+            <img src="${pageContext.request.contextPath}/resources/images/france-Airlines.jpg" alt="Air France">
             <span>Air France</span>
         </div>
         <div class="airline-card" data-airline="ethiopian">
-            <img src="https://i.postimg.cc/qvLRWBzL/ethiopian-1.jpg" alt="Ethiopian Airways">
+            <img src="${pageContext.request.contextPath}/resources/images/ethiopian.jpg" alt="Ethiopian Airways">
             <span>Ethiopian Airways</span>
         </div>
         <div class="airline-card" data-airline="jal">
-            <img src="https://i.postimg.cc/2Sw6gjVc/japan-1.jpg" alt="Japan Airlines">
+            <img src="${pageContext.request.contextPath}/resources/images/japan.jpg" alt="Japan Airlines">
             <span>Japan Airlines</span>
         </div>
         <div class="airline-card" data-airline="easyjet">
-            <img src="https://i.postimg.cc/pdLTvNFJ/ease-Jet.png" alt="EasyJet">
+            <img src="${pageContext.request.contextPath}/resources/images/ease-Jet.png" alt="EasyJet">
             <span>EasyJet</span>
         </div>
     </section>
@@ -345,11 +345,11 @@
                 <div class="footer-column">
                     <h3>Formas de Pagamento</h3>
                     <div class="payment-methods">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
+                        <img src="${pageContext.request.contextPath}/resources/images/Mastercard-logo.svg"
                             alt="Mastercard">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa">
-                        <img src="https://i.postimg.cc/ZnqJNwgm/boleto.png" alt="Boleto">
-                        <img src="https://i.postimg.cc/zvfqhxMv/pix.png" alt="Pix">
+                        <img src="${pageContext.request.contextPath}/resources/images/Visa_Inc._logo_(2021–present).svg" alt="Visa">
+                        <img src="${pageContext.request.contextPath}/resources/images/boleto.png" alt="Boleto">
+                        <img src="${pageContext.request.contextPath}/resources/images/pix.png" alt="Pix">
                     </div>
                 </div>
             </div>
@@ -357,7 +357,7 @@
             <div class="footer-bottom">
                 <div class="footer-brand">
                     <a href="http://localhost/dashboard/SkyMilles/"><img
-                            src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles"></a>
+                            src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Logo SkyMilles"></a>
                     <div class="footer-brand-text"><span>SKY</span>MILLES</div>
                 </div>
 

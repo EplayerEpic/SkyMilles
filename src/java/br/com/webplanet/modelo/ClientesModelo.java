@@ -173,7 +173,7 @@ public class ClientesModelo {
             ConexaoMySQLSky conexao = new ConexaoMySQLSky();
             Connection conn = conexao.conectar();
 
-            String consulta = "DELETE FROM cliente WHERE cod_cliente = ?";
+            String consulta = "UPDATE cliente set status =0 WHERE cod_cliente = ?";
             PreparedStatement stm = conn.prepareStatement(consulta);
             stm.setInt(1, cliCodigo);
 

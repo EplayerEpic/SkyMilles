@@ -20,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class VooControle {
 
-    
     @GetMapping("/menuVoo")
     public String menuVoo() {
         return "menuVoo";
@@ -164,7 +163,33 @@ public class VooControle {
     }
 
     @RequestMapping(value = "/removerVoo", method = RequestMethod.POST)
-    public String removerVoo(@RequestParam("codVoo") int codVoo, Model modelo) {
-        return "removerVoo";
+    public String removerVoo(@ModelAttribute("voo") Voo v, BindingResult bindingResult, Model modelo) {
+        if (bindingResult.hasErrors()) {
+            return "removerVoo";
+        }
+
+        VooModelo vM = new VooModelo();
+        Voo vooSelecionado = vM.consultarVooCodigo(v.getCodVoo());
+
+        if (v.getNumVoo() != null && !v.getNumVoo().trim().isEmpty()
+                && v.getAviao() != null && !v.getAviao().trim().isEmpty()
+                && v.getCompanhia() != null && !v.getCompanhia().trim().isEmpty()
+                && v.getDataHoraPartida() != null && v.getDataHoraChegada() != null
+                && v.getAeroPartida() != null && v.getAeroPartida().getCodAeroporto() > 0
+                && v.getAeroDestino() != null && v.getAeroDestino().getCodAeroporto() > 0) {
+
+            v.setStatus(0);
+            vM.removerVoo(v.getCodVoo());
+
+            Voo vazio = new Voo();
+            vazio.setAeroPartida(new Aeroporto());
+            vazio.setAeroDestino(new Aeroporto());
+            modelo.addAttribute("voo", vazio);
+            modelo.addAttribute("mensagem", "Voo remover com sucesso!");
+        } else {
+            modelo.addAttribute("voo", vooSelecionado != null ? vooSelecionado : v);
+        }
+
+        return "alterarVoo";
     }
 }

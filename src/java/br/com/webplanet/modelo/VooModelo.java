@@ -135,7 +135,7 @@ public class VooModelo {
     public String removerVoo(int cod) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "DELETE FROM voo WHERE cod_voo = ?";
+            String sql = "UPDATE voo SET status =0 WHERE cod_voo = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, cod);
             stm.executeUpdate();

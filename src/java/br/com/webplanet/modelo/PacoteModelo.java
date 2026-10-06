@@ -154,7 +154,7 @@ public class PacoteModelo {
     public String deletarPacote(int codPacote) {
         try {
             Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "DELETE FROM pacote WHERE cod_pacote=?";
+            String sql = "UPDATE pacote set status =0 WHERE cod_pacote=?";
             PreparedStatement stm = conn.prepareStatement(sql);
 
             stm.setInt(1, codPacote);
