@@ -39,6 +39,7 @@
 <div class="input-group">Check-in: ${HotelCheckIn}</div>
 <div class="input-group">Check-out: ${HotelCheckOut}</div>
 <div class="input-group">Cidade (cód.): ${HotelCidade}</div>
+<p class="footer"><a href="${pageContext.request.contextPath}/menuHotel">Voltar</a></p>
 <div class="mensagem">${mensagem}</div>
 </div>
 </body>

@@ -36,6 +36,7 @@
 <div class="input-group">Descrição: ${PontoDescricao}</div>
 <div class="input-group">Endereço: ${PontoEndereco}</div>
 <div class="input-group">Cidade (cód.): ${PontoCidade}</div>
+<p class="footer"><a href="${pageContext.request.contextPath}/menuPonto">Voltar</a></p>
 <div class="mensagem">${mensagem}</div>
 </div>
 </body>

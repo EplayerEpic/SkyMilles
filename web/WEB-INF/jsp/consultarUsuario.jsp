@@ -36,6 +36,7 @@
 <div class="input-group">Login: ${UsuarioLogin}</div>
 <div class="input-group">E-mail: ${UsuarioEmail}</div>
 <div class="input-group">Cliente (cód.): ${UsuarioCliente}</div>
+<p class="footer"><a href="${pageContext.request.contextPath}/menuUsuario">Voltar</a></p>
 <div class="mensagem">${mensagem}</div>
 </div>
 </body>

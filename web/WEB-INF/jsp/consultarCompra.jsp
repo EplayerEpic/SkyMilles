@@ -50,7 +50,7 @@
 <div class="input-group">Data: ${CompraData}</div>
 <div class="input-group">Cliente (cód.): ${CompraCliente}</div>
 <div class="input-group">Pacote (cód.): ${CompraPacote}</div>
-
+<p class="footer"><a href="${pageContext.request.contextPath}/menuCompra">Voltar</a></p>
 <div class="mensagem">
     ${mensagem}
 </div>

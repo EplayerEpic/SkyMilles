@@ -39,6 +39,7 @@
 <div class="input-group">Data de Início: ${QuartoDataInicio}</div>
 <div class="input-group">Quantidade de Diárias: ${QuartoDiarias}</div>
 <div class="input-group">Hotel (cód.): ${QuartoHotel}</div>
+<p class="footer"><a href="${pageContext.request.contextPath}/menuQuarto">Voltar</a></p>
 <div class="mensagem">${mensagem}</div>
 </div>
 </body>

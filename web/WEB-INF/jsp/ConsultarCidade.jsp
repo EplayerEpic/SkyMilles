@@ -50,7 +50,7 @@ String Java: <%= "Informação da Cidade" %>
             <div class="input-group">
                 Estado ${CidadeEstado}
             </div>
-           
+           <p class="footer"><a href="${pageContext.request.contextPath}/menuCidade">Voltar</a></p>
             </form:form>
         </div>
         <!--JavaScript at end of body for optimized loading-->

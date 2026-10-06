@@ -36,6 +36,7 @@
     <legend>Dados do Aeroporto</legend>
     <div class="input-group">Nome: ${AeroportoNome}</div>
     <div class="input-group">Cidade: ${AeroportoCidade}</div>
+    <p class="footer"><a href="${pageContext.request.contextPath}/menuAeroporto">Voltar</a></p>
 </form:form>
 <br>
 <div class="mensagem">${mensagem}</div>
