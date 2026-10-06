@@ -42,8 +42,8 @@
     </button>
   </nav>
   <div class="board" id="board"><div class="board-in"><div class="board-row">
-    <a class="lnk" href="${pageContext.request.contextPath}/listarVoos"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="4.5" height="4" rx="1"/><path d="M10.5 6h10.5"/><rect x="3" y="10" width="4.5" height="4" rx="1"/><path d="M10.5 12h10.5"/><rect x="3" y="16" width="4.5" height="4" rx="1"/><path d="M10.5 18h10.5"/></svg></span><span><span class="t2">Todos os usuarios</span><span class="t3">Lista completa de usuarios</span></span></a>
-    <a class="lnk" href="${pageContext.request.contextPath}/consultarVoo"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2.2a2.8 2.8 0 0 0 0 5.6V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2.2a2.8 2.8 0 0 0 0-5.6z"/><path d="M8 9.5v5M11 9.5v5M14 9.5v5M17 9.5v5"/></svg></span><span><span class="t2">Por código</span><span class="t3">Buscar um usuario específico</span></span></a>
+    <a class="lnk" href="${pageContext.request.contextPath}/listarTodosUsuario"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="4.5" height="4" rx="1"/><path d="M10.5 6h10.5"/><rect x="3" y="10" width="4.5" height="4" rx="1"/><path d="M10.5 12h10.5"/><rect x="3" y="16" width="4.5" height="4" rx="1"/><path d="M10.5 18h10.5"/></svg></span><span><span class="t2">Todos os usuarios</span><span class="t3">Lista completa de usuarios</span></span></a>
+    <a class="lnk" href="${pageContext.request.contextPath}/consultarUsuario"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2.2a2.8 2.8 0 0 0 0 5.6V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2.2a2.8 2.8 0 0 0 0-5.6z"/><path d="M8 9.5v5M11 9.5v5M14 9.5v5M17 9.5v5"/></svg></span><span><span class="t2">Por código</span><span class="t3">Buscar um usuario específico</span></span></a>
   </div></div></div>
 </main>
 </body>

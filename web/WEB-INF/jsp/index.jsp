@@ -5,22 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkyMilles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700&family=Unbounded:wght@500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/css.css">
-    <link rel="stylesheet" href="${$pageContext.request.contextPath}/resources/css/searchStyles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/searchStyles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/nav.css">
 </head>
 
 <body>
-    <a href="${pageContext.request.contextPath}/menuCidade">Menu Cidade</a>
-    <a href="${pageContext.request.contextPath}/menuCompra">Menu Compra</a>
-    <a href="${pageContext.request.contextPath}/menuPacote">Menu Pacote</a>
-    <a href="${pageContext.request.contextPath}/menuPonto"> MenuPonto
-    <a href="${pageContext.request.contextPath}/menuVoo"> MenuVoo
-    <a href="${pageContext.request.contextPath}/menuHotel"> MenuHotel
-    <a href="${pageContext.request.contextPath}/menuQuarto"> MenuQuarto
-    <a href="${pageContext.request.contextPath}/menuUsuario"> MenuUsuario
-    <a href="${pageContext.request.contextPath}/menuAeroporto"> MenuAeroporto
-    <a href="${pageContext.request.contextPath}/menuAssento"> MenuAssento
-    <a href="${pageContext.request.contextPath}/menuCliente"> MenuCliente    
     <header id="header">
         <a href="${pageContext.request.contextPath}/"><img id="Logo"
                 src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Logo SkyMilles"></a>
@@ -39,10 +30,52 @@
         </div>
 
         <!-- Menu Desktop -->
-        <nav id="main-nav">
+        <nav id="main-nav" aria-label="Principal">
             <button class="ButtonMenu" onclick="location.href='${pageContext.request.contextPath}/destaques'">Destaques</button>
             <button class="ButtonMenu" onclick="location.href='${pageContext.request.contextPath}/pacotes'">Pacotes Promocionais</button>
             <button class="ButtonMenu" onclick="location.href='${pageContext.request.contextPath}/conheca'">Conheça a Sky Milles</button>
+
+            <!-- NOVO: botão Menu + painel de embarque -->
+            <div class="nm-wrap">
+                <button class="nm-btn" id="nmBtn" type="button" aria-expanded="false" aria-controls="nmPanel" aria-haspopup="true">
+                    Menu
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="nm-panel" id="nmPanel" hidden>
+                    <div class="nm-site">
+                        <a href="${pageContext.request.contextPath}/destaques">Destaques</a>
+                        <a href="${pageContext.request.contextPath}/pacotes">Pacotes Promocionais</a>
+                        <a href="${pageContext.request.contextPath}/conheca">Conheça a Sky Milles</a>
+                    </div>
+                    <div class="nm-head">
+                        <span class="nm-live"></span>
+                        <span class="nm-label">Painel de acesso</span>
+                        <span class="nm-label">Todos os módulos</span>
+                    </div>
+                    <div class="nm-cols">
+                        <div class="nm-col">
+                            <p class="nm-label nm-title">Voos</p>
+                            <a class="nm-item" href="${pageContext.request.contextPath}/menuVoo"><span class="nm-chip">VOO</span>Voo</a>
+                            <a class="nm-item" href="${pageContext.request.contextPath}/menuAeroporto"><span class="nm-chip">AER</span>Aeroporto</a>
+                            <a class="nm-item" href="${pageContext.request.contextPath}/menuAssento"><span class="nm-chip">ASS</span>Assento</a>
+                        </div>
+                        <div class="nm-col">
+                            <p class="nm-label nm-title">Destinos</p>
+                            <a class="nm-item" href="${pageContext.request.contextPath}/menuCidade"><span class="nm-chip">CID</span>Cidade</a>
+                            <a class="nm-item" href="${pageContext.request.contextPath}/menuPonto"><span class="nm-chip">PNT</span>Ponto turístico</a>
+                            <a class="nm-item" href="${pageContext.request.contextPath}/menuHotel"><span class="nm-chip">HTL</span>Hotel</a>
+                            <a class="nm-item" href="${pageContext.request.contextPath}/menuQuarto"><span class="nm-chip">QRT</span>Quarto</a>
+                        </div>
+                        <div class="nm-col">
+                            <p class="nm-label nm-title">Vendas</p>
+                            <a class="nm-item" href="${pageContext.request.contextPath}/menuPacote"><span class="nm-chip">PCT</span>Pacote</a>
+                            <a class="nm-item" href="${pageContext.request.contextPath}/menuCompra"><span class="nm-chip">CMP</span>Compra</a>
+                            <a class="nm-item" href="${pageContext.request.contextPath}/menuCliente"><span class="nm-chip">CLI</span>Cliente</a>
+                            <a class="nm-item" href="${pageContext.request.contextPath}/menuUsuario"><span class="nm-chip">USR</span>Usuário</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </nav>
 
         <!-- Perfil e Botão Hambúrguer -->
@@ -85,6 +118,28 @@
             <button class="mobile-menu-item" onclick="location.href='${pageContext.request.contextPath}/destaques'">DESTAQUES</button>
             <button class="mobile-menu-item" onclick="location.href='${pageContext.request.contextPath}/pacotes'">PACOTES PROMOCIONAIS</button>
             <button class="mobile-menu-item" onclick="location.href='${pageContext.request.contextPath}/conheca'">CONHEÇA A SKY MILLES</button>
+
+            <!-- NOVO: acordeão Menu (não usa a classe mobile-menu-item de propósito, para não ser pego pelo js.js) -->
+            <button class="nm-mobile-toggle" id="nmMobileBtn" type="button" aria-expanded="false" aria-controls="nmMobileList">
+                MENU
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="nm-mobile-list" id="nmMobileList" hidden>
+                <p class="nm-mobile-group">Voos</p>
+                <a class="nm-mobile-link" href="${pageContext.request.contextPath}/menuVoo"><span class="nm-chip">VOO</span>Voo</a>
+                <a class="nm-mobile-link" href="${pageContext.request.contextPath}/menuAeroporto"><span class="nm-chip">AER</span>Aeroporto</a>
+                <a class="nm-mobile-link" href="${pageContext.request.contextPath}/menuAssento"><span class="nm-chip">ASS</span>Assento</a>
+                <p class="nm-mobile-group">Destinos</p>
+                <a class="nm-mobile-link" href="${pageContext.request.contextPath}/menuCidade"><span class="nm-chip">CID</span>Cidade</a>
+                <a class="nm-mobile-link" href="${pageContext.request.contextPath}/menuPonto"><span class="nm-chip">PNT</span>Ponto turístico</a>
+                <a class="nm-mobile-link" href="${pageContext.request.contextPath}/menuHotel"><span class="nm-chip">HTL</span>Hotel</a>
+                <a class="nm-mobile-link" href="${pageContext.request.contextPath}/menuQuarto"><span class="nm-chip">QRT</span>Quarto</a>
+                <p class="nm-mobile-group">Vendas</p>
+                <a class="nm-mobile-link" href="${pageContext.request.contextPath}/menuPacote"><span class="nm-chip">PCT</span>Pacote</a>
+                <a class="nm-mobile-link" href="${pageContext.request.contextPath}/menuCompra"><span class="nm-chip">CMP</span>Compra</a>
+                <a class="nm-mobile-link" href="${pageContext.request.contextPath}/menuCliente"><span class="nm-chip">CLI</span>Cliente</a>
+                <a class="nm-mobile-link" href="${pageContext.request.contextPath}/menuUsuario"><span class="nm-chip">USR</span>Usuário</a>
+            </div>
         </nav>
         <!-- Logo no rodapé do menu -->
         <div class="mobile-menu-footer">
@@ -401,6 +456,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/searchSystem.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/js.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/auth.js"></script>
+     <script src="${pageContext.request.contextPath}/resources/js/nav.js"></script>
 </body>
 
 </html>

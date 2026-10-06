@@ -1,0 +1,177 @@
+/* =====================================================================
+   nav.css  ·  Navbar Sky Milles (painel de embarque)
+   Carregar DEPOIS de css.css. Classes novas usam o prefixo "nm-".
+   ===================================================================== */
+:root {
+    --nm-board: #0c3142;
+    --nm-gold: #f8c537;
+    --nm-gold-soft: rgba(248, 197, 55, .16);
+    --nm-line: rgba(255, 255, 255, .18);
+    --nm-display: "Unbounded", "Trebuchet MS", sans-serif;
+    --nm-body: "Figtree", "Trebuchet MS", system-ui, sans-serif;
+}
+
+/* ---------- Header: vidro translúcido ---------- */
+#header {
+    background: rgba(77, 159, 184, .88);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--nm-line);
+    box-shadow: 0 4px 18px rgba(11, 47, 64, .18);
+}
+
+#NomeMarca {
+    font-family: var(--nm-display);
+    font-weight: 600;
+    letter-spacing: .01em;
+}
+@media screen and (min-width: 768px)  { #NomeMarca { font-size: 1.45rem; } }
+@media screen and (min-width: 1200px) { #NomeMarca { font-size: 1.7rem; } }
+
+/* ---------- Links do topo: sublinhado dourado ---------- */
+#main-nav { gap: 24px; }
+
+#main-nav > .ButtonMenu {
+    font-family: var(--nm-body);
+    font-weight: 600;
+    font-size: .95rem;
+    padding: .5rem .2rem;
+    border-bottom: 2px solid transparent;
+    transition: border-color .2s, color .2s;
+}
+#main-nav > .ButtonMenu:hover {
+    color: #fff;
+    border-bottom-color: var(--nm-gold);
+}
+
+/* ---------- Botão "Menu" ---------- */
+.nm-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    font: 600 .95rem var(--nm-body);
+    color: #fff;
+    background: rgba(255, 255, 255, .14);
+    border: 1px solid rgba(255, 255, 255, .4);
+    border-radius: 999px;
+    padding: .55rem 1.1rem;
+    cursor: pointer;
+    transition: background .2s;
+}
+.nm-btn:hover,
+.nm-btn[aria-expanded="true"] { background: rgba(255, 255, 255, .26); }
+.nm-btn svg {
+    width: 16px; height: 16px;
+    fill: none; stroke: currentColor; stroke-width: 2.4;
+    stroke-linecap: round; stroke-linejoin: round;
+    transition: transform .2s;
+}
+.nm-btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+.nm-btn:focus-visible,
+.nm-item:focus-visible,
+.nm-site a:focus-visible { outline: 3px solid var(--nm-gold); outline-offset: 3px; }
+
+/* ---------- Painel de embarque (desktop/tablet) ---------- */
+.nm-panel {
+    position: absolute;                /* relativo ao #header (position: fixed) */
+    top: calc(100% + 12px);
+    right: clamp(16px, 4vw, 60px);
+    width: min(760px, calc(100vw - 32px));
+    background: var(--nm-board);
+    color: #fff;
+    border-radius: 14px;
+    border-top: 4px solid var(--nm-gold);
+    box-shadow: 0 24px 48px rgba(6, 30, 42, .45);
+    font-family: var(--nm-body);
+    animation: nm-pop .18s ease-out;
+}
+.nm-panel[hidden] { display: none; }
+@keyframes nm-pop {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: none; }
+}
+
+.nm-label {
+    font-weight: 600;
+    font-size: .72rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+.nm-head {
+    display: flex; align-items: center; gap: .6rem;
+    padding: .8rem 1.2rem;
+    border-bottom: 1px solid var(--nm-line);
+    color: rgba(255, 255, 255, .6);
+}
+.nm-head .nm-label:last-child { margin-left: auto; }
+.nm-live { width: 8px; height: 8px; border-radius: 50%; background: #5fe08a; box-shadow: 0 0 8px #5fe08a; }
+
+.nm-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; padding: 1rem; }
+.nm-title { margin: 0 0 .5rem .6rem; color: var(--nm-gold); }
+
+.nm-item {
+    display: flex; align-items: center; gap: .8rem;
+    color: #fff; text-decoration: none; font-weight: 500; font-size: .95rem;
+    padding: .55rem .6rem; border-radius: 8px;
+    transition: background .15s;
+}
+.nm-item:hover { background: rgba(255, 255, 255, .09); }
+
+.nm-chip {
+    min-width: 46px; text-align: center;
+    font: 500 .68rem var(--nm-display); letter-spacing: .06em;
+    color: var(--nm-gold); background: var(--nm-gold-soft);
+    border: 1px solid rgba(248, 197, 55, .4);
+    border-radius: 6px; padding: .3rem .4rem;
+}
+
+/* Links do site dentro do painel: só aparecem quando o topo fica apertado */
+.nm-site { display: none; flex-wrap: wrap; gap: .5rem; padding: 1rem 1rem 0; }
+.nm-site a {
+    color: #fff; text-decoration: none; font-weight: 600; font-size: .85rem;
+    padding: .4rem .9rem; border: 1px solid var(--nm-line); border-radius: 999px;
+    transition: background .15s, border-color .15s;
+}
+.nm-site a:hover { background: rgba(255, 255, 255, .1); border-color: var(--nm-gold); }
+
+@media screen and (min-width: 768px) and (max-width: 1099px) {
+    #main-nav > .ButtonMenu { display: none; }
+    .nm-site { display: flex; }
+}
+
+/* ---------- Menu mobile lateral: acordeão ---------- */
+.nm-mobile-toggle {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%;
+    background: none; border: none; border-bottom: 1px solid rgba(255, 255, 255, .1);
+    color: var(--nm-gold); font-size: 16px; font-weight: bold; text-align: left;
+    font-family: var(--nm-body);
+    padding: 20px 30px; cursor: pointer; transition: background .3s;
+}
+.nm-mobile-toggle:hover,
+.nm-mobile-toggle[aria-expanded="true"] { background: rgba(255, 255, 255, .1); }
+.nm-mobile-toggle svg {
+    width: 18px; height: 18px;
+    fill: none; stroke: currentColor; stroke-width: 2.6;
+    stroke-linecap: round; stroke-linejoin: round; transition: transform .2s;
+}
+.nm-mobile-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+
+.nm-mobile-list { background: rgba(11, 47, 64, .28); padding-bottom: 8px; }
+.nm-mobile-list[hidden] { display: none; }
+.nm-mobile-group {
+    margin: 0; padding: 14px 30px 4px;
+    font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: rgba(255, 255, 255, .65);
+}
+.nm-mobile-link {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 30px; color: #fff; text-decoration: none; font-size: 15px;
+    font-family: var(--nm-body);
+}
+.nm-mobile-link:hover { background: rgba(255, 255, 255, .1); }
+
+@media screen and (max-width: 767px) {
+    .nm-panel { display: none; }       /* no mobile o acesso é pelo menu lateral */
+}
