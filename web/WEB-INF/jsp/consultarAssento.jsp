@@ -40,6 +40,7 @@
     <div class="input-group">Aeroporto de Partida (código): ${AssentoLocalPartida}</div>
     <div class="input-group">Aeroporto de Destino (código): ${AssentoDestino}</div>
     <div class="input-group">Voo (código): ${AssentoVoo}</div>
+    <p class="footer"><a href="${pageContext.request.contextPath}/menuAssento">Voltar</a></p>
 </form:form>
 <br>
 <div class="mensagem">${mensagem}</div>

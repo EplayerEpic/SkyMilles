@@ -39,6 +39,7 @@
     <div class="input-group">Sexo: ${cliSexo}</div>
     <div class="input-group">Telefone: ${cliTelefone}</div>
     <div class="input-group">Data de Nasc.: ${cliDataNasc}</div>
+    <p class="footer"><a href="${pageContext.request.contextPath}/menuCliente">Voltar</a></p>
 </form:form>
 <br>
 <div class="mensagem">${mensagem}</div>
