@@ -357,7 +357,7 @@
     </footer>
     <script src="${pageContext.request.contextPath}/resources/js/perguntas.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/js.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/auth.js"></script>
+    <!--<script src="${pageContext.request.contextPath}/resources/js/auth.js"></script>-->
 </body>
 
 </html>

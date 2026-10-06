@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Termos de Serviço - SkyMilles</title>
-    <link rel="stylesheet" href="../css/css.css">
-    <link rel="stylesheet" href="../css/termos.css">
-    <link rel="stylesheet" href="../css/searchStyles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/css.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/termos.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/searchStyles.css">
 </head>
 
 <body>
     <!-- Cabeçalho -->
     <header id="header">
-        <a href="http://localhost/dashboard/SkyMilles/"><img id="Logo"
-            src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles"></a>
+        <a href="${pageContext.request.contextPath}/"><img id="Logo"
+            src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Logo SkyMilles"></a>
         <a id="NomeMarca" href="#"><span>SKY</span>MILLES</a>
 
         <!-- Barra de pesquisa (visível apenas no desktop) -->
@@ -23,7 +23,7 @@
                 <div class="search-input-container" id="searchInputContainer">
                     <input type="text" id="search-input" placeholder="Buscar...">
                 </div>
-                <img class="lupa" id="searchIcon" src="https://cdn-icons-png.flaticon.com/512/54/54481.png"
+                <img class="lupa" id="searchIcon" src="${pageContext.request.contextPath}/resources/images/54481.png"
                     alt="Buscar">
             </div>
             <div id="searchResults"></div>
@@ -31,9 +31,9 @@
 
         <!-- Menu Desktop -->
         <nav id="main-nav">
-            <button class="ButtonMenu" onclick="location.href='./destaques.jsp'">Destaques</button>
-            <button class="ButtonMenu" onclick="location.href='./pacotes.jsp'">Pacotes Promocionais</button>
-            <button class="ButtonMenu" onclick="location.href='./conheca.jsp'">Conheça a Sky Milles</button>
+            <button class="ButtonMenu" onclick="location.href='${pageContext.request.contextPath}/destaques'">Destaques</button>
+            <button class="ButtonMenu" onclick="location.href='${pageContext.request.contextPath}/pacotes'">Pacotes Promocionais</button>
+            <button class="ButtonMenu" onclick="location.href='${pageContext.request.contextPath}/conheca'">Conheça a Sky Milles</button>
         </nav>
 
         <!-- Perfil e Botão Hambúrguer -->
@@ -41,8 +41,8 @@
             <div class="perfil-container">
                 <img class="perfil" src="https://i.postimg.cc/qMvvdyYp/download-3.jpg" alt="Sua Foto" id="perfil-img">
                 <div class="dropdown-menu" id="dropdown-menu">
-                    <button onclick="location.href='./login.jsp'">Login</button>
-                    <button onclick="location.href='./cadastro.jsp'">Cadastrar</button>
+                    <button onclick="location.href='${pageContext.request.contextPath}/login'">Login</button>
+                    <button onclick="location.href='${pageContext.request.contextPath}/cadastro'">Cadastrar</button>
                 </div>
             </div>
 
@@ -67,18 +67,18 @@
                 <img class="mobile-menu-perfil" src="https://i.postimg.cc/qMvvdyYp/download-3.jpg" alt="Perfil"
                     id="mobile-perfil-img">
                 <div class="mobile-dropdown-menu" id="mobile-dropdown-menu">
-                    <button onclick="location.href='./login.jsp'">Login</button>
-                    <button onclick="location.href='./cadastro.jsp'">Cadastrar</button>
+                    <button onclick="location.href='${pageContext.request.contextPath}/login'">Login</button>
+                    <button onclick="location.href='${pageContext.request.contextPath}/cadastro'">Cadastrar</button>
                 </div>
             </div>
         </div>
         <nav class="mobile-menu-nav">
-            <button class="mobile-menu-item" onclick="location.href='./destaques.jsp'">DESTAQUES</button>
-            <button class="mobile-menu-item" onclick="location.href='./pacotes.jsp'">PACOTES PROMOCIONAIS</button>
-            <button class="mobile-menu-item" onclick="location.href='./conheca.jsp'">CONHEÇA A SKY MILLES</button>
+            <button class="mobile-menu-item" onclick="location.href='${pageContext.request.contextPath}/destaques'">DESTAQUES</button>
+            <button class="mobile-menu-item" onclick="location.href='${pageContext.request.contextPath}/pacotes'">PACOTES PROMOCIONAIS</button>
+            <button class="mobile-menu-item" onclick="location.href='${pageContext.request.contextPath}/conheca'">CONHEÇA A SKY MILLES</button>
         </nav>
         <div class="mobile-menu-footer">
-            <img src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles">
+            <img src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Logo SkyMilles">
             <div class="mobile-menu-footer-text"><span>SKY</span>MILLES</div>
         </div>
     </div>
@@ -462,58 +462,59 @@
                 <h3>Dúvidas sobre os Termos?</h3>
                 <p>Estamos aqui para esclarecer!</p>
                 <p>Envie um email para <a href="mailto:suporte@skymilles.com.br">suporte@skymilles.com.br</a></p>
-                <p>ou acesse nossa <a href="./suporte.jsp">Central de Suporte</a></p>
+                <p>ou acesse nossa <a href="./suporte">Central de Suporte</a></p>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
+     <!-- Footer -->
     <footer>
         <div class="footer-container">
             <div class="footer-top">
                 <div class="footer-column">
                     <h3>Nossos Serviços</h3>
                     <ul>
-                        <li><a href="./passagens.jsp">Passagens Aéreas</a></li>
-                        <li><a href="./hoteis.jsp">Reserva de Hotéis</a></li>
-                        <li><a href="./pacotes.jsp">Pacotes Promocionais</a></li>
+                        <li><a href="${pageContext.request.contextPath}/passagens">Passagens Aéreas</a></li>
+                        <li><a href="${pageContext.request.contextPath}/hoteis">Reserva de Hotéis</a></li>
+                        <li><a href="${pageContext.request.contextPath}/pacotes">Pacotes Promocionais</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
                     <h3>Institucional</h3>
                     <ul>
-                        <li><a href="./conheca.jsp">Conheça a Sky Milles</a></li>
-                        <li><a href="./termos.jsp">Termos de Serviço</a></li>
-                        <li><a href="./privacidade.jsp">Políticas de Privacidade</a></li>
+                        <li><a href="${pageContext.request.contextPath}/conheca">Conheça a Sky Milles</a></li>
+                        <li><a href="${pageContext.request.contextPath}/termos">Termos de Serviço</a></li>
+                        <li><a href="${pageContext.request.contextPath}/privacidade">Políticas de Privacidade</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
                     <h3>Ajuda</h3>
                     <ul>
-                        <li><a href="./perguntas.jsp">Perguntas Frequentes</a></li>
-                        <li><a href="./suporte.jsp">Central de Suporte</a></li>
-                        <li><a href="./status-voo.jsp">Status de Voo</a></li>
+                        <li><a href="${pageContext.request.contextPath}/adm">Demiurgo</a></li>
+                        <li><a href="${pageContext.request.contextPath}/perguntas">Perguntas Frequentes</a></li>
+                        <li><a href="${pageContext.request.contextPath}/suporte">Central de Suporte</a></li>
+                        <li><a href="${pageContext.request.contextPath}/status-voo">Status de Voo</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
                     <h3>Formas de Pagamento</h3>
                     <div class="payment-methods">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
+                        <img src="${pageContext.request.contextPath}/resources/images/Mastercard-logo.svg"
                             alt="Mastercard">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa">
-                        <img src="https://i.postimg.cc/ZnqJNwgm/boleto.png" alt="Boleto">
-                        <img src="https://i.postimg.cc/zvfqhxMv/pix.png" alt="Pix">
+                        <img src="${pageContext.request.contextPath}/resources/images/Visa_Inc._logo_(2021–present).svg" alt="Visa">
+                        <img src="${pageContext.request.contextPath}/resources/images/boleto.png" alt="Boleto">
+                        <img src="${pageContext.request.contextPath}/resources/images/pix.png" alt="Pix">
                     </div>
                 </div>
             </div>
 
             <div class="footer-bottom">
                 <div class="footer-brand">
-                    <a href="http://localhost/dashboard/SkyMilles/"><img
-                            src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles"></a>
+                    <a href="${pageContext.request.contextPath}/"><img
+                            src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Logo SkyMilles"></a>
                     <div class="footer-brand-text"><span>SKY</span>MILLES</div>
                 </div>
 
@@ -542,8 +543,8 @@
                                     </linearGradient>
                                 </defs>
                                 <path
-                                    d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03z" />
-                        </svg>
+                                    d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z" />
+                            </svg>
                         </a>
                     </div>
                 </div>
@@ -555,9 +556,9 @@
         </div>
     </footer>
 
-    <script src="../js/searchSystem.js"></script>
-    <script src="../js/js.js"></script>
-    <script src="../js/auth.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/searchSystem.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/js.js"></script>
+    <!<!-- <script src="${pageContext.request.contextPath}/resources/js/auth.js"></script> -->
 </body>
 
 </html>

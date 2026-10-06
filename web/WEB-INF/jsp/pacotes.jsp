@@ -32,9 +32,9 @@
 
         <!-- Menu Desktop -->
         <nav id="main-nav">
-            <button class="ButtonMenu" onclick="location.href='destaques.jsp'">Destaques</button>
-            <button class="ButtonMenu active" onclick="location.href='pacotes.jsp'">Pacotes Promocionais</button>
-            <button class="ButtonMenu" onclick="location.href='conheca.jsp'">Conheça a Sky Milles</button>
+            <button class="ButtonMenu" onclick="location.href='${pageContext.request.contextPath}/destaques'">Destaques</button>
+            <button class="ButtonMenu active" onclick="location.href='${pageContext.request.contextPath}/pacotes'">Pacotes Promocionais</button>
+            <button class="ButtonMenu" onclick="location.href='${pageContext.request.contextPath}/conheca'">Conheça a Sky Milles</button>
         </nav>
 
         <!-- Perfil e Botão Hambúrguer -->
@@ -1338,7 +1338,8 @@
     </footer>
     <script src="${pageContext.request.contextPath}/resources/js/searchSystem.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/pacotes.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/auth.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/js.js"></script>
+    <!--<script src="${pageContext.request.contextPath}/resources/js/auth.js"></script>-->
 </body>
 
 </html>

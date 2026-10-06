@@ -14,7 +14,7 @@
     <body>
         <!-- Cabeçalho -->
         <header id="header">
-            <a href="http://localhost/dashboard/SkyMilles/"><img id="Logo"
+            <a href="${pageContext.request.contextPath}/"><img id="Logo"
                                                                  src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Logo SkyMilles"></a>
             <a id="NomeMarca" href="#"><span>SKY</span>MILLES</a>
 
@@ -326,7 +326,7 @@
 
                 <div class="footer-bottom">
                     <div class="footer-brand">
-                        <a href="http://localhost/dashboard/SkyMilles/"><img
+                        <a href="${pageContext.request.contextPath}/"><img
                                 src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Logo SkyMilles"></a>
                         <div class="footer-brand-text"><span>SKY</span>MILLES</div>
                     </div>
@@ -371,7 +371,7 @@
         <script src="${pageContext.request.contextPath}/resources/js/searchSystem.js"></script>
         <script src="${pageContext.request.contextPath}/resources/js/js.js"></script>
         <script src="${pageContext.request.contextPath}/resources/js/conheca.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/js/auth.js"></script>
+        <!--<script src="${pageContext.request.contextPath}/resources/js/auth.js"></script>-->
     </body>
 
 </html>

@@ -6,9 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reserva de Hotéis - SkyMilles</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/css.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/hoteis.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/searchStyles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/css.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hoteis.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/searchStyles.css">
     <!-- Adicionar Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -33,18 +33,18 @@
 
         <!-- Menu Desktop -->
         <nav id="main-nav">
-            <button class="ButtonMenu" onclick="location.href='./destaques.jsp'">Destaques</button>
-            <button class="ButtonMenu" onclick="location.href='./pacotes.jsp'">Pacotes Promocionais</button>
-            <button class="ButtonMenu" onclick="location.href='./conheca.jsp'">Conheça a Sky Milles</button>
+            <button class="ButtonMenu" onclick="location.href='${pageContext.request.contextPath}/destaques'">Destaques</button>
+            <button class="ButtonMenu" onclick="location.href='${pageContext.request.contextPath}/pacotes'">Pacotes Promocionais</button>
+            <button class="ButtonMenu" onclick="location.href='${pageContext.request.contextPath}/conheca'">Conheça a Sky Milles</button>
         </nav>
 
         <!-- Perfil e Botão Hambúrguer -->
         <div class="header-right">
             <div class="perfil-container">
-                <img class="perfil" src="${pageContext.request.contextPath}/resources/foto-perfil.jpg" alt="Sua Foto" id="perfil-img">
+                <img class="perfil" src="${pageContext.request.contextPath}/resources/images/foto-perfil.jpg" alt="Sua Foto" id="perfil-img">
                 <div class="dropdown-menu" id="dropdown-menu">
-                    <button onclick="location.href='./login.jsp'">Login</button>
-                    <button onclick="location.href='./cadastro.jsp'">Cadastrar</button>
+                    <button onclick="location.href='${pageContext.request.contextPath}/login'">Login</button>
+                    <button onclick="location.href='${pageContext.request.contextPath}/cadastro'">Cadastrar</button>
                 </div>
             </div>
             
@@ -65,17 +65,17 @@
             <button class="back-arrow" id="back-arrow">←</button>
             <span class="mobile-menu-title">Faça seu login</span>
             <div class="mobile-perfil-container">
-                <img class="mobile-menu-perfil" src="${pageContext.request.contextPath}/resources/foto-perfil.jpg" alt="Perfil" id="mobile-perfil-img">
+                <img class="mobile-menu-perfil" src="${pageContext.request.contextPath}/resources/images/foto-perfil.jpg" alt="Perfil" id="mobile-perfil-img">
                 <div class="mobile-dropdown-menu" id="mobile-dropdown-menu">
-                    <button onclick="location.href='./login.jsp'">Login</button>
-                    <button onclick="location.href='./cadastro.jsp'">Cadastrar</button>
+                    <button onclick="location.href='./login'">Login</button>
+                    <button onclick="location.href='./cadastro'">Cadastrar</button>
                 </div>
             </div>
         </div>
         <nav class="mobile-menu-nav">
-            <button class="mobile-menu-item" onclick="location.href='./index.jsp'">DESTAQUES</button>
-            <button class="mobile-menu-item" onclick="location.href='./pacotes.jsp'">PACOTES</button>
-            <button class="mobile-menu-item" onclick="location.href='./conheca.jsp'">CONHEÇA A SKY MILLES</button>
+            <button class="mobile-menu-item" onclick="location.href='${pageContext.request.contextPath}/index'">DESTAQUES</button>
+            <button class="mobile-menu-item" onclick="location.href='${pageContext.request.contextPath}/pacotes'">PACOTES</button>
+            <button class="mobile-menu-item" onclick="location.href='${pageContext.request.contextPath}/conheca'">CONHEÇA A SKY MILLES</button>
         </nav>
         <div class="mobile-menu-footer">
             <img src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Logo SkyMilles">
@@ -221,7 +221,7 @@
                         <span class="price-label">A partir de</span>
                         <span class="price-value">R$ 1.950/noite</span>
                     </div>
-                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento.jsp'">Reservar</button>
+                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento'">Reservar</button>
                 </div>
             </div>
         </div>
@@ -245,7 +245,7 @@
                         <span class="price-label">A partir de</span>
                         <span class="price-value">R$ 2.400/noite</span>
                     </div>
-                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento.jsp'">Reservar</button>
+                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento'">Reservar</button>
                 </div>
             </div>
         </div>
@@ -269,7 +269,7 @@
                         <span class="price-label">A partir de</span>
                         <span class="price-value">R$ 1.550/noite</span>
                     </div>
-                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento.jsp'">Reservar</button>
+                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento'">Reservar</button>
                 </div>
             </div>
         </div>
@@ -293,7 +293,7 @@
                         <span class="price-label">A partir de</span>
                         <span class="price-value">R$ 1.700/noite</span>
                     </div>
-                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento.jsp'">Reservar</button>
+                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento'">Reservar</button>
                 </div>
             </div>
         </div>
@@ -317,7 +317,7 @@
                         <span class="price-label">A partir de</span>
                         <span class="price-value">R$ 1.100/noite</span>
                     </div>
-                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento.jsp'">Reservar</button>
+                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento'">Reservar</button>
                 </div>
             </div>
         </div>
@@ -341,7 +341,7 @@
                         <span class="price-label">A partir de</span>
                         <span class="price-value">R$ 890/noite</span>
                     </div>
-                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento.jsp'">Reservar</button>
+                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento'">Reservar</button>
                 </div>
             </div>
         </div>
@@ -365,7 +365,7 @@
                         <span class="price-label">A partir de</span>
                         <span class="price-value">R$ 1.800/noite</span>
                     </div>
-                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento.jsp'">Reservar</button>
+                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento'">Reservar</button>
                 </div>
             </div>
         </div>
@@ -389,7 +389,7 @@
                         <span class="price-label">A partir de</span>
                         <span class="price-value">R$ 520/noite</span>
                     </div>
-                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento.jsp'">Reservar</button>
+                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento'">Reservar</button>
                 </div>
             </div>
         </div>
@@ -413,7 +413,7 @@
                         <span class="price-label">A partir de</span>
                         <span class="price-value">R$ 610/noite</span>
                     </div>
-                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento.jsp'">Reservar</button>
+                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento'">Reservar</button>
                 </div>
             </div>
         </div>
@@ -437,7 +437,7 @@
                         <span class="price-label">A partir de</span>
                         <span class="price-value">R$ 480/noite</span>
                     </div>
-                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento.jsp'">Reservar</button>
+                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento'">Reservar</button>
                 </div>
             </div>
         </div>
@@ -461,7 +461,7 @@
                         <span class="price-label">A partir de</span>
                         <span class="price-value">R$ 1.350/noite</span>
                     </div>
-                    <button class="btn-reserve-hotel" onclick="location.href='./pagamento.jsp'">Reservar</button>
+                    <button class="btn-reserve-hotel" onclick="location.href='${pageContext.request.contextPath}/pagamento'">Reservar</button>
                 </div>
             </div>
         </div>
@@ -591,7 +591,7 @@
 
             <div class="footer-bottom">
                 <div class="footer-brand">
-                    <a href="http://localhost/dashboard/SkyMilles/"><img
+                    <a href="${pageContext.request.contextPath}/"><img
                             src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Logo SkyMilles"></a>
                     <div class="footer-brand-text"><span>SKY</span>MILLES</div>
                 </div>
@@ -634,9 +634,10 @@
         </div>
     </footer>
 
-    <script src="${pageContext.request.contextPath}/js/searchSystem.js"></script>
-    <script src="${pageContext.request.contextPath}/js/hoteis.js"></script>
-    <script src="${pageContext.request.contextPath}/js/auth.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/searchSystem.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/hoteis.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/js.js"></script>
+    <!<!-- <script src="${pageContext.request.contextPath}/resources/js/auth.js"></script> -->
 </body>
 
 </html>

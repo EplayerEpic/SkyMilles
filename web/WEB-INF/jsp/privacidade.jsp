@@ -6,9 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Política de Privacidade - SkyMilles</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/css.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/privacidade.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/searchStyles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/css.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/privacidade.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/searchStyles.css">
 </head>
 
 <body>
@@ -396,9 +396,9 @@
         </div>
     </footer>
 
-    <script src="${pageContext.request.contextPath}/js/searchSystem.js"></script>
-    <script src="${pageContext.request.contextPath}/js/js.js"></script>
-    <script src="${pageContext.request.contextPath}/js/auth.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/searchSystem.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/js.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/auth.js"></script>
 </body>
 
 </html>

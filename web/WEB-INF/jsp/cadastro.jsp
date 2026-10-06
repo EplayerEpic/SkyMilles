@@ -29,7 +29,7 @@
     </div>
 
     <div class="left-section">
-        <button class="back-button" onclick="location.href='./index.jsp'">
+        <button class="back-button" onclick="location.href='${pageContext.request.contextPath}/'">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
             </svg>
@@ -46,7 +46,7 @@
             <!-- Cabeçalho com Cadastro e Logo -->
             <div class="cadastro-header">
                 <h1>Cadastro</h1>
-                <a href="./index.jsp" class="logo-box">
+                <a href="${pageContext.request.contextPath}/" class="logo-box">
                     <img src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="SkyMilles Logo">
                 </a>
             </div>
@@ -135,7 +135,7 @@
                     <button type="submit" class="register-btn">CADASTRAR</button>
 
                     <div class="footer-text">
-                        Deseja ter um plano? <a href="./index.jsp#planos"
+                        Deseja ter um plano? <a href="${pageContext.request.contextPath}/#planos"
                             style="color: #f8c537; text-decoration: none;">Clique aqui</a><br>
                         para saber mais.
                     </div>
