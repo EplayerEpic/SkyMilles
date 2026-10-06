@@ -5,60 +5,102 @@
 <head>
     <meta charset="UTF-8">
     <title>Adicionar Cliente</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/AdicionarGeral.css">
+
     <style>
-        body{ font-family: Arial, sans-serif; background:#f4f4f4; }
-        .form-centro{ width:420px; margin:40px auto; background:white; padding:20px; border-radius:8px; box-shadow:0px 0px 10px #999; }
-        .input-group{ margin-bottom:15px; }
-        label{ display:block; font-weight:bold; margin-bottom:5px; }
-        input, select{ width:100%; padding:8px; box-sizing:border-box; }
-        .radio-group label{ display:inline-block; font-weight:normal; margin-right:15px; }
-        .footer{ text-align:center; }
-        .mensagem{ color:green; font-weight:bold; text-align:center; }
+        .input-group input[type="date"] {
+            color-scheme: dark;
+        }
+
+        .input-group input[type="radio"] {
+            width: auto;
+            padding: 0;
+            margin: 0;
+            accent-color: var(--amarelo);
+            cursor: pointer;
+        }
+
+        .input-group input[type="radio"].campo-erro {
+            outline: 2px solid var(--erro);
+        }
+
+        .input-group .radio-opcao {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-right: 20px;
+            font-size: 15px;
+            font-weight: 400;
+            text-transform: none;
+            color: var(--texto);
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
+
 <div class="form-centro">
-<h2>Adicionar Cliente</h2>
-<form:form method="POST" action="${pageContext.request.contextPath}/adicionarCliente" modelAttribute="cliente">
-    <form:errors path="*" cssStyle="color:red"/>
 
-    <div class="input-group">
-        <form:label path="cliNome">Nome</form:label>
-        <form:input path="cliNome"/>
-    </div>
+    <span class="subtitulo">gerenciar clientes</span>
+    <h2>Adicionar Cliente</h2>
 
-    <div class="input-group">
-        <form:label path="cliEndereco">Endereço</form:label>
-        <form:input path="cliEndereco"/>
-    </div>
+    <form:form method="POST" action="${pageContext.request.contextPath}/adicionarCliente" modelAttribute="cliente">
 
-    <div class="input-group">
-        <form:label path="cliCPF">CPF</form:label>
-        <form:input path="cliCPF"/>
-    </div>
+        <form:errors path="*" cssClass="erros" element="div"/>
 
-    <div class="input-group">
-        <form:label path="cliTelefone">Telefone</form:label>
-        <form:input path="cliTelefone"/>
-    </div>
+        <div class="input-group">
+            <form:label path="cliNome">Nome</form:label>
+            <small>nome completo do cliente</small>
+            <form:input path="cliNome" cssErrorClass="campo-erro"/>
+        </div>
 
-    <div class="input-group">
-        <form:label path="cliDataNasc">Data de Nascimento</form:label>
-        <form:input path="cliDataNasc" type="date"/>
-    </div>
+        <div class="input-group">
+            <form:label path="cliEndereco">Endereço</form:label>
+            <small>rua, número e bairro</small>
+            <form:input path="cliEndereco" cssErrorClass="campo-erro"/>
+        </div>
 
-    <div class="input-group radio-group">
-        <label>Sexo</label>
-        <form:radiobutton path="cliSexo" value="M"/> Masculino
-        <form:radiobutton path="cliSexo" value="F"/> Feminino
-    </div>
+        <div class="input-row">
+            <div class="input-group">
+                <form:label path="cliCPF">CPF</form:label>
+                <small>documento do cliente</small>
+                <form:input path="cliCPF" cssErrorClass="campo-erro"/>
+            </div>
 
-    <div class="footer">
-        <input type="submit" value="Cadastrar"/>
-    </div>
-</form:form>
-<br>
-<div class="mensagem">${mensagem}</div>
+            <div class="input-group">
+                <form:label path="cliTelefone">Telefone</form:label>
+                <small>com DDD</small>
+                <form:input path="cliTelefone" cssErrorClass="campo-erro"/>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <form:label path="cliDataNasc">Data de Nascimento</form:label>
+            <small>dia, mês e ano</small>
+            <form:input path="cliDataNasc" type="date" cssErrorClass="campo-erro"/>
+        </div>
+
+        <div class="input-group">
+            <label>Sexo</label>
+            <small>selecione uma opção</small>
+            <label class="radio-opcao">
+                <form:radiobutton path="cliSexo" value="M" cssErrorClass="campo-erro"/> Masculino
+            </label>
+            <label class="radio-opcao">
+                <form:radiobutton path="cliSexo" value="F" cssErrorClass="campo-erro"/> Feminino
+            </label>
+        </div>
+
+        <div class="footer">
+            <input type="submit" value="Cadastrar"/>
+            <a class="btn-voltar" href="${pageContext.request.contextPath}/menuCliente">Voltar</a>
+        </div>
+
+    </form:form>
+
+    <div class="mensagem">${mensagem}</div>
+
 </div>
+
 </body>
 </html>
