@@ -318,8 +318,8 @@
 <body>
     <div class="admin-container">
         <div class="header">
-            <a href="${pageContext.request.contextPath}/"><img class="logo-img"
-                src="${pageContext.request.contextPath}/resources/images/Logo.png" alt="Logo SkyMilles"></a>
+            <a href="http://localhost/dashboard/SkyMilles/adm.html"><img class="logo-img"
+                src="https://i.postimg.cc/nLnYq7Fp/logo-Sky-Milles.png" alt="Logo SkyMilles"></a>
             <h1>Painel Administrativo</h1>
             <p class="subtitle">Sistema de Gerenciamento de Voos SkyMilles</p>
             <div class="divider"></div>
@@ -327,7 +327,7 @@
 
         <!-- Voos -->
         <div class="cards-container">
-            <div class="admin-card" onclick="window.location.href='${pageContext.request.contextPath}/voos'">
+            <div class="admin-card" onclick="window.location.href='voos.html'">
                 <div class="card-icon">✈️</div>
                 <h2 class="card-title">Cadastrar Voo</h2>
                 <p class="card-description">
@@ -336,7 +336,7 @@
                 <a href="voos.html" class="card-btn">Novo Cadastro</a>
             </div>
 
-            <div class="admin-card" onclick="window.location.href='${pageContext.request.contextPath}/visuVoos'">
+            <div class="admin-card" onclick="window.location.href='visuVoos.html'">
                 <div class="card-icon">📋</div>
                 <h2 class="card-title">Visualizar Voos</h2>
                 <p class="card-description">

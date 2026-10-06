@@ -127,27 +127,30 @@ public class UsuarioModelo {
         }
     }
 
-    public String alterarUsuario(Usuario usu) {
-        try {
-            Connection conn = new ConexaoMySQLSky().conectar();
-            String sql = "UPDATE usuario SET login=?, senha=?, e_mail=?, cod_cliente=?,status=? WHERE cod_usuario=?";
-            PreparedStatement stm = conn.prepareStatement(sql);
+   public String alterarUsuario(Usuario usu) {
+    try {
+        Connection conn = new ConexaoMySQLSky().conectar();
 
-            stm.setString(1, usu.getUsuLogin());
-            stm.setString(2, usu.getUsuSenha());
-            stm.setString(3, usu.getUsuEmail());
-            stm.setInt(4, usu.getUsuCliente().getCliCodigo());
-            stm.setInt(5, usu.getUsuCodigo());
-            stm.setInt(6,usu.getStatus());
+        String sql = "UPDATE usuario SET login=?, senha=?, e_mail=?, cod_cliente=?, status=? WHERE cod_usuario=?";
 
-            stm.executeUpdate();
-            return "Alterado";
+        PreparedStatement stm = conn.prepareStatement(sql);
 
-        } catch (SQLException ex) {
-            System.out.println(ex);
-            return ex.getSQLState();
-        }
+        stm.setString(1, usu.getUsuLogin());
+        stm.setString(2, usu.getUsuSenha());
+        stm.setString(3, usu.getUsuEmail());
+        stm.setInt(4, usu.getUsuCliente().getCliCodigo());
+        stm.setInt(5, usu.getStatus());
+        stm.setInt(6, usu.getUsuCodigo());
+
+        stm.executeUpdate();
+
+        return "Alterado";
+
+    } catch (SQLException ex) {
+        System.out.println(ex);
+        return ex.getSQLState();
     }
+}
 
     /**
      * Remoção lógica: não existe DELETE no sistema. O registro recebe status = 0

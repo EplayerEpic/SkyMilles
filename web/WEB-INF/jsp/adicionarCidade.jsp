@@ -12,93 +12,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Adicionar Cidade</title>
-
-    <style>
-        body{
-            font-family: Arial, sans-serif;
-            background:#f4f4f4;
-        }
-
-        .form-centro{
-            width:400px;
-            margin:40px auto;
-            background:white;
-            padding:20px;
-            border-radius:8px;
-            box-shadow:0px 0px 10px #999;
-        }
-
-        .input-group{
-            margin-bottom:15px;
-        }
-
-        label{
-            display:block;
-            font-weight:bold;
-            margin-bottom:5px;
-        }
-
-        input{
-            width:100%;
-            padding:8px;
-            box-sizing:border-box;
-        }
-
-        .footer{
-            text-align:center;
-        }
-
-        .mensagem{
-            color:green;
-            font-weight:bold;
-            text-align:center;
-        }
-    </style>
-
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/AdicionarGeral.css">
 </head>
 <body>
 
 <div class="form-centro">
 
-<h2>Cadastro de Cidade</h2>
+    <span class="subtitulo">gerenciar cidades</span>
+    <h2>Cadastro de Cidade</h2>
 
-<form:form
-        method="POST"
-        action="${pageContext.request.contextPath}/adicionarCidade"
-        modelAttribute="cidade">
+    <form:form
+            method="POST"
+            action="${pageContext.request.contextPath}/adicionarCidade"
+            modelAttribute="cidade">
 
-    <form:errors path="*" cssStyle="color:red"/>
+        <form:errors path="*" cssClass="erros" element="div"/>
 
-    <div class="input-group">
-        <form:label path="nomeCidade">Nome da Cidade</form:label>
-        <form:input path="nomeCidade"/>
-    </div>
+        <div class="input-group">
+            <form:label path="nomeCidade">Nome da Cidade</form:label>
+            <small>como aparece nos cadastros</small>
+            <form:input path="nomeCidade" cssErrorClass="campo-erro"/>
+        </div>
 
-    <div class="input-group">
-        <form:label path="estado">Estado</form:label>
-        <form:input path="estado"/>
-    </div>
+        <div class="input-row">
+            <div class="input-group">
+                <form:label path="estado">Estado</form:label>
+                <small>sigla do estado</small>
+                <form:input path="estado" cssErrorClass="campo-erro"/>
+            </div>
 
-    <div class="input-group">
-        <form:label path="ddd">DDD</form:label>
-        <form:input path="ddd"/>
-    </div>
+            <div class="input-group">
+                <form:label path="ddd">DDD</form:label>
+                <small>código com 2 dígitos</small>
+                <form:input path="ddd" cssErrorClass="campo-erro"/>
+            </div>
+        </div>
 
-    <div class="footer">
-        <input type="submit" value="Cadastrar">
-    </div>
+        <div class="footer">
+            <input type="submit" value="Cadastrar">
+            <a class="btn-voltar" href="${pageContext.request.contextPath}/menuUsuario">Voltar</a>
+        </div>
 
-</form:form>
+    </form:form>
 
-<br>
-
-<div class="mensagem">
-    ${mensagem}
-</div>
-
-<p style="color:green;">
-    ${mensagem}
-</p>
+    <div class="mensagem">${mensagem}</div>
 
 </div>
 

@@ -119,32 +119,55 @@ public class UsuarioControle {
     }
 
     @RequestMapping(value = "/alterarUsuario", method = RequestMethod.POST)
-    public String alterarUsuario(@ModelAttribute("usuario") Usuario u, BindingResult bindingResult, Model modelo) {
-        if (bindingResult.hasErrors()) {
-            return "alterarUsuario";
-        }
+public String alterarUsuario(@ModelAttribute("usuario") Usuario u,
+                             BindingResult bindingResult,
+                             Model modelo) {
 
-        UsuarioModelo usuM = new UsuarioModelo();
-        Usuario usuarioSelecionado = usuM.consultarUsuarioCodigo(u.getUsuCodigo());
+    UsuarioModelo usuM = new UsuarioModelo();
 
-        if (u.getUsuLogin() != null && !u.getUsuLogin().trim().isEmpty()
-                && u.getUsuSenha() != null && !u.getUsuSenha().trim().isEmpty()
-                && u.getUsuEmail() != null && !u.getUsuEmail().trim().isEmpty()
-                && u.getUsuCliente() != null && u.getUsuCliente().getCliCodigo() > 0) {
+    Usuario usuarioSelecionado = usuM.consultarUsuarioCodigo(u.getUsuCodigo());
 
-            u.setStatus(1);
-            usuM.alterarUsuario(u);
+    // Se acabou de selecionar um usuário, carrega os dados dele na tela
+    if (usuarioSelecionado != null &&
+        (u.getUsuLogin() == null || u.getUsuLogin().trim().isEmpty())) {
 
-            Usuario vazio = new Usuario();
-            vazio.setUsuCliente(new Clientes());
-            modelo.addAttribute("usuario", vazio);
-            modelo.addAttribute("mensagem", "Usuário alterado com sucesso!");
-        } else {
-            modelo.addAttribute("usuario", usuarioSelecionado != null ? usuarioSelecionado : u);
-        }
-
+        modelo.addAttribute("usuario", usuarioSelecionado);
         return "alterarUsuario";
     }
+
+    if (bindingResult.hasErrors()) {
+        modelo.addAttribute("usuario", u);
+        return "alterarUsuario";
+    }
+
+    if (u.getUsuLogin() != null && !u.getUsuLogin().trim().isEmpty()
+            && u.getUsuEmail() != null && !u.getUsuEmail().trim().isEmpty()
+            && u.getUsuCliente() != null
+            && u.getUsuCliente().getCliCodigo() > 0) {
+
+        // Se não digitou uma nova senha, mantém a atual
+        if (u.getUsuSenha() == null || u.getUsuSenha().trim().isEmpty()) {
+            if (usuarioSelecionado != null) {
+                u.setUsuSenha(usuarioSelecionado.getUsuSenha());
+            }
+        }
+
+        u.setStatus(1);
+        usuM.alterarUsuario(u);
+
+        Usuario vazio = new Usuario();
+        vazio.setUsuCliente(new Clientes());
+
+        modelo.addAttribute("usuario", vazio);
+        modelo.addAttribute("mensagem", "Usuário alterado com sucesso!");
+
+    } else {
+        modelo.addAttribute("usuario",
+                usuarioSelecionado != null ? usuarioSelecionado : u);
+    }
+
+    return "alterarUsuario";
+}
 
     @RequestMapping(value = "/removerUsuario", method = RequestMethod.GET)
     public String removerUsuario() {
