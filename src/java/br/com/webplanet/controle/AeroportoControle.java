@@ -107,7 +107,15 @@ public class AeroportoControle {
 
         if (encontrado != null) {
             modelo.addAttribute("AeroportoNome", encontrado.getNomeAero());
-            modelo.addAttribute("AeroportoCidade", encontrado.getCidade());
+            // o modelo só traz o código da cidade; busca o nome para exibir
+            String nomeCidade = "";
+            if (encontrado.getCidade() != null) {
+                Cidade c = new CidadeModelo().consultarCidadeCodigo(encontrado.getCidade().getCodCidade());
+                nomeCidade = (c != null && c.getNomeCidade() != null)
+                        ? c.getNomeCidade()
+                        : String.valueOf(encontrado.getCidade().getCodCidade());
+            }
+            modelo.addAttribute("AeroportoCidade", nomeCidade);
         } else {
             modelo.addAttribute("mensagem", "Aeroporto não encontrado");
         }

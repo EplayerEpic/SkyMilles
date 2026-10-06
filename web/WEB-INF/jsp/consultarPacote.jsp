@@ -48,7 +48,7 @@
 <div class="input-group">Valor: ${PacoteValor}</div>
 <div class="input-group">Quarto (cód.): ${PacoteQuarto}</div>
 <div class="input-group">Assento (cód.): ${PacoteAssento}</div>
-
+<p class="footer"><a href="${pageContext.request.contextPath}/menuPacote">Voltar</a></p>
 <div class="mensagem">
     ${mensagem}
 </div>

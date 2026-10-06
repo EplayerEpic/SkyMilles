@@ -41,6 +41,7 @@
 <div class="input-group">Aeroporto de partida (cód.): ${VooAeroPartida}</div>
 <div class="input-group">Aeroporto de destino (cód.): ${VooAeroDestino}</div>
 <div class="mensagem">${mensagem}</div>
+<p class="footer"><a href="${pageContext.request.contextPath}/menuVoo">Voltar</a></p>
 </div>
 </body>
 </html>

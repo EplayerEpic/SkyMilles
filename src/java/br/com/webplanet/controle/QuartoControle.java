@@ -91,6 +91,11 @@ public class QuartoControle {
         return "adicionarQuarto";
     }
 
+    @RequestMapping(value = "/consultarQuarto", method = RequestMethod.GET)
+    public String consultarQuarto() {
+        return "consultarQuarto";
+    }
+
     @RequestMapping(value = "/consultarQuarto", method = RequestMethod.POST)
     public String consultarQuarto(@ModelAttribute("quarto") Quarto q, BindingResult bindingResult, Model modelo) {
         if (bindingResult.hasErrors()) {
